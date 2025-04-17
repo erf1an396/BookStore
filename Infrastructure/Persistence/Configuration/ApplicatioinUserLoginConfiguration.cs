@@ -1,0 +1,24 @@
+﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Infrastructure.Persistence.Configuration
+{
+    public class ApplicationUserLoginConfiguration : IEntityTypeConfiguration<ApplicationUserLogin>
+    {
+        public void Configure(EntityTypeBuilder<ApplicationUserLogin> b)
+        {
+            b.ToTable("ApplicationUserLogin");
+
+            b.HasOne(p => p.ApplicationUser)
+             .WithMany(t => t.ApplicationUserLogins)
+             .HasForeignKey(f => f.UserId)
+             .OnDelete(DeleteBehavior.Cascade);
+        }
+    }
+}
