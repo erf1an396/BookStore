@@ -77,6 +77,9 @@ namespace Infrastructure.Dbinitializer
             }
         }
 
+
+        
+
         private async Task<IdentityResult> SeedDatabaseWithAdminUserAsync()
         {
             ApplicationUser adminUser = await _userManager.FindByNameAsync(name);
@@ -99,6 +102,11 @@ namespace Infrastructure.Dbinitializer
                     Name = roleName,
                 };
                 IdentityResult adminRoleResult = await _roleManager.CreateAsync(adminRole);
+
+                //add user role
+                IdentityResult userRoleResult = await _roleManager.CreateAsync(new ApplicationRole() { Name = "user"});
+
+
                 if (adminRoleResult == IdentityResult.Failed())
                 {
                     return IdentityResult.Failed();

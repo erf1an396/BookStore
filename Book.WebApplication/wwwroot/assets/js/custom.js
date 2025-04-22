@@ -617,11 +617,11 @@
       var temp = $("<input>");
       $("body").append(temp);
       temp.val(parentDiv.find(".target").text()).select();
-      document.execCommand("copy");
+      document.execCommand("کپی");
       temp.remove();
-      $(this).text("Copied");
+      $(this).text("کپی شد");
       setTimeout(function (item) {
-        parentDiv.find(".actn_btn").text("Copy");
+        parentDiv.find(".actn_btn").text("کپی");
       }, 4000);
     });
   }
@@ -690,7 +690,7 @@ function automatedAddToCartSystem() {
     var y = JSON.parse(localStorage.getItem("shoppingCart"));
     for (var item in y) {
       if (y[item].productKey) {
-        $("." + y[item].productKey).text("Added To Cart");
+        $("." + y[item].productKey).text("اضاقه به سبد خرید");
         $("." + y[item].productKey).prop("disabled", true);
       }
     }
@@ -700,7 +700,7 @@ function automatedAddToCartSystem() {
       localStorage.setItem("shoppingCart", JSON.stringify(cart));
       var x = JSON.parse(localStorage.getItem("shoppingCart"));
       for (var item in x) {
-        $("." + x[item].productKey).text("Added To Cart");
+        $("." + x[item].productKey).text("اضافه به سبد خرید");
         $("." + x[item].productKey).prop("disabled", true);
       }
     }
@@ -715,12 +715,12 @@ function automatedAddToCartSystem() {
 
     var obj = {};
 
-    // Add to cart
+    // به سبد خرید اضافه شود
     obj.addItemToCart = function (img, name, price, count, mrp, productKey) {
       for (var item in cart) {
         if (cart[item].productKey === productKey) {
           cart[item].count++;
-          $("." + cart[item].productKey).text("Added To Cart");
+          $("." + cart[item].productKey).text("اضافه به سبد");
           $("." + cart[item].productKey).prop("disabled", true);
           saveCart();
           showToast(); // Call the toast function
@@ -761,7 +761,7 @@ function automatedAddToCartSystem() {
     obj.removeItemFromCartAll = function (productKey) {
       for (var item in cart) {
         if (cart[item].productKey === productKey) {
-          $("." + cart[item].productKey).text("Add To Cart");
+          $("." + cart[item].productKey).text("به سبد خرید اضافه شود");
           $("." + cart[item].productKey).prop("disabled", false);
           cart.splice(item, 1);
           break;
@@ -773,7 +773,7 @@ function automatedAddToCartSystem() {
     // Clear cart
     obj.clearCart = function () {
       cart = [];
-      $(".add-to-cart-automated").text("Add To Cart");
+      $(".add-to-cart-automated").text("به سبد خرید اضافه شود");
       saveCart();
     };
 
@@ -827,7 +827,7 @@ function automatedAddToCartSystem() {
   $(".clear-cart").click(function () {
     shoppingCart.clearCart();
     displayCart();
-    $(".add-to-cart-automated").text("Add To Cart");
+    $(".add-to-cart-automated").text("به سبد خرید اضافه شود");
     $(".add-to-cart-automated").prop("disabled", false);
   });
 
@@ -846,9 +846,10 @@ function automatedAddToCartSystem() {
         cartArray[i].name +
         "</a></p>" +
         "<p>" +
-        (cartArray[i].mrp ? "<del>$" + cartArray[i].mrp + "</del> - " : "") +
-        "$" +
+        (cartArray[i].mrp ? + cartArray[i].mrp+ "<del>تومان"  + "</del> - " : "") +
         cartArray[i].price +
+        "تومان" +
+        
         "</p>" +
         "</div>" +
         "<button class=' cart-remove action delete-item' data-product-key=" +

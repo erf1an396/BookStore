@@ -4,12 +4,14 @@ using Application.Features.Category.Command.Update;
 using Application.Features.Category.Query.GetAll;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Book.WebApplication.Areas.Admin.Controllers
 {
 
-    [ApiController]
-    [Route("api/[controller]")]
+    //[ApiController]
+    //[Route("api/[controller]")]
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IMediator _mediator;
@@ -17,6 +19,14 @@ namespace Book.WebApplication.Areas.Admin.Controllers
         public CategoryController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        //[Url("admin/category")]
+        public async Task<IActionResult> Index()
+        {
+            return View();
+
         }
 
         [HttpGet]

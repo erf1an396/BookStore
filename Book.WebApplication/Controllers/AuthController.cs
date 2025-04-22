@@ -1,4 +1,5 @@
 ﻿using Application.Features.Auth.Command;
+using Book.WebApplication.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,9 +15,14 @@ namespace Book.WebApplication.Controllers
             
         }
 
-        public IActionResult Index()
+        public IActionResult Login()
         {
             return View();
+        }
+
+        public IActionResult Register()
+        {
+            return View();  
         }
 
         [HttpPost("login")]
@@ -30,6 +36,7 @@ namespace Book.WebApplication.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterCommand command)
         {
             var result = await _mediator.Send(command);
+
             return Ok(result);
         }
 

@@ -69,7 +69,7 @@ namespace Application.Features.Auth.Command
         private string GenerateJwtToken(ApplicationUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_configuration["jwtConfig:SignInKey"]);
+            var key = Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -80,8 +80,8 @@ namespace Application.Features.Auth.Command
                     new Claim("Test", user.Id.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
-                Issuer = _configuration["jwtConfig:SignInKey"],
-                Audience = _configuration["jwtConfig:Audience"],
+                //Issuer = _configuration["jwtConfig:SignInKey"],
+                //Audience = _configuration["jwtConfig:Audience"],
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

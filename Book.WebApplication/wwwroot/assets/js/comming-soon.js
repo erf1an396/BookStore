@@ -29,23 +29,23 @@
 	    if(days!=0){
 		    html+="<div class='timer days'>"
 		    	html+="<span class='days days-bottom'>"+pad(days)+"</span>";
-                html+="<div class='smalltext days-top'>Days</div>";
+                html+="<div class='smalltext days-top'>روز</div>";
 		    html+="</div>";
 		}
 
 	    html+="<div class='timer hours'>"
             html+="<span class='hours hours-bottom'>"+pad(hours)+"</span>";
-	    	html+="<div class='smalltext hours-top'>Hours</div>";
+	    	html+="<div class='smalltext hours-top'>ساعت</div>";
 	    html+="</div>";
 
 	    html+="<div class='timer minutes'>"
             html+="<span class='minutes minutes-bottom'>"+pad(minutes)+"</span>";
-	    	html+="<div class='smalltext minutes-top'>Minutes</div>";
+	    	html+="<div class='smalltext minutes-top'>دقیقه</div>";
 	    html+="</div>";
 
 	    html+="<div class='timer seconds'>"
             html+="<span class='seconds seconds-bottom'>"+pad(seconds)+"</span>";
-	    	html+="<div class='smalltext seconds-top'>Seconds</div>";
+	    	html+="<div class='smalltext seconds-top'>ثانیه</div>";
 	    html+="</div>";
 
 	    this.html(html);

@@ -2,10 +2,10 @@
   "use strict";
   /*============= preloader js css =============*/
   var cites = [];
-  cites[0] = "Dive into Stories, One Click Away!";
-  cites[1] = "Datepress hosts face-to-face events in various cities";
-  cites[2] = "Your Next Great Read is Just a Tap Away!";
-  cites[3] = "Unlock Worlds, One Book at a Time.";
+  cites[0] = "شیرجه رفتن به داستان، یک کلیک دور!";
+  cites[1] = "میزبان رویدادهای چهره به چهره در شهرهای مختلف است";
+  cites[2] = "خواندن عالی بعدی شما فقط با یک ضربه دور است!";
+  cites[3] = "باز کردن قفل دنیاها، یک کتاب در یک زمان.";
   var cite = cites[Math.floor(Math.random() * cites.length)];
   $("#preloader p").text(cite);
   $("#preloader").addClass("loading");

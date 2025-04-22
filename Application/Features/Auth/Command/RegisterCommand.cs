@@ -20,7 +20,11 @@ namespace Application.Features.Auth.Command
 
         public string Password { get; set; }
 
-        public string Email { get; set; }
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        
 
     }
 
@@ -39,7 +43,7 @@ namespace Application.Features.Auth.Command
         }
 
         public async Task<ApiResult<string>> Handle(RegisterCommand request , CancellationToken cancellationToken)
-        {
+            {
             ApiResult<string> result = new();
 
             var existingUser = await _userManager.FindByNameAsync(request.Username);
@@ -52,11 +56,12 @@ namespace Application.Features.Auth.Command
             var user = new ApplicationUser
             {
                 UserName = request.Username,
-                Email = request.Email,
-                FirstName = "",
-                LastName = ""
+                
+                FirstName = request.FirstName,
+                LastName = request.LastName,
 
             };
+
             var finalResult = await  _userManager.CreateAsync(user, request.Password);
             if (!finalResult.Succeeded)
             {
@@ -64,10 +69,13 @@ namespace Application.Features.Auth.Command
                 return result;
             }
 
-            await _userManager.AddToRoleAsync(user, "user");
+
+
+            var roleResult = await _userManager.AddToRoleAsync(user, "user");
 
             var token = GenerateJwtToken(user);
-            result.Value = token;
+
+            //result.Value = token;
             result.Success("OK");
             return result;  
 
@@ -78,7 +86,7 @@ namespace Application.Features.Auth.Command
         private string GenerateJwtToken(ApplicationUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_configuration["jwtConfig:SignInKey"]);
+            var key = Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -89,8 +97,8 @@ namespace Application.Features.Auth.Command
                     new Claim("Test", user.Id.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
-                Issuer = _configuration["jwtConfig:SignInKey"],
-                Audience = _configuration["jwtConfig:Audience"],
+                //Issuer = _configuration["jwtConfig:SignInKey"],
+                //Audience = _configuration["jwtConfig:Audience"],
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

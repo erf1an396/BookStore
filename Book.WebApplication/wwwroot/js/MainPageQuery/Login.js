@@ -9,20 +9,32 @@ $(document).ready(function () {
         e.preventDefault();
 
         var formData = {
-            email: $('input[name="phoneNumber"]').val(),
-            password: $('input[name="password"]').val()
+            Username: $('input[name="phoneNumber"]').val(),
+            Password: $('input[name="password"]').val()
+            
 
         };
 
+        debugger 
+
+        console.log("hello");
         $.ajax({
             url: '/login',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(formData),
             success: function (response) {
-                console.log("Login successful:", response);
-                window.location.href = "/home"
+
+                if (response.IsSuccess) {
+                    console.log("Login successful:", response);
+                    window.location.href = "/home"
+                } else {
+                    console.warn('Login failed:', response.message);
+                    alert('ورود ناموفق بود: ');
+                }
+                
             },
+
             error: function (xhr, status, error) {
                 console.log("Login failed : ", error)
                 alert("ورود ناموفق بود, لطفا ایمیل و پسوورد خود را بررسی کنید .")
