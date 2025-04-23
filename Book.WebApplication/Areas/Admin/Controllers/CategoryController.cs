@@ -30,6 +30,7 @@ namespace Book.WebApplication.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [ActionName("GetAll")]
         public async Task<IActionResult> GetAll()
         {
             var query =  new CategoryGetAllQuery();
@@ -39,7 +40,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         }
 
-        [HttpDelete]
+        [HttpPost]
+        [ActionName("Delete")]
         public async Task<IActionResult> Delete(int id)
         {
             var command = new CategoryDeleteCommand { Id = id };
@@ -49,9 +51,9 @@ namespace Book.WebApplication.Areas.Admin.Controllers
         }
 
 
-        [HttpPost("Create")]
+        [HttpPost]
+        [ActionName("Create")]
         public async Task<IActionResult> Create([FromBody] CategoryInsertCommand command)
-        
         {
             var result = await _mediator.Send(command);
             return Ok(result);
@@ -60,10 +62,12 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
 
 
-        [HttpPost("Update")]
-        public async Task<IActionResult> Update([FromBody] CategoryUpdateCommand command)
+        [HttpPost]
+        [ActionName("Update")]
+        public async Task<IActionResult> Update(int Id,[FromBody] CategoryUpdateCommand command)
         {
-            var result = await _mediator.Send(command);
+            var commandd = new CategoryUpdateCommand { Id = Id  , Title = command.Title };
+            var result = await _mediator.Send(commandd);
             return Ok(result);
         }
 

@@ -1,0 +1,11 @@
+﻿
+.accordion-button span {
+    flex: 1;
+}
+
+.list-group-item {
+    background-color: #f9f9f9;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+}
+

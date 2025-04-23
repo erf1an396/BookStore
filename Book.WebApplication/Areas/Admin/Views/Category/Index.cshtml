@@ -9,10 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Items</title>
     <link rel="stylesheet" href="~/css/modalcss/StyleSheet.css">
+    
     <script src="~/css/modalcss/JavaScript.js"></script>
     <script src="~/css/modalcss/JavaScript1.js"></script>
-    
 
+    
 }
 
 
@@ -34,133 +35,81 @@
                     </div>
                 </div>
 
-                <!-- Bookmark Start-->
-               @*  <div class="col">
-                    <div class="bookmark pull-right">
-                        <ul>
-                            <li><a href="#" data-container="body" data-toggle="popover" data-placement="top" title="" data-original-title="تقویم"><i data-feather="calendar"></i></a></li>
-                            <li><a href="#" data-container="body" data-toggle="popover" data-placement="top" title="" data-original-title="ایمیل"><i data-feather="mail"></i></a></li>
-                            <li><a href="#" data-container="body" data-toggle="popover" data-placement="top" title="" data-original-title="چت"><i data-feather="message-square"></i></a></li>
-                            <li>
-                                <a href="#"><i class="bookmark-search" data-feather="star"></i></a>
-                                <form class="form-inline search-form">
-                                    <div class="form-group form-control-search">
-                                        <input type="text" placeholder="جستجو..">
-                                    </div>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                </div> *@
-                <!-- Bookmark Ends-->
             </div>
         </div>
     </div>
-    <div class="container mt-5 col-sm-12 boxx-color border rounded shadow-lg p-4 bg-light" style="box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); margin-bottom:110px">
-        <h4 class="mb-4 text-center text-primary font-weight-bold" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);">تغییرات</h4>
-        <button id="addNewText" class="btn btn-success mb-3"> Add New Text</button>
-        <div class="table-responsive">
-            <table class="table table-hover table-striped table-bordered" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px; overflow: hidden;">
 
-                <thead class="thead-dark" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                    <tr>
-                        <th scope="col">نام</th>
-                        <th scope="col">مقدار</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">مدیریت کتگوری‌ها</h2>
+        <button class="btn btn-success mb-3"  data-bs-toggle="modal" onclick="openAddCategoryModal()">➕ افزودن کتگوری</button>
 
+        <ul class="list-group" id="categoryTree">
 
-                <tbody id="main_tb" class="td-rtl">
+            <!-- درخت کتگوری اینجا ساخته میشه -->
 
-                    <!-- Rows will be dynamically added here via AJAX -->
-                </tbody>
-            </table>
-        </div>
+        </ul>
     </div>
 
 </div>
 
 
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+<!-- 🔹 Add Category Modal -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Text</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+            <div class="modal-header"><h5 class="modal-title">افزودن کتگوری</h5></div>
             <div class="modal-body">
-                <form id="editForm">
-                    <input type="hidden" id="editId" name="id">
-                    <div class="form-group">
-                        <label for="ckEditor4">Text</label>
-                        <textarea type="text" class="form-control" name="value" id="ckEditor4" required></textarea>
-                    </div>
-                </form>
+                <input type="text" id="addCategoryName" class="form-control" placeholder="نام کتگوری">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveEdit">Save changes</button>
+                <button class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                <button class="btn btn-primary" id="addCategoryBtn">افزودن</button>
             </div>
         </div>
     </div>
 </div>
 
-
-<!-- add modal-->
-<div id="updateContactModal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+<!-- 🔹 Edit Modal -->
+<div class="modal fade" id="editCategoryModal" tabindex="-1">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <form id="updateContactForm">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" id="updateId" name="updateId">
-
-                    <div class="form-group">
-                        <label for="updateName">Text</label>
-                        <input type="text" class="form-control" id="updateName" name="updateName" required>
-                    </div>
-
-
-                    <select class="form-select" aria-label="Default select example" id="test1">
-                        <option value=null>انتخاب کنید</option>
-
-
-                        
-                    </select>
-                    <br />
-
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteLabel">Delete Text</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+            <div class="modal-header"><h5 class="modal-title">ویرایش کتگوری</h5></div>
             <div class="modal-body">
-                <p>? Are you sure you want to delete this Text</p>
-                <button type="button" class="btn btn-danger" id="btnDeleteConfirm">Delete</button>
+                <input type="text" id="editCategoryName" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                <button class="btn btn-primary" id="editCategoryBtn">ذخیره تغییرات</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 🔹 Delete Modal -->
+<div class="modal fade" id="deleteCategoryModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">حذف کتگوری</h5></div>
+            <div class="modal-body">آیا مطمئن هستید که می‌خواهید این کتگوری را حذف کنید؟</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary"  data-dismiss="modal">لغو</button>
+                <button class="btn btn-danger" id="deleteCategoryBtn">حذف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 🔹 Add Child Modal -->
+<div class="modal fade" id="addChildModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">افزودن کتگوری فرزند</h5></div>
+            <div class="modal-body">
+                <input type="text" id="childCategoryName" class="form-control" placeholder="نام فرزند">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                <button class="btn btn-warning" id="addChildBtn">افزودن فرزند</button>
             </div>
         </div>
     </div>
@@ -174,11 +123,31 @@
 
 
 @section myscript {
-    
+
+    <script>
+        let addModal;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const modalEl = document.getElementById('addCategoryModal');
+            addModal = new bootstrap.Modal(modalEl);
+        });
+
+        function openAddCategoryModal() {
+            addModal.show();
+        }
+
+        function closeAddCategoryModal() {
+            addModal.hide();
+        }
+    </script>
 
 
-    <script src="~/admin-panel/assets/js/Render/Contact.js"></script>
 
+
+    <script src="~/js/AdminPageQuery/Category.js"></script>
+
+
+   
 
     
 }
