@@ -15,5 +15,7 @@ namespace Domain.Entities
 
         public ICollection<Category> CategoryChildren { get; set; } = new HashSet<Category>();
 
+        public ICollection<Book> books { get; set; }
+
     }
 }

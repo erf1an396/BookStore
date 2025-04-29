@@ -1,25 +1,646 @@
-﻿<!DOCTYPE html>
+﻿@using MediatR
+@inject IMediator Mediator
+@inherits Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic> 
+@using Application.Features.Category.Query.GetAllAsTree 
+@using Application.Features.Category 
+
+@{
+    var result  = await Mediator.Send(new CategoryGetAllAsTreeQuery());
+    List<CategoryDto> categoryDtos = result.Value;
+}
+
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Book.WebApplication</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="shortcut icon" href="~/assets/img/favicon.png" />
     
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Book.WebApplication.styles.css" asp-append-version="true" />
-</head>
-<body>
-    
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <link href="~/assets/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/vendors/slick/slick.css" rel="stylesheet" />
+    <link href="~/assets/vendors/slick/slick-theme.css" rel="stylesheet" />
+    <link href="~/assets/vendors//elagent-icon/style.css" rel="stylesheet" />
+    <link href="~/assets/vendors/themify-icon/themify-icons.css" rel="stylesheet" />
+    <link href="~/assets/vendors/animation/animate.css" rel="stylesheet" />
+    <link href="~/assets/vendors/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/assets/vendors/swiper/swiper.min.css" rel="stylesheet" />
+    <link href="~/assets/vendors/icomoon/style.css" rel="stylesheet" />
+    <link href="~/assets/css/style.css" rel="stylesheet" />
+    <link href="~/assets/css/responsive.css" rel="stylesheet" />
+    <title>کتابمون </title>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    
+    <style>
+        
+        .dropdown-submenu {
+            position: relative;
+        }
+
+            .dropdown-submenu .dropdown-menu {
+                top: 0;
+                left: 100%;
+                margin-left: .1rem;
+                margin-right: .1rem;
+            }
+    </style>
+
+
+</head>
+ <body data-scroll-animation="true">
+        <div id="preloader">
+            <div id="ctn-preloader" class="ctn-preloader">
+                <div class="round_spinner">
+                    <div class="spinner"></div>
+                    <div class="text">
+                        <img src="assets/img/favicon.png" alt="Image" />
+                        <h4><span>کتاب باز</span></h4>
+                    </div>
+                </div>
+                <h2 class="head">آیا میدانستید؟</h2>
+                <p></p>
+            </div>
+        </div>
+
+        <div class="body_wrapper">
+            <div class="click_capture"></div>
+            <header class="header_area header_relative header_blue">
+                <nav class="navbar navbar-expand-lg menu_one menu_white" id="header">
+                    <div class="container rtl">
+                        <a class="navbar-brand sticky_logo" href="index.html">
+                            <img src="assets/img/home/logo-white.svg" alt="logo" />
+                            <img src="assets/img/home-two/logo-dark.svg" alt="logo" />
+                        </a>
+                        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="menu_toggle">
+                                <span class="hamburger">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                                <span class="hamburger-cross">
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                            </span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+                            <ul class="navbar-nav menu w_menu ms-auto me-auto">
+                                <li class="nav-item dropdown submenu active">
+                                    <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        خانه
+                                    </a>
+                                
+                                </li>
+                            <li class="nav-item dropdown submenu active">
+                                <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    دسته بندی
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @foreach (var category in categoryDtos)
+                                    {
+                                        @Html.Partial("_CategoryNode", category)
+                                    }
+                                </ul>
+                            </li>
+                                <li class="nav-item dropdown submenu">
+                                    <a class="nav-link dropdown-toggle" href="shop.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        فروشگاه
+                                    </a>
+
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item dropdown submenu">
+                                            <a class="nav-link dropdown-toggle" href="shop.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                فروشگاه
+                                            </a>
+                                            <ul class="dropdown-menu">
+
+                                                
+                                                @* <li class="nav-item">
+                                                    <a href="shop.html" class="nav-link">فروشگاه</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="shop-no-sidebar.html" class="nav-link">فروشگاه بدون نوار کناری</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="product-single.html" class="nav-link">جزئیات محصول</a>
+                                                </li> *@
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item dropdown submenu">
+                                            <a class="nav-link dropdown-toggle" href="cart.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                سبد خرید
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li class="nav-item">
+                                                    <a href="cart.html" class="nav-link">سبد خرید</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="cart-guest.html" class="nav-link">سبد خرید مهمان</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item dropdown submenu">
+                                            <a class="nav-link dropdown-toggle" href="checkout.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                تسویه حساب
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li class="nav-item">
+                                                    <a href="checkout.html" class="nav-link">تسویه حساب</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="checkout-login.html" class="nav-link">ورود به سیستم پرداخت</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="checkout-gift.html" class="nav-link">پرداخت هدیه</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown submenu">
+                                    <a class="nav-link dropdown-toggle" href="my-account.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        داشبورد
+                                    </a>
+
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="my-account.html" class="nav-link">پروفایل کاربری</a>
+                                        </li>
+
+                                        <li class="nav-item dropdown submenu">
+                                            <a class="nav-link dropdown-toggle" href="my-orders.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                سفارشات
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li class="nav-item">
+                                                    <a href="my-orders.html" class="nav-link">سفارشات</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="order-track.html" class="nav-link">پیگیری سفارشات</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="order-confrmation.html" class="nav-link">صفحه قدردانی</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <a href="my-ebook-library.html" class="nav-link">کتاب الکترونیکی</a>
+
+
+                                        <li class="nav-item dropdown submenu">
+                                            <a class="nav-link dropdown-toggle" href="my-list.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                فهرست کتاب
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li class="nav-item">
+                                                    <a href="my-list.html" class="nav-link">فهرست کتاب</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="my-list-details.html" class="nav-link">جزیئات فهرست کتاب</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="my-list-create.html" class="nav-link">ساخت فهرست کتاب</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item dropdown submenu">
+                                            <a class="nav-link dropdown-toggle" href="my-address.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                دفترچه آدرس
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li class="nav-item">
+                                                    <a href="my-address.html" class="nav-link">دفترچه آدرس</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="add-new-address.html" class="nav-link">اضافه کردن آدرس جدید</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="my-following-authors.html" class="nav-link">نویسندگان</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="my-rating-reviews.html" class="nav-link">رتبه بندی و نظرات</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="my-wishlist.html" class="nav-link">علاقه مندی ها</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown submenu mega_menu tab-demo">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        کاوش کنید
+                                    </a>
+                                    <ul class="dropdown-menu sub">
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-lg-5 tabHeader">
+                                                    <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                        <li class="nav-item active">
+                                                            <a class="nav-link" id="v-pills-tour-tab" data-toggle="pill" href="#v-pills-tour" role="tab" aria-controls="v-pills-tour" aria-selected="false">صفحات سودمند</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="v-others-menu-tab" data-toggle="pill" href="#v-others-menu" role="tab" aria-controls="v-others-menu" aria-selected="false">کمپانی</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="v-pills-doc-tab" data-toggle="pill" href="#v-pills-doc" role="tab" aria-controls="v-pills-doc" aria-selected="true">صفحات فروشگاه</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="v-pills-code-tab" data-toggle="pill" href="#v-pills-code" role="tab" aria-controls="v-pills-code" aria-selected="false">داشبورد</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="v-pills-layout-tab" data-toggle="pill" href="#v-pills-layout" role="tab" aria-controls="v-pills-layout" aria-selected="false">وبلاگ و نویسنده</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <div class="tab-content tabContent" id="v-pills-tabContent">
+                                                        <div class="tab-pane fade active show" id="v-pills-tour" role="tabpanel" aria-labelledby="v-pills-tour-tab">
+                                                            <div class="d-flex">
+                                                                <ul class="list-unstyled tab_list w_100">
+                                                                    <li>
+                                                                        <a href="login.html">واردشوید</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="registration.html">ثبت نام کنید</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="typography.html">تایپوگرافی</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="page-banner-style-2.html">
+                                                                            سبک بنر
+                                                                            02
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="page-banner-style-3.html">
+                                                                            سبک بنر
+                                                                            03
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="v-others-menu" role="tabpanel" aria-labelledby="v-others-menu-tab">
+                                                            <div class="d-flex">
+                                                                <ul class="list-unstyled tab_list w_100">
+                                                                    <li>
+                                                                        <a href="book-listing.html">فهرست کتاب</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="about.html">درباره</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="contact.html">تماس با ما</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="terms-condition.html">شرایط و خدمات</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="privacy-policy.html">سیاست حفظ حریم خصوصی</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="v-pills-doc" role="tabpanel" aria-labelledby="v-pills-doc-tab">
+                                                            <div class="d-flex">
+                                                                <ul class="list-unstyled tab_list">
+                                                                    <li>
+                                                                        <a href="shop.html">فروشگاه</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="shop-no-sidebar.html">فروشگاه بدون نوار کناری</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="product-single.html">جزئیات محصول</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="cart.html">سبدخرید</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="cart-guest.html">سبد خرید مهمان</a>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul class="list-unstyled tab_list">
+                                                                    <li>
+                                                                        <a href="checkout.html">تسویه حساب</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="checkout-gift.html">پرداخت هدیه</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="checkout-login.html">ورود به سیستم پرداخت</a>
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <a href="my-wishlist.html">علاقه مندی ها</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="v-pills-code" role="tabpanel" aria-labelledby="v-pills-code-tab">
+                                                            <div class="d-flex">
+                                                                <ul class="list-unstyled tab_list">
+                                                                    <li>
+                                                                        <a href="my-account.html">پروفایل کاربری</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="my-orders.html">سفارش ها</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="order-track.html">پیگیری سفارش ها</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="order-confrmation.html">صفحه قدردانی</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="my-ebook-library.html">کتاب الکترونیکی</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="my-following-authors.html">نویسندگان</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="my-rating-reviews.html">رتبه بندی نویسندگان</a>
+                                                                    </li>
+
+                                                                </ul>
+                                                                <ul class="list-unstyled tab_list">
+                                                                    <li>
+                                                                        <a href="my-list.html">لیست کتاب</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="my-list-details.html">جزیئات لیست کتاب</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="my-list-create.html">ساخت لیست کتاب</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="my-address.html">آدرس کتاب</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="add-new-address.html">اضافه کردن آدرس جدید </a>
+
+                                                                    </li>
+
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="v-pills-layout" role="tabpanel" aria-labelledby="v-pills-layout-tab">
+                                                            <div class="d-flex">
+                                                                <ul class="list-unstyled tab_list">
+                                                                    <li>
+                                                                        <a href="blog-grid.html">شبکه و وبلاگ</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="blog-extend-grid.html">شبکه گسترده</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="blog-list.html">لیست وبلاگ</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="blog-details.html">جزیئات وبلاگ</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="author.html">نویسنده</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="author-single.html">نویسندگان مجرد</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown submenu">
+                                    <a class="nav-link dropdown-toggle" href="blog-list.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        وبلاگ
+                                    </a>
+
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="blog-grid.html" class="nav-link">شبکه ووبلاگ</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-extend-grid.html" class="nav-link">شبکه گسترده</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-list.html" class="nav-link">لیست وبلاگ</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-details.html" class="nav-link">جزیئات وبلاگ</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <div class="alter_nav">
+                                <ul class="navbar-nav search_cart menu">
+                                    <li class="nav-item search">
+                                        <a class="nav-link search-btn" href="javascript:void(0);"><i class="icon-search"></i></a>
+                                        <form action="#" method="get" class="menu-search-form">
+                                            <div class="input-group">
+                                                <input type="search" class="form-control" placeholder=" جستجو " />
+                                                <button type="submit">
+                                                    <i class="ti-arrow-right"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </li>
+                                    <li class="nav-item shpping-cart dropdown submenu">
+                                        <a class="cart-btn nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="icon-shopping-basket"></i><span class="num">2</span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li class="cart-single-item clearfix">
+                                                <div class="cart-img">
+                                                    <img src="assets/img/cart1.jpg" alt="styler" />
+                                                </div>
+                                                <div class="cart-content text-left">
+                                                    <p class="cart-title">
+                                                        <a href="product-single.html">صورتی کم رنگ و مشکی دکمه دار</a>
+                                                    </p>
+                                                    <p><del>تومان400.000</del> -تومان350.000</p>
+                                                </div>
+                                                <div class="cart-remove">
+                                                    <a href="#" class="action"><span class="ti-close"></span></a>
+                                                </div>
+                                            </li>
+                                            <li class="cart-single-item clearfix">
+                                                <div class="cart-img">
+                                                    <img src="assets/img/cart1.jpg" alt="styler" />
+                                                </div>
+                                                <div class="cart-content text-left">
+                                                    <p class="cart-title">
+                                                        <a href="product-single.html">ورا بردلی چمدان بزرگ</a>
+                                                    </p>
+                                                    <p>تومان350.000</p>
+                                                </div>
+                                                <div class="cart-remove">
+                                                    <a href="#" class="action"><span class="ti-close"></span></a>
+                                                </div>
+                                            </li>
+                                            <li class="cart_f">
+                                                <div class="cart-pricing">
+                                                    <p class="total">
+                                                        جمع فرعی :<span class="p-total text-end">تومان358.00</span>
+                                                    </p>
+                                                </div>
+                                                <div class="cart-button text-center">
+                                                    <a href="cart.html" class="btn btn-cart get_btn pink">سبد خرید</a>
+                                                    <a href="checkout.html" class="btn btn-cart get_btn dark">تسویه حساب</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item user ms-3">
+                                        <a class="nav-link" href="my-account.html"><i class="icon-user"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <!-- banner area  -->
+           @RenderBody()
+            <!-- footer area css  -->
+            <footer class="bj_footer_area padding_top" data-bg-color="#001F58">
+                <img class="footer_bg_img" src="assets/img/home/footer_img.jpg" alt="" />
+                <div class="footer_top rtl">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-2 col-sm-6">
+                                <div class="f_widget link_widget wow fadeInUp" data-wow-delay="0.2s">
+                                    <h2 class="f_widget_title">کمپانی</h2>
+                                    <ul class="list-unstyled list">
+                                        <li><a href="about.html">درباره ما</a></li>
+                                        <li><a href="contact.html">تماس با ما</a></li>
+                                        <li><a href="blog-grid.html">وبلاگ</a></li>
+                                        <li><a href="author.html">نویسنده</a></li>
+                                        <li><a href="book-listing.html">کتاب ها</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="f_widget link_widget ps-lg-5 wow fadeInUp" data-wow-delay="0.3s">
+                                    <h2 class="f_widget_title">سرویس ها</h2>
+                                    <ul class="list-unstyled list">
+                                        <li><a href="shop.html">فروشگاه</a></li>
+                                        <li><a href="my-orders.html">سفارش</a></li>
+                                        <li><a href="cart.html">سبدخرید</a></li>
+                                        <li><a href="checkout.html">تسویه حساب</a></li>
+                                        <li><a href="my-wishlist.html">علاقه مندی ها</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="f_widget link_widget ps-lg-5 wow fadeInUp" data-wow-delay="0.3s">
+                                    <h2 class="f_widget_title">صفحات</h2>
+                                    <ul class="list-unstyled list">
+                                        <li><a href="login.html">ورود</a></li>
+                                        <li><a href="registration.html">ثبت نام</a></li>
+                                        <li><a href="typography.html">تایپوگرافی</a></li>
+                                        <li><a href="404.html">404 صفحات</a></li>
+                                        <li><a href="my-ebook-library.html">کتاب الکترونیکی</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="f_widget link_widget ps-lg-5 wow fadeInUp" data-wow-delay="0.4s">
+                                    <h2 class="f_widget_title">خبرنامه</h2>
+                                    <p>
+                                        آئنیاس قرار است یکی از نخبگان فوتبال باشد و او با تیر به دنیا آمده است.
+                                    </p>
+                                    <form action="#" class="d-flex justify-content-end footer-search">
+                                        <input type="email" class="form-control email-form" placeholder="ایمیل خود را وارد کنید" />
+                                        <button class="bj_theme_btn btn-Subscribe" type="submit">
+                                            <i class="arrow_right"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer_middle wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="container rtl">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12 text-center text-lg-start">
+                                <a href="#" class="f_logo">
+                                    <img src="assets/img/home/logo-white.svg" alt="f_logo" />
+                                </a>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="footer_social d-flex justify-content-lg-center">
+                                    صفحات مارو دنبال کنید:
+                                    <ul class="list-unstyled f_social_round">
+                                        <li>
+                                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="footer_terms text-end">
+                                    <a href="terms-condition.html">شرایط خدمات</a>
+                                    <a href="privacy-policy.html">سیاست حفظ حریم خصوصی</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer_bottom text-center wow fadeInUp" data-wow-delay="0.6s">
+                    <p>© 2024 کتاب باز تمامی حقوق محفوظ است</p>
+                </div>
+            </footer>
+            <!-- footer area css  -->
+        </div>
+        <!-- Back to top button -->
+        <a id="back-to-top" title="Back to Top"></a>
+        <!-- Optional JavaScript; choose one of the two! -->
+        <script src="~/assets/js/jquery-3.6.0.min.js"></script>
+
+        <!-- Option 2: Separate Popper and Bootstrap JS -->
+
+        <script src="~/assets/js/preloader.js"></script>
+        <script src="~/assets/vendors/bootstrap/js/popper.min.js"></script>
+        <script src="~/assets/vendors/bootstrap//js/bootstrap.min.js"></script>
+        <script src="~/assets/vendors/parallax//parallax.js"></script>
+        <script src="~/assets/vendors/slick/slick.min.js"></script>
+        <script src="~/assets/js/comming-soon.js"></script>
+        <script src="~/assets/js/jquery.counterup.min.js"></script>
+        <script src="~/assets/js/jquery.waypoints.min.js"></script>
+        <script src="~/assets/vendors/swiper//swiper-bundle.min.js"></script>
+        <script src="~/assets/vendors/wow//wow.min.js"></script>
+        <script src="~/assets/js/custom.js"></script>
+
+    @* <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script> *@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

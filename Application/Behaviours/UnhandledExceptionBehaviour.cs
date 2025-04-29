@@ -32,6 +32,19 @@ namespace Application.Behaviours
                 MethodInfo failMethotOfApiResult = type.GetMethod("Fail");
                 if (failMethotOfApiResult != null)
                 {
+                    if( ex is Microsoft.EntityFrameworkCore.DbUpdateException)
+                    {
+                        var tar  = Activator.CreateInstance(type);
+
+                        object[] arg = { "این فیلد به دلیل وابستگی قابل حذف نمی باشد" };
+
+                        failMethotOfApiResult.Invoke(tar, arg);
+
+                        return (TResponse)Convert.ChangeType(tar, typeof(TResponse));
+
+
+                    }
+
                     var target = Activator.CreateInstance(type);
 
                     object[] args = { "خطا رخ داده است" };

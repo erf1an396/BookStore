@@ -36,6 +36,8 @@ $(document).ready(function () {
                 if (response.IsSuccess) {
                     $('#deleteCategoryModal').modal('hide');
                     loadCategories();
+                } else {
+                    alert(response.Message);
                 }
                 
             }

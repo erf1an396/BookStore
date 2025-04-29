@@ -25,6 +25,8 @@ namespace Infrastructure.Persistence
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<Book> Books { get; set; }
+
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

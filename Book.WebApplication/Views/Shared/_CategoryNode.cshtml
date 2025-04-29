@@ -1,0 +1,18 @@
+﻿@model Application.Features.Category.CategoryDto
+
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        @Model.Title
+    </a>
+
+    @if (Model.CategoryChildren?.Any() == true)
+    {
+        <ul class="dropdown-menu">
+            @foreach (var child in Model.CategoryChildren)
+            {
+                @Html.Partial("_CategoryNode", child)
+            }
+        </ul>
+    }
+</li>
