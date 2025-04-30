@@ -1,13 +1,7 @@
 ﻿using Application.Contracts;
 using Application.Models;
-using Domain.Entities;
 using Domain.Enums;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Book.Command.Insert
 {
@@ -34,7 +28,8 @@ namespace Application.Features.Book.Command.Insert
 
     }
 
-    public class BookInsertCommandHandler : IRequestHandler<BookInsertCommand ,ApiResult>
+
+    public class BookInsertCommandHandler : IRequestHandler<BookInsertCommand, ApiResult>
     {
         private readonly IBookStoreContext _db;
 
@@ -43,7 +38,7 @@ namespace Application.Features.Book.Command.Insert
             _db = db;
         }
 
-        public async Task<ApiResult> Handle(BookInsertCommand request , CancellationToken cancellationToken)
+        public async Task<ApiResult> Handle(BookInsertCommand request, CancellationToken cancellationToken)
         {
             ApiResult apiResult = new();
 
@@ -60,7 +55,7 @@ namespace Application.Features.Book.Command.Insert
                 CategotyId = request.CategoryId,
             });
 
-            await _db.SaveChangesAsync();   
+            await _db.SaveChangesAsync();
             apiResult.Success(ApiResultStaticMessage.SavedSuccessfully);
             return apiResult;
         }
