@@ -1,0 +1,126 @@
+﻿@using Application.Extensions
+@{
+    Layout = "_Layout";
+}
+
+@section myStyle {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Items</title>
+    <link rel="stylesheet" href="~/css/modalcss/StyleSheet.css">
+    <link rel="stylesheet" href="~/css/custom.css">
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col">
+                    <div class="page-header-left">
+                        <h3>Book Page</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">home</li>
+                            <li class="breadcrumb-item active">Book Page</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <h2 class="text-center mb-4">مدیریت کتاب‌ها</h2>
+        <button class="btn btn-success mb-3" onclick="openAddBookModal()">➕ افزودن کتاب</button>
+        <ul class="list-group" id="bookList"></ul>
+    </div>
+</div>
+
+<!-- 🔹 Add Book Modal -->
+<div class="modal fade" id="addBookModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">افزودن کتاب</h5></div>
+            <div class="modal-body">
+                <input id="bookTitle" class="form-control mb-2" placeholder="عنوان" />
+                <input id="bookAuthor" class="form-control mb-2" placeholder="نویسنده" />
+                <input id="bookPublisher" class="form-control mb-2" placeholder="ناشر" />
+                <input id="bookYear" type="number" class="form-control mb-2" placeholder="سال انتشار" />
+                <input id="bookIsbn" class="form-control mb-2" placeholder="شابک" />
+                <input id="bookPages" type="number" class="form-control mb-2" placeholder="تعداد صفحات" />
+                <textarea id="bookDescription" class="form-control mb-2" placeholder="توضیحات"></textarea>
+
+                <select class="form-select mb-2" id="bookLanguage">
+                    <option value="">انتخاب زبان</option>
+                    @foreach (Domain.Enums.BookLanguageEnum suit in (Domain.Enums.BookLanguageEnum[])Enum.GetValues(typeof(Domain.Enums.BookLanguageEnum)))
+                    {
+                        <option value="@((int)suit)">@suit.GetEnumDescription()</option>
+                    }
+                </select>
+
+                <input id="bookCategoryId" type="number" class="form-control mb-2" placeholder="شناسه کتگوری" />
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                <button class="btn btn-primary" id="addBookBtn">افزودن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 🔹 Edit Book Modal -->
+<div class="modal fade" id="editBookModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">ویرایش کتاب</h5></div>
+            <div class="modal-body">
+                <input type="hidden" id="editBookId" />
+                <input id="editBookTitle" class="form-control mb-2" placeholder="عنوان" />
+                <input id="editBookAuthor" class="form-control mb-2" placeholder="نویسنده" />
+                <input id="editBookPublisher" class="form-control mb-2" placeholder="ناشر" />
+                <input id="editBookYear" type="number" class="form-control mb-2" placeholder="سال انتشار" />
+                <input id="editBookIsbn" class="form-control mb-2" placeholder="شابک" />
+                <input id="editBookPages" type="number" class="form-control mb-2" placeholder="تعداد صفحات" />
+                <textarea id="editBookDescription" class="form-control mb-2" placeholder="توضیحات"></textarea>
+
+                <select class="form-select mb-2" id="editBookLanguage">
+                    @foreach (Domain.Enums.BookLanguageEnum suit in (Domain.Enums.BookLanguageEnum[])Enum.GetValues(typeof(Domain.Enums.BookLanguageEnum)))
+                    {
+                        <option value="@((int)suit)">@suit.GetEnumDescription()</option>
+                    }
+                </select>
+
+                <input id="editBookCategoryId" type="number" class="form-control mb-2" placeholder="شناسه کتگوری" />
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                <button class="btn btn-primary" id="saveEditBookBtn">ذخیره</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 🔹 Delete Modal -->
+<div class="modal fade" id="deleteBookModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">حذف کتاب</h5></div>
+            <div class="modal-body">
+                <input type="hidden" id="deleteBookId" />
+                آیا مطمئن هستید که می‌خواهید این کتاب را حذف کنید؟
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">لغو</button>
+                <button class="btn btn-danger" id="confirmDeleteBookBtn">حذف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section myscript {
+    <script src="/ckeditor4/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('bookDescription');
+        CKEDITOR.replace('editBookDescription');
+    </script>
+    <script src="~/js/AdminPageQuery/Book.js"></script>
+}

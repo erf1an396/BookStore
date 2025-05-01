@@ -51,6 +51,7 @@ namespace Book.WebApplication.Areas.Admin.Controllers
         }
 
 
+
         [HttpPost]
         [ActionName("Create")]
         public async Task<IActionResult> Create([FromBody] CategoryInsertCommand command)
@@ -58,6 +59,7 @@ namespace Book.WebApplication.Areas.Admin.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
 
 
 

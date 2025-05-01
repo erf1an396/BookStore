@@ -10,12 +10,12 @@ namespace Domain.Enums
     public enum BookLanguageEnum
     {
         [Description("فارسی")]
-        Persian = 0  ,
+        Persian = 1  ,
 
         [Description("انگلیسی")]
-        English = 1 ,
+        English = 2 ,
 
         [Description("فرانسوی")]
-        French = 2 
+        French = 3
     }
 }
