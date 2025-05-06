@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
 
     loadBook();
+    loadBookMain();
 
     $('#bookForm').on('submit', function (e) {
         e.preventDefault();
@@ -14,7 +15,7 @@
             Publication_Year: parseInt($('#bookYear').val()),
             Isbn: $('#bookIsbn').val(),
             Pages: parseInt($('#bookPages').val()),
-            Description: $('#bookDescription').val(),
+            Description: CKEDITOR.instances['bookDescription'].getData(),
             Language: parseInt($('#bookLanguage').val()),
             CategoryId: parseInt($('#bookCategoryId').val())
             
@@ -34,6 +35,7 @@
                 
                 resetForm();
                 loadBook();
+                loadBookMain();
             },
             error: function () {
                 alert("خطا در ذخیره کتاب")
@@ -72,21 +74,39 @@
                         `
                     );
                 }
+                
+            },
+            error: function () {
+                alert('خط در برگزاری لیست کتاب ها ')
+            }
+        });
+    }
 
-                //value.foreach(book => {
-                //    $list.append(
-                //        `
-                //          <li class="list-group-item d-flex justify-content-between align-items-center">
-                //            <div><strong>${book.Title}</strong> - ${book.Author}</div>
-                //            <div>
-                //                <button class="btn btn-sm btn-primary me-2" onclick='editBook(${JSON.stringify(book)})'>ویرایش</button>
-                //                <button class="btn btn-sm btn-danger" onclick='deleteBook(${book.Id})'>حذف</button>
-                //            </div>
-                //          </li>
+    function loadBookMain() {
+        $.ajax({
+            url: '/admin/book/GetAll',
+            type: 'GET',
+            success: function (books) {
+
+
+
+                const $list = $('#bookListMain');
+                $list.empty();
+                const value = books.Value;
+
+
+                for (let book of books.Value) {
+                    $list.append(
+                        `
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div><strong>${book.Title}</strong> - ${book.Author}</div>
+                            
+                          </li>
                         
-                //        `
-                //    );
-                //});
+                        `
+                    );
+                }
+
             },
             error: function () {
                 alert('خط در برگزاری لیست کتاب ها ')
@@ -103,7 +123,8 @@
         $('#bookYear').val(book.Publication_Year);
         $('#bookIsbn').val(book.Isbn);
         $('#bookPages').val(book.Pages);
-        $('#bookDescription').val(book.Description);
+        /*$('#bookDescription').val(book.Description);*/
+        CKEDITOR.instances['bookDescription'].setData(book.Description);
         $('#bookLanguage').val(book.Language);
         $('#bookCategoryId').val(book.CategoryId);
         $('#cancelEditBtn').show();
@@ -121,6 +142,7 @@
             
             success: function () {
                 loadBook();
+                loadBookMain();
                 
             },
             error: function () {
