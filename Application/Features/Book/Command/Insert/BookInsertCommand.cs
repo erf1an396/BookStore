@@ -19,7 +19,7 @@ namespace Application.Features.Book.Command.Insert
 
         public BookLanguageEnum Language { get; set; }
 
-        public int pages { get; set; }
+        public int Pages { get; set; }
 
         public string? Description { get; set; }
 
@@ -50,9 +50,10 @@ namespace Application.Features.Book.Command.Insert
                 Publication_Year = request.Publication_Year,
                 Isbn = request.Isbn,
                 Language = request.Language,
-                pages = request.pages,
+                Pages = request.Pages,
                 Description = request.Description,
-                CategotyId = request.CategoryId,
+                CategoryId = request.CategoryId,
+                
             });
 
             await _db.SaveChangesAsync();

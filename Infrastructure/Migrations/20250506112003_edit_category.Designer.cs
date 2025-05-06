@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BookStoreContext))]
-    [Migration("20250429123248_Add_book")]
-    partial class Add_book
+    [Migration("20250506112003_edit_category")]
+    partial class edit_category
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -251,7 +251,7 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CategotyId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -269,6 +269,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime?>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Pages")
+                        .HasColumnType("int");
+
                     b.Property<int>("Publication_Year")
                         .HasColumnType("int");
 
@@ -280,12 +283,9 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("pages")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CategotyId");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Book", (string)null);
                 });
@@ -385,7 +385,7 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.Entities.Category", "Category")
                         .WithMany("books")
-                        .HasForeignKey("CategotyId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -27,7 +27,7 @@ namespace Application.Features.Book.Command.Update
 
         public BookLanguageEnum  Language  { get ; set; }
 
-        public int pages { get; set; }
+        public int Pages { get; set; }
 
         public string? Description  { get; set; }
 
@@ -65,10 +65,10 @@ namespace Application.Features.Book.Command.Update
             {
                 book.Isbn = request.Isbn;
             }
-            book.CategotyId = request.CategoryId;
+            book.CategoryId = request.CategoryId;
             book.Publication_Year = request.Publication_Year;
             book.Description = request.Description;
-            book.pages = request.pages;
+            book.Pages = request.Pages;
             book.Language = request.Language;
 
             _db.Books.Update(book);

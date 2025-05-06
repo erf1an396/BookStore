@@ -37,7 +37,7 @@ namespace Application.Features.Book
 
         public BookLanguageEnum Language { get; set; }
 
-        public int pages { get; set; }
+        public int Pages { get; set; }
 
         public CategoryDto Category { get; set; }
 

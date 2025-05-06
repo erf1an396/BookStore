@@ -27,7 +27,7 @@ namespace Infrastructure.Persistence.Configuration
 
             builder.HasOne(b => b.Category)
                 .WithMany(c => c.books)
-                .HasForeignKey(c => c.CategotyId)
+                .HasForeignKey(c => c.CategoryId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

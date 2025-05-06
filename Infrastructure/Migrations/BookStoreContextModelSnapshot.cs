@@ -248,7 +248,7 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CategotyId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -266,6 +266,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime?>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Pages")
+                        .HasColumnType("int");
+
                     b.Property<int>("Publication_Year")
                         .HasColumnType("int");
 
@@ -277,12 +280,9 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("pages")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CategotyId");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Book", (string)null);
                 });
@@ -382,7 +382,7 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.Entities.Category", "Category")
                         .WithMany("books")
-                        .HasForeignKey("CategotyId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

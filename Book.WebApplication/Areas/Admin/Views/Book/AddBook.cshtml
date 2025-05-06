@@ -1,0 +1,187 @@
+﻿@using Application.Extensions
+@using Application.Features.Category
+@using MediatR
+@inject IMediator Mediator
+@using Application.Features.Category.Query.GetAll
+
+
+@{
+    Layout = "_Layout";
+}
+
+
+@{
+
+
+
+    var category = await Mediator.Send(new CategoryGetAllQuery());
+
+
+
+
+    List<CategoryDto> categoryDtos = category.Value;
+
+
+
+
+
+    // List<CategoryDto> categoryDtos = category.Value;
+}
+
+@functions {
+
+    string RenderCategoryOptions(List<CategoryDto> allCategories, int? parentId, int level)
+    {
+        var children = allCategories.Where(x => x.ParentId == parentId).OrderBy(c => c.Title).ToList();
+
+        foreach (var category in children)
+
+        {
+
+            var space = string.Concat(Enumerable.Repeat(" -- ", level * 2));
+
+
+
+            <option value="@category.Id">@($"{space} {category.Title} ")</option>
+
+            RenderCategoryOptions(allCategories, category.Id, level + 1);
+        }
+
+        return "";
+
+    }
+}
+
+
+
+@section myStyle {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Items</title>
+    <link rel="stylesheet" href="~/css/modalcss/StyleSheet.css">
+    <link rel="stylesheet" href="~/css/custom.css">
+}
+
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col">
+                    <div class="page-header-left">
+                        <h3>Book Page</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">home</li>
+                            <li class="breadcrumb-item active">Book Page</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="container my-5">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">📚 مدیریت کتاب‌ها</h2>
+            <p class="text-muted">کتاب جدید اضافه کن یا اطلاعات کتاب‌های قبلی رو ویرایش کن</p>
+        </div>
+
+
+
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0" id="formTitle">➕ افزودن کتاب</h5>
+            </div>
+            <div class="card-body">
+                <form id="bookForm">
+                    <input type="hidden" id="bookId" />
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">عنوان</label>
+                            <input id="bookTitle" class="form-control" placeholder="مثلاً: غرور و تعصب" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">نویسنده</label>
+                            <input id="bookAuthor" class="form-control" placeholder="مثلاً: جین آستن" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">ناشر</label>
+                            <input id="bookPublisher" class="form-control" placeholder="مثلاً: ققنوس" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">سال انتشار</label>
+                            <input id="bookYear" type="number" class="form-control" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">شابک</label>
+                            <input id="bookIsbn" class="form-control" placeholder=" 978-3-16-148410-0 :مثلاً" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">تعداد صفحات</label>
+                            <input id="bookPages" type="number" class="form-control" />
+                        </div>
+
+                        @* <div class="col-md-3 mb-3">
+                            <label class="form-label">شناسه کتگوری</label>
+                            <input id="bookCategoryId" type="number" class="form-control" />
+                        </div> *@
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">کتگوری</label>
+                            <select class="form-select" id="bookCategoryId">
+                                <option value="">انتخاب کتگوری</option>
+                                @RenderCategoryOptions(category.Value, null, 0)
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">زبان</label>
+                            <select class="form-select" id="bookLanguage">
+                                <option value="">انتخاب زبان</option>
+                                <option value="1">🇮🇷 فارسی</option>
+                                <option value="2">🇬🇧 انگلیسی</option>
+                                <option value="3">🇫🇷 فرانسوی</option>
+                            </select>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label class="form-label">توضیحات</label>
+                            <textarea id="bookDescription" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <button type="submit" class="btn btn-success px-4">💾 ذخیره</button>
+                        <button type="button" id="cancelEditBtn" class="btn btn-secondary" style="display: none;">❌ انصراف</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">📖 لیست کتاب‌ها</h5>
+            </div>
+            <ul class="list-group list-group-flush" id="bookList">
+            </ul>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+@section myscript {
+    <script src="/ckeditor4/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('bookDescription');
+    </script>
+    <script src="~/js/AdminPageQuery/Book.js"></script>
+}

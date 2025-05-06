@@ -22,14 +22,14 @@ namespace Domain.Entities
 
         public BookLanguageEnum Language { get; set; }
 
-        public int pages { get; set; }
+        public int Pages { get; set; }
 
         public  string? Description { get; set; }
 
 
         public Category  Category { get; set; }
 
-        public int CategotyId { get; set; }
+        public int CategoryId { get; set; }
 
 
 

@@ -30,11 +30,21 @@
 
     <div class="container my-5">
         <h2 class="text-center mb-4">مدیریت کتاب‌ها</h2>
-        <button class="btn btn-success mb-3" onclick="openAddBookModal()">➕ افزودن کتاب</button>
+
+            <a href="~/admin/book/addbook" class="text-white">
+            <button class="btn btn-success mb-3" onclick="openAddBookModal()">
+                مدیریت کتاب‌ها
+            </button>
+            </a>
+        
+
+
         <ul class="list-group" id="bookList"></ul>
     </div>
 </div>
 
+
+@* 
 <!-- 🔹 Add Book Modal -->
 <div class="modal fade" id="addBookModal" tabindex="-1">
     <div class="modal-dialog">
@@ -114,7 +124,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> *@
 
 @section myscript {
     <script src="/ckeditor4/ckeditor/ckeditor.js"></script>

@@ -25,6 +25,14 @@ namespace Book.WebApplication.Areas.Admin.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        [ActionName("AddBook")]
+        public async Task<IActionResult> AddBook()
+        {
+            return View();
+        }
+
         [HttpGet]
         [ActionName("GetAll")]
 
@@ -36,7 +44,7 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
             return Ok(result);
         }
-
+         
         [HttpPost]
         [ActionName("Delete")]
         public async Task<IActionResult> Delete(int id)
@@ -59,11 +67,11 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpPost]
         [ActionName("Update")]
-        public async Task<IActionResult> Update (int id , [FromBody] BookUpdateCommand command)
+        public async Task<IActionResult> Update (int Id , [FromBody] BookUpdateCommand command)
         {
-            var request = new BookUpdateCommand {  Id = id };
+           
 
-            var result = await _mediator.Send(request);
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
     }
