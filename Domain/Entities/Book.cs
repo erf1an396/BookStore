@@ -31,6 +31,8 @@ namespace Domain.Entities
 
         public int CategoryId { get; set; }
 
+        public ICollection<BookPhoto> BookPhtotos { get; set; }
+
 
 
         

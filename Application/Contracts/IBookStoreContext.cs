@@ -17,6 +17,8 @@ namespace Application.Contracts
         DbSet<Category> Categories { get; set; }
         DbSet<Book> Books { get; set; }
 
+        DbSet<BookPhoto> BookPhotos { get; set; }
+
         Task<IDbContextTransaction> BeginTransaction(CancellationToken cancellationToken = default);
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 

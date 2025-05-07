@@ -18,6 +18,8 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Application.Contracts.WebHostEnvironment;
+using Infrastructure.WebHostEnvironment;
 namespace Infrastructure
 {
     public static class InfrastructureServiceRegistration
@@ -39,6 +41,8 @@ namespace Infrastructure
 
 
             services.AddScoped<ISignalRService, SignalRService>();
+
+            services.AddScoped<IWebHostEnvironmentAccessor , WebHostEnvironmentAccessor>
 
 
             services.AddOurAddIdentity(configuration);
