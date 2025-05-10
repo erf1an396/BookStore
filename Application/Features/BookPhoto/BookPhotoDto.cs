@@ -15,14 +15,16 @@ namespace Application.Features.BookPhoto
 
         public void Mapping (Profile profile)
         {
-            profile.CreateMap<Domain.Entities.BookPhoto , BookDto>().ReverseMap() ;    
+            profile.CreateMap<Domain.Entities.BookPhoto , BookPhotoDto>().ReverseMap() ;    
         }
 
         public string Name { get; set; } 
 
         public int BookId { get; set; }
 
-        public string Extention { get; set; }
+        public string Extenstion { get; set; }
+
+
 
         public BookDto Book { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using Application.Features.Category;
+﻿using Application.Features.BookPhoto;
+using Application.Features.Category;
 using Application.Mappings;
 using Application.Models;
 using AutoMapper;
@@ -42,6 +43,8 @@ namespace Application.Features.Book
         public CategoryDto Category { get; set; }
 
         public int CategoryId { get; set; }
+
+        public ICollection<BookPhotoDto> BookPhtotos { get; set; }
 
 
 

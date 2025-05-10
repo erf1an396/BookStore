@@ -12,7 +12,7 @@ namespace Application.Features.BookPhoto.Command.Insert
     {
         public string Name { get; set; }
 
-        public string Extention { get; set; }
+       
 
         public int BookId { get; set; }
 
@@ -51,15 +51,17 @@ namespace Application.Features.BookPhoto.Command.Insert
 
             string savePath = Directory.GetCurrentDirectory() + "\\wwwroot\\img\\BookPhoto";
 
+
             //var fileName = $"{res.Id}.{ext2}";
             //var fullPath = Path.Combine(savePath, fileName);
+
 
             if(!Directory.Exists(savePath))
             {
                 Directory.CreateDirectory(savePath);
             }
 
-            string fileName = $"{res.Id}.{ext}";
+            string fileName = $"{res.Id}.{ext2}";
             string fullPath = Path.Combine(savePath, fileName);
 
             using var stream = request.File.OpenReadStream();

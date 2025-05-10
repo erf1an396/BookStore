@@ -42,7 +42,7 @@ namespace Infrastructure
 
             services.AddScoped<ISignalRService, SignalRService>();
 
-            services.AddScoped<IWebHostEnvironmentAccessor , WebHostEnvironmentAccessor>
+            services.AddScoped<IWebHostEnvironmentAccessor, WebHostEnvironmentAccessor>();
 
 
             services.AddOurAddIdentity(configuration);

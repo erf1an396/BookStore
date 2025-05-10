@@ -18,10 +18,10 @@
             Description: CKEDITOR.instances['bookDescription'].getData(),
             Language: parseInt($('#bookLanguage').val()),
             CategoryId: parseInt($('#bookCategoryId').val())
-            
+
 
         };
-        
+
 
         const url = bookId ? '/admin/book/Update' : '/admin/book/Create';
 
@@ -30,9 +30,9 @@
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(book),
-            
+
             success: function () {
-                
+
                 resetForm();
                 loadBook();
                 loadBookMain();
@@ -53,7 +53,7 @@
             type: 'GET',
             success: function (books) {
 
-                
+
 
                 const $list = $('#bookList');
                 $list.empty();
@@ -74,7 +74,7 @@
                         `
                     );
                 }
-                
+
             },
             error: function () {
                 alert('خط در برگزاری لیست کتاب ها ')
@@ -100,8 +100,19 @@
                         `
                           <li class="list-group-item d-flex justify-content-between align-items-center">
                             <div><strong>${book.Title}</strong> - ${book.Author}</div>
-                            
+
+                            <div>
+                                <a href="/admin/bookPhoto/index?bookId=${book.Id}">
+
+                                <button class="btn btn-sm btn-warning me-2">افزودن عکس</button>
+                                
+                                </a>
+                                
+                            </div>
+
                           </li>
+
+                         
                         
                         `
                     );
@@ -115,7 +126,7 @@
     }
 
     window.editBook = function (book) {
-        
+
         $('#bookId').val(book.Id);
         $('#bookTitle').val(book.Title);
         $('#bookAuthor').val(book.Author);
@@ -128,22 +139,22 @@
         $('#bookLanguage').val(book.Language);
         $('#bookCategoryId').val(book.CategoryId);
         $('#cancelEditBtn').show();
-        
+
     }
 
     window.deleteBook = function (bookId) {
         if (!confirm('آیا مطمئن هستید')) return;
 
-        
+
         $.ajax({
             url: '/admin/book/Delete/' + bookId,
             type: 'POST',
 
-            
+
             success: function () {
                 loadBook();
                 loadBookMain();
-                
+
             },
             error: function () {
                 alert('خطا در حذف کتاب')
@@ -151,7 +162,7 @@
 
         });
 
-        
+
     };
 
     function resetForm() {

@@ -14,6 +14,7 @@ namespace Application.Features.BookPhoto.Query.GetAll
 {
     public class BookPhotoGetAllQuery : IRequest<ApiResult<List<BookPhotoDto>>>
     {
+        public int BookId { get; set; }
     }
 
     public class BookGetAllQueryHandler : IRequestHandler<BookPhotoGetAllQuery , ApiResult<List<BookPhotoDto>>> 
@@ -32,7 +33,7 @@ namespace Application.Features.BookPhoto.Query.GetAll
         {
             ApiResult<List<BookPhotoDto>> result = new();
 
-            var data = await _db.BookPhotos.ToListAsync(cancellationToken);
+            List<Domain.Entities.BookPhoto> data = await _db.BookPhotos.Where(x => x.BookId == request.BookId).ToListAsync();
 
             result.Value = _mapper.Map<List<BookPhotoDto>>(data);
             result.Success();

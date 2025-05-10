@@ -1,0 +1,93 @@
+﻿
+
+.bj_new_pr_item {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #fff;
+    width: 300px;
+}
+
+.book-image-slider {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+    .book-image-slider img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+
+.wish_btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: red;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 300px;
+    display: block;
+}
+
+
+
+.swiper-button-next, .swiper-button-prev {
+    color: #444;
+}
+
+.book_price {
+    font-weight: bold;
+    color: green;
+}
+
+.ratting_icon i {
+    color: gold;
+}
+
+.bj_theme_btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.writer_name {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    width: 32px;
+    height: 32px;
+    background-color: rgba(255, 255, 255, 0.85);
+    color: #333;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 16px;
+        font-weight: bold;
+    }

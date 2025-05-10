@@ -30,7 +30,7 @@ namespace Application.Features.Book.Query.GetAll
         {
             ApiResult<List<BookDto>> result = new();
 
-            var data = await _db.Books.ToListAsync(cancellationToken);
+            List<Domain.Entities.Book> data = await _db.Books.ToListAsync(cancellationToken);
             result.Value = _mapper.Map<List<BookDto>>( data );
             result.Success();
             return result;  
