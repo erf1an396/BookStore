@@ -12,8 +12,9 @@
             type: 'GET',
             
             success: function (books) {
+                console.log(books)
                 const book = books.Value;
-               debugger
+               
 
                 $('#bookId').val(book.Id);
                 $('#bookTitle').val(book.Title);
@@ -27,8 +28,13 @@
                 $('#bookCategoryId').val(book.CategoryId);
                 $('#cancelEditBtn').show();
                 $('#formTitle').text("✏️ ویرایش کتاب");
+                
             },
             error: function () {
+
+                //console.error("Status:", xhr.status);
+                //console.error("Response:", xhr.responseText);
+                //alert("خطا: " + xhr.responseText);
                 alert("خطا در دریافت اطلاعات کتاب");
             }
         });

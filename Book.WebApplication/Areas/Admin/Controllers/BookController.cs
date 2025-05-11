@@ -87,10 +87,14 @@ namespace Book.WebApplication.Areas.Admin.Controllers
         [ActionName("GetById")]
         public async Task<IActionResult> GetById(int Id)
         {
-            var query = new BookGetByIdQuery { Id = Id };
-            var result = _mediator.Send(query);
+            
+                var query = new BookGetByIdQuery { Id = Id };
+                var result = await _mediator.Send(query);
 
-            return Ok(result);
+                return Ok(result);
+            
+            
+            
         }
     }
 }
