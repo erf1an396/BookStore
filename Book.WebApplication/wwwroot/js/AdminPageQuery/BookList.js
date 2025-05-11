@@ -6,6 +6,7 @@
         $.ajax({
             url: '/admin/book/GetAll',
             type: 'GET',
+            
             success: function (books) {
 
 

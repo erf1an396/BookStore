@@ -26,6 +26,8 @@
 
                 if (response.IsSuccess ) {
                     console.log("Login successful:", response);
+
+                    /*localStorage.setItem("token", response.Value);*/
                     window.location.href = "/home"
                 } else {
                     console.warn('Login failed:', response.message);

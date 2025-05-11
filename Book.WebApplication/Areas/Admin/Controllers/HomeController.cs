@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Book.WebApplication.Areas.Admin.Controllers
 {
     [Area("admin")]
+    
     public class HomeController : Controller
     {
         public IActionResult Index()

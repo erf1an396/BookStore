@@ -4,12 +4,14 @@ using Application.Features.Book.Command.Update;
 using Application.Features.Book.Query.GetAll;
 using Application.Features.Book.Query.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book.WebApplication.Areas.Admin.Controllers
 {
 
     [Area("Admin")]
+    
     public class BookController : Controller
     {
 

@@ -36,6 +36,7 @@ $(document).ready(function () {
                     //}).then(() => {
                     //    window.location.href = "/admin";
                     //});
+                    /*localStorage.setItem("token", response.Value);*/
                     window.location.href = "/admin";
                 } else {
                     console.warn('Login failed:', response.message);

@@ -3,11 +3,13 @@ using Application.Features.BookPhoto.Command.Insert;
 using Application.Features.BookPhoto.Query.GetAll;
 using Application.Features.BookPhoto.Query.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book.WebApplication.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    
     public class BookPhotoController : Controller
     {
         private readonly IMediator _mediator;

@@ -3,6 +3,7 @@ using Application.Models;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
@@ -35,13 +36,15 @@ namespace Application.Features.Auth.Command
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
-       
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
 
-        public LoginCommandHandler(UserManager<ApplicationUser> userManager , IConfiguration configuration)
+
+        public LoginCommandHandler(UserManager<ApplicationUser> userManager , IConfiguration configuration , IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
             
             
         }
@@ -60,6 +63,17 @@ namespace Application.Features.Auth.Command
             
 
             var token = GenerateJwtToken(user);
+
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("access_token", token, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTime.UtcNow.AddHours(1)
+
+            });
+
+
             result.Value = token;
             result.Success("OK");
             return result;
