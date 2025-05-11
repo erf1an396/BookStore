@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
     loadBook();
-    loadBookMain();
+    
 
     $('#bookForm').on('submit', function (e) {
         e.preventDefault();
@@ -35,7 +35,7 @@
 
                 resetForm();
                 loadBook();
-                loadBookMain();
+                
             },
             error: function () {
                 alert("خطا در ذخیره کتاب")
@@ -82,48 +82,7 @@
         });
     }
 
-    function loadBookMain() {
-        $.ajax({
-            url: '/admin/book/GetAll',
-            type: 'GET',
-            success: function (books) {
-
-
-
-                const $list = $('#bookListMain');
-                $list.empty();
-                const value = books.Value;
-
-
-                for (let book of books.Value) {
-                    $list.append(
-                        `
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div><strong>${book.Title}</strong> - ${book.Author}</div>
-
-                            <div>
-                                <a href="/admin/bookPhoto/index?bookId=${book.Id}">
-
-                                <button class="btn btn-sm btn-warning me-2">افزودن عکس</button>
-                                
-                                </a>
-                                
-                            </div>
-
-                          </li>
-
-                         
-                        
-                        `
-                    );
-                }
-
-            },
-            error: function () {
-                alert('خط در برگزاری لیست کتاب ها ')
-            }
-        });
-    }
+    
 
     window.editBook = function (book) {
 
@@ -145,7 +104,7 @@
     window.deleteBook = function (bookId) {
         if (!confirm('آیا مطمئن هستید')) return;
 
-
+        debugger
         $.ajax({
             url: '/admin/book/Delete/' + bookId,
             type: 'POST',
@@ -153,7 +112,7 @@
 
             success: function () {
                 loadBook();
-                loadBookMain();
+                
 
             },
             error: function () {

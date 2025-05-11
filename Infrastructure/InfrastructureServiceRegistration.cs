@@ -20,21 +20,22 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Application.Contracts.WebHostEnvironment;
 using Infrastructure.WebHostEnvironment;
+using Microsoft.Extensions.Options;
 namespace Infrastructure
 {
     public static class InfrastructureServiceRegistration
     {
 
-        public static IServiceCollection AddInfrastructureService(this IServiceCollection services , IConfiguration configuration)
+        public static IServiceCollection AddInfrastructureService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<BookStoreContext>(options =>
-            
+
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IMvcActionsDiscovery, MvcActionsDiscovery>();
-            services.AddScoped<IBookStoreContext , BookStoreContext>();
+            services.AddScoped<IBookStoreContext, BookStoreContext>();
 
-            services.AddScoped<IIdentityUserManager , IdentityUserManger>();
+            services.AddScoped<IIdentityUserManager, IdentityUserManger>();
             services.AddScoped<IIdentityRoleManager, IdentityRoleManager>();
 
             services.AddScoped<IDbInitializerService, DbInitializerService>();
@@ -73,11 +74,23 @@ namespace Infrastructure
                     IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(key),
                     ValidateIssuer = false,
                     ValidateAudience = false
-
                 };
+
+                //option.Events = new JwtBearerEvents
+                //{
+                //    OnMessageReceived = context =>
+                //    {
+                //        var token = context.Request.Cookies["access_token"];
+                //        if (!string.IsNullOrEmpty(token))
+                //            context.Token = token;
+
+                //        return Task.CompletedTask;
+                //    }
+                //};
+
             });
 
-            
+
 
             return services;
         }
@@ -106,6 +119,7 @@ namespace Infrastructure
                     options.ClaimsIdentity.UserIdClaimType = "nameid";
                     options.ClaimsIdentity.UserNameClaimType = "unique_name";
                     options.ClaimsIdentity.RoleClaimType = "role";
+
                 })
                 .AddEntityFrameworkStores<BookStoreContext>()
                 .AddErrorDescriber<CustomIdentityErrorDescriber>()

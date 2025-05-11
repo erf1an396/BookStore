@@ -27,7 +27,16 @@ $(document).ready(function () {
 
                 if (response.IsSuccess) {
                     console.log("Login successful:", response);
-                    window.location.href = "/home"
+                    //fetch('/Auth/SetToken', {
+                    //    method: 'POST',
+                    //    headers: {
+                    //        'Content-Type': 'application/json'
+                    //    },
+                    //    body: JSON.stringify({ token: response.value })
+                    //}).then(() => {
+                    //    window.location.href = "/admin";
+                    //});
+                    window.location.href = "/admin";
                 } else {
                     console.warn('Login failed:', response.message);
                     alert('ورود ناموفق بود: ');

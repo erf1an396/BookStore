@@ -34,6 +34,13 @@ namespace Book.WebApplication.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [ActionName("BookList")]
+        public async Task<IActionResult> BookList()
+        {
+            return View();
+        }
+
+        [HttpGet]
         [ActionName("GetAll")]
 
         public async Task<IActionResult> GetAll()

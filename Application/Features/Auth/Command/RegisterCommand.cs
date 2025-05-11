@@ -95,6 +95,8 @@ namespace Application.Features.Auth.Command
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim("Test", user.Id.ToString()),
+                    new Claim("FirstName", user.LastName.ToString()),
+                    new Claim("lastName", user.FirstName.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 //Issuer = _configuration["jwtConfig:SignInKey"],

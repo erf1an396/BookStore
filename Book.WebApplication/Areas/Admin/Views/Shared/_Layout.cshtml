@@ -1,4 +1,17 @@
-﻿﻿
+﻿@using Application.Features.Auth
+@using Application.Features.Auth.Command
+@using MediatR
+@inject IMediator Mediator
+
+@using System.Security.Claims
+
+@{
+   
+    
+    
+
+}
+﻿
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
 
@@ -160,7 +173,17 @@
                             <img class="img-60 rounded-circle" src="~/img/firouzmakan.jpg" alt="#">
                             <div class="profile-edit"><a href="edit-profile.html" target="_blank"><i data-feather="edit"></i></a></div>
                         </div>
-                        <h6 class="mt-3 f-14">علی اکبر فیروز مکان</h6>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            var FirstName = User.FindFirst("FirstName")?.Value;
+                            
+                            <h6 class="mt-3 f-14">@FirstName</h6>
+
+                        }
+
+                        
                         <p>مدیر کل.</p>
                     </div>
                     <ul class="sidebar-menu">
@@ -185,8 +208,8 @@
                         <li>
                             <a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>‌Book</span><i class="fa fa-angle-right pull-right"></i></a>
                             <ul class="sidebar-submenu">
-                                <li><a href="~/Admin/book/index"><i class="fa fa-circle"></i>بخش اصلی </a></li>
-                            @* <li><a href="chart-widget.html"><i class="fa fa-circle"></i>نمودار</a></li> *@
+                                <li><a href="~/Admin/book/index"><i class="fa fa-circle"></i>مدیریت کتاب </a></li>
+                            <li><a href="~/Admin/book/BookList"><i class="fa fa-circle"></i> لیست کتاب ها</a></li>
                             </ul>
                         </li>
                         @* <li>

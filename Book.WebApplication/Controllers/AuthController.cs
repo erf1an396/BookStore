@@ -41,5 +41,24 @@ namespace Book.WebApplication.Controllers
         }
 
 
+        //public IActionResult SetToken([FromBody] TokenDto dto)
+        //{
+        //    Response.Cookies.Append("access_token", dto.Token, new CookieOptions
+        //    {
+        //        HttpOnly = true,
+        //        Secure = true,
+        //        SameSite = SameSiteMode.Strict,
+        //        Expires = DateTimeOffset.UtcNow.AddHours(1)
+        //    });
+
+        //    return Ok();
+        //}
+
+        //public class TokenDto
+        //{
+        //    public string Token { get; set; }
+        //}
+
+
     }
 }

@@ -1,0 +1,53 @@
+﻿@using Application.Extensions
+@{
+    Layout = "_Layout";
+}
+
+@section myStyle {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Items</title>
+    <link rel="stylesheet" href="~/css/modalcss/StyleSheet.css">
+    <link rel="stylesheet" href="~/css/custom.css">
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col">
+                    <div class="page-header-left">
+                        <h3>Book Page</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">home</li>
+                            <li class="breadcrumb-item active">Book Page</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <h2 class="text-center mb-4">لیست کتاب ها </h2>
+
+
+
+
+
+        <ul class="list-group" id="bookListMain">
+        </ul>
+    </div>
+</div>
+
+
+
+
+@section myscript {
+    <script src="/ckeditor4/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('bookDescription');
+        CKEDITOR.replace('editBookDescription');
+    </script>
+    <script src="~/js/AdminPageQuery/BookList.js"></script>
+}

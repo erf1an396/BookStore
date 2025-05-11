@@ -57,6 +57,7 @@ namespace Application.Features.Auth.Command
                 result.Fail("یوزر یا پسسورد نادرست است ");
                 return result;
             }
+            
 
             var token = GenerateJwtToken(user);
             result.Value = token;
@@ -78,10 +79,13 @@ namespace Application.Features.Auth.Command
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim("Test", user.Id.ToString()),
+                    new Claim("FirstName", user.LastName.ToString()),
+                    new Claim("lastName", user.FirstName.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 //Issuer = _configuration["jwtConfig:SignInKey"],
                 //Audience = _configuration["jwtConfig:Audience"],
+
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
