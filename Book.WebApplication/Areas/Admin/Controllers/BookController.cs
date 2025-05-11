@@ -2,6 +2,7 @@
 using Application.Features.Book.Command.Insert;
 using Application.Features.Book.Command.Update;
 using Application.Features.Book.Query.GetAll;
+using Application.Features.Book.Query.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -79,6 +80,16 @@ namespace Book.WebApplication.Areas.Admin.Controllers
            
 
             var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [ActionName("GetById")]
+        public async Task<IActionResult> GetById(int Id)
+        {
+            var query = new BookGetByIdQuery { Id = Id };
+            var result = _mediator.Send(query);
+
             return Ok(result);
         }
     }
