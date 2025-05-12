@@ -1,8 +1,18 @@
-﻿@{
+﻿@using Application.Features.Category
+@using Application.Features.Category.Query.GetAll
+@using Application.Features.Category.Query.GetAllAsTree
+@using MediatR
+@inject IMediator Mediator
+@{
     ViewData["Title"] = "Home Page";
 
     var books = ViewBag.Books as List<Application.Features.Book.BookDto>;
     var bookPhoto = ViewBag.BookPhotos as List<Application.Features.BookPhoto.BookPhotoDto> ?? new List<Application.Features.BookPhoto.BookPhotoDto>() ;
+
+   
+    var result  = await Mediator.Send(new CategoryGetAllQuery());
+    List<CategoryDto> categoryDtos = result.Value;
+
 }
 
 @section myStyle {
@@ -93,56 +103,24 @@
         <div class="row wow fadeInUp" data-wow-delay="0.2s">
             <div class="col-lg-4">
                 <ul class="nav nav-pills tab_slider_thumb" id="pills-tab-one" role="tablist">
-                    <li role="presentation" class="nav-item">
-                        <a class="nav-link active" id="pills-adventure-tab" data-bs-toggle="pill" data-bs-target="#pills-adventure" role="tab" aria-controls="pills-adventure" aria-selected="true">
-                            <strong>ماجراجویی</strong> <span>(250 کتاب ها)</span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="nav-item">
-                        <a class="nav-link" id="pills-bio-tab" data-bs-toggle="pill" data-bs-target="#pills-bio" role="tab" aria-controls="pills-bio" aria-selected="false">
-                            <strong>بیوگرافی</strong> <span>(310 کتاب ها) </span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="nav-item">
-                        <a class="nav-link" id="pills-classic-tab" data-bs-toggle="pill" data-bs-target="#pills-classic" role="tab" aria-controls="pills-classic" aria-selected="false"><strong>کلاسیک</strong> <span>(450 کتاب ها)</span></a>
-                    </li>
-                    <li role="presentation" class="nav-item">
-                        <a class="nav-link" id="pills-harvard-tab" data-bs-toggle="pill" data-bs-target="#pills-harvard" role="tab" aria-controls="pills-harvard" aria-selected="false">
-                            <strong>کلاسیک هاروارد</strong> <span>(150 کتاب ها)</span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="nav-item">
-                        <a class="nav-link" id="pills-design-tab" data-bs-toggle="pill" data-bs-target="#pills-design" role="tab" aria-selected="false">
-                            <strong>طراحی کتاب</strong> <span> (250 کتاب ها) </span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="nav-item">
-                        <a class="nav-link" id="pills-philosophy-tab" data-bs-toggle="pill" data-bs-target="#pills-philosophy" role="tab" aria-selected="false">
-                            <strong>فلسفه</strong> <span> (590 کتاب ها) </span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="nav-item">
-                        <a class="nav-link" id="pills-science-tab" data-bs-toggle="pill" data-bs-target="#pills-science" role="tab" aria-selected="false">
-                            <strong>علمی تخیلی</strong> <span> (250 کتاب ها) </span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="nav-item">
-                        <a class="nav-link" id="pills-short-tab" data-bs-toggle="pill" data-bs-target="#pills-short" role="tab" aria-selected="false">
-                            <strong>داستان های کوتاه</strong> <span>(190 کتاب ها) </span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="nav-item">
-                        <a class="nav-link" id="pills-romantic-tab" data-bs-toggle="pill" data-bs-target="#pills-romantic" role="tab" aria-selected="false">
-                            <strong>رمانتیک</strong> <span> (120 کتاب ها) </span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="nav-item">
-                        <a class="nav-link" id="pills-thriller-tab" data-bs-toggle="pill" data-bs-target="#pills-thriller" role="tab" aria-selected="false">
-                            <strong>هیجان انگیز</strong> <span> (140 کتاب ها) </span>
-                        </a>
-                    </li>
+                    
+                @foreach(var category in categoryDtos)
+                    {
+                       
+                                <li role="presentation" class="nav-item">
+                                    <a class="nav-link active" id="pills-adventure-tab" data-bs-toggle="pill" data-bs-target="#pills-adventure" role="tab" aria-controls="pills-adventure" aria-selected="true">
+
+                                        <strong>@category.Title</strong> <span>(250 کتاب ها)</span>
+                                    </a>
+                                </li>
+                         
+  
+                    }
+
                 </ul>
             </div>
+        
+        
             <div class="col-lg-8 ltr">
                 <div class="tab-content" id="pills-tabContent-two">
                     <div class="tab-pane fade show active" id="pills-adventure" role="tabpanel" aria-labelledby="pills-adventure-tab">
