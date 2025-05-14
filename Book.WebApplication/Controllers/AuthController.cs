@@ -1,6 +1,7 @@
 ﻿using Application.Features.Auth.Command;
 using Book.WebApplication.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book.WebApplication.Controllers
@@ -23,6 +24,11 @@ namespace Book.WebApplication.Controllers
         public IActionResult Register()
         {
             return View();  
+        }
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
         [HttpPost("login")]

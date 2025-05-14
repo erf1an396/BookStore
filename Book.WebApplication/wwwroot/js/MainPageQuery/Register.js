@@ -28,7 +28,7 @@
                     console.log("Login successful:", response);
 
                     /*localStorage.setItem("token", response.Value);*/
-                    window.location.href = "/home"
+                    window.location.href = "/auth/login"
                 } else {
                     console.warn('Login failed:', response.message);
                     alert('ثبت نام ناموفق بود: ');

@@ -1,6 +1,7 @@
 ﻿@using Application.Features.Category
 @using Application.Features.Category.Query.GetAll
 @using Application.Features.Category.Query.GetAllAsTree
+@using Application.Features.Category.Query.GetById
 @using MediatR
 @inject IMediator Mediator
 @{
@@ -9,9 +10,12 @@
     var books = ViewBag.Books as List<Application.Features.Book.BookDto>;
     var bookPhoto = ViewBag.BookPhotos as List<Application.Features.BookPhoto.BookPhotoDto> ?? new List<Application.Features.BookPhoto.BookPhotoDto>() ;
 
-   
+
+
     var result  = await Mediator.Send(new CategoryGetAllQuery());
     List<CategoryDto> categoryDtos = result.Value;
+
+    
 
 }
 

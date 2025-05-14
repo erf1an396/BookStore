@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Builder;
 using Application.Contracts.WebHostEnvironment;
 using Infrastructure.WebHostEnvironment;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.Cookies;
 namespace Infrastructure
 {
     public static class InfrastructureServiceRegistration
@@ -57,39 +58,20 @@ namespace Infrastructure
 
         private static IServiceCollection AddOurAddAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-            var secret = configuration.GetSection("JWT").GetSection("SecretKey").Value;
-            var key = Encoding.ASCII.GetBytes(secret);
-            services.AddAuthentication(options =>
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
+           
+
+
+            services.ConfigureApplicationCookie(options =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(option =>
-            {
-                option.RequireHttpsMetadata = false;
-                option.SaveToken = true;
-                option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-
-                //option.Events = new JwtBearerEvents
-                //{
-                //    OnMessageReceived = context =>
-                //    {
-                //        var token = context.Request.Cookies["access_token"];
-                //        if (!string.IsNullOrEmpty(token))
-                //            context.Token = token;
-
-                //        return Task.CompletedTask;
-                //    }
-                //};
-
-            });
-
+                options.LoginPath = "/auth/Login";
+                options.AccessDeniedPath = "/auth/AccessDenied";
+                options.LogoutPath = "/auth/Logout";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.SlidingExpiration = true;
+            }
+            );
 
 
             return services;
@@ -106,6 +88,7 @@ namespace Infrastructure
                     options.Password.RequireLowercase = true;
                     options.Password.RequireNonAlphanumeric = true;
                     options.Password.RequireUppercase = true;
+                   
 
                     options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                     options.User.RequireUniqueEmail = false;

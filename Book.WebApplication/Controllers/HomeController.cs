@@ -2,6 +2,8 @@ using Application.Features.Book;
 using Application.Features.Book.Query.GetAll;
 using Application.Features.BookPhoto;
 using Application.Features.BookPhoto.Query.GetAll;
+using Application.Features.Category;
+using Application.Features.Category.Query.GetById;
 using Book.WebApplication.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -24,16 +26,28 @@ namespace Book.WebApplication.Controllers
         {
             var books = (await _mediator.Send(new BookGetAllQuery())).Value;
 
+
+            // book photo  & category
             var bookList = new List<BookPhotoDto>();
+            
 
             foreach(var book in books)
             {
                 var photos = await _mediator.Send(new BookPhotoGetAllQuery { BookId = book.Id});
+                
                 bookList.AddRange(photos.Value);
+                
+
             }
+
+            // book photo & category
+
+
+
 
             ViewBag.Books = books;
             ViewBag.BookPhotos = bookList;
+            
             
             return View();
         }
@@ -51,10 +65,5 @@ namespace Book.WebApplication.Controllers
         }
 
 
-        public class BookWithPhotosVm
-        {
-            public BookDto Book { get; set; }
-            public List<BookPhotoDto> photos { get; set; }
-        }
     }
 }

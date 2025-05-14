@@ -31,7 +31,7 @@ namespace Application.Features.Category.Query.GetAll
         {
             ApiResult<List<CategoryDto>> result = new();
 
-            var data = await _db.Categories.Where(x => x.ParentId == null).ToListAsync(cancellationToken);
+            var data = await _db.Categories.ToListAsync(cancellationToken);
             result.Value = _mapper.Map<List<CategoryDto>>(data);
             result.Success();
             return result;

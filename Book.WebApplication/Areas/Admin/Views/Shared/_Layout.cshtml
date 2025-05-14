@@ -172,14 +172,14 @@
                         @if (User.Identity.IsAuthenticated)
                         {
 
-                            var FirstName = User.FindFirst("FirstName")?.Value;
+                            var FirstName = User.FindFirst("FullName")?.Value;
                             
                             <h6 class="mt-3 f-14">@FirstName</h6>
 
                         }
 
                         
-                        <p>مدیر کل.</p>
+                        
                     </div>
                     <ul class="sidebar-menu">
                         <li>
