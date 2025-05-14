@@ -18,6 +18,7 @@ namespace Application.Features.Book.Command.Update
 
         public string Title { get; set; }
 
+
         public string Publisher { get; set; }
 
         public int Publication_Year { get; set; }
@@ -33,7 +34,11 @@ namespace Application.Features.Book.Command.Update
 
         public int CategoryId { get; set; } 
 
-        public string Category {  get; set; }   
+        public int AuthorId { get; set; }
+
+        public string Category {  get; set; } 
+        
+        public int Price { get; set; }
 
 
 
@@ -70,6 +75,8 @@ namespace Application.Features.Book.Command.Update
             book.Description = request.Description;
             book.Pages = request.Pages;
             book.Language = request.Language;
+            book.Price = request.Price;
+            book.AuthorId = request.AuthorId;
 
             _db.Books.Update(book);
 

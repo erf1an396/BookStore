@@ -28,6 +28,7 @@ namespace Infrastructure.Persistence
         public DbSet<Book> Books { get; set; }
 
         public DbSet<BookPhoto> BookPhotos { get; set; }
+        public DbSet<Author> Authors { get; set; }
 
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

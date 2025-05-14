@@ -9,7 +9,7 @@ namespace Application.Features.Book.Command.Insert
     {
         public string Title { get; set; }
 
-        public string Author { get; set; }
+        public int AuthorId { get; set; }
 
         public string Publisher { get; set; }
 
@@ -24,6 +24,8 @@ namespace Application.Features.Book.Command.Insert
         public string? Description { get; set; }
 
         public int CategoryId { get; set; }
+
+        public int Price { get; set; }
 
 
     }
@@ -45,7 +47,7 @@ namespace Application.Features.Book.Command.Insert
             _db.Books.Add(new Domain.Entities.Book
             {
                 Title = request.Title,
-                Author = request.Author,
+                AuthorId = request.AuthorId,
                 Publisher = request.Publisher,
                 Publication_Year = request.Publication_Year,
                 Isbn = request.Isbn,
@@ -53,6 +55,7 @@ namespace Application.Features.Book.Command.Insert
                 Pages = request.Pages,
                 Description = request.Description,
                 CategoryId = request.CategoryId,
+                Price = request.Price,
                 
             });
 

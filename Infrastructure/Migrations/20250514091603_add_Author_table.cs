@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class edit_category : Migration
+    public partial class add_Author_table : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,8 +30,8 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
                     IsAdmin = table.Column<bool>(type: "bit", nullable: false),
@@ -56,13 +56,33 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Author",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Born_Year = table.Column<int>(type: "int", nullable: false),
+                    Language = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Book_Count = table.Column<int>(type: "int", nullable: false),
+                    Prize_Count = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Author", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ParentId = table.Column<int>(type: "int", nullable: true),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -188,13 +208,14 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Publisher = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AuthorId = table.Column<int>(type: "int", nullable: false),
+                    Publisher = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Publication_Year = table.Column<int>(type: "int", nullable: false),
                     Isbn = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Language = table.Column<int>(type: "int", nullable: false),
                     Pages = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -204,9 +225,38 @@ namespace Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Book", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Book_Author_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Author",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Book_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookPhoto",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Extenstion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BookId = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookPhoto", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BookPhoto_Book_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Book",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -251,9 +301,19 @@ namespace Infrastructure.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Book_AuthorId",
+                table: "Book",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Book_CategoryId",
                 table: "Book",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookPhoto_BookId",
+                table: "BookPhoto",
+                column: "BookId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Category_ParentId",
@@ -280,13 +340,19 @@ namespace Infrastructure.Migrations
                 name: "ApplicationUserToken");
 
             migrationBuilder.DropTable(
-                name: "Book");
+                name: "BookPhoto");
 
             migrationBuilder.DropTable(
                 name: "ApplicationRole");
 
             migrationBuilder.DropTable(
                 name: "ApplicationUser");
+
+            migrationBuilder.DropTable(
+                name: "Book");
+
+            migrationBuilder.DropTable(
+                name: "Author");
 
             migrationBuilder.DropTable(
                 name: "Category");

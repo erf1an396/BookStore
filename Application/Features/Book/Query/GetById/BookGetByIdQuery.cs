@@ -38,7 +38,7 @@ namespace Application.Features.Book.Query.GetById
             {
                 Id = b.Id,
                 Title = b.Title,
-                Author = b.Author,
+                AuthorId = b.AuthorId,
                 Publication_Year = b.Publication_Year,
                 Publisher = b.Publisher,
                 Isbn = b.Isbn,
@@ -46,6 +46,7 @@ namespace Application.Features.Book.Query.GetById
                 Description = b.Description,
                 Language = b.Language,
                 CategoryId = b.CategoryId,
+                Price = b.Price,
 
 
 

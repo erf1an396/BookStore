@@ -74,6 +74,7 @@
         CKEDITOR.instances['bookDescription'].setData(book.Description);
         $('#bookLanguage').val(book.Language);
         $('#bookCategoryId').val(book.CategoryId);
+        $('#bookPrice').val(book.Price);
         $('#cancelEditBtn').show();
 
     }

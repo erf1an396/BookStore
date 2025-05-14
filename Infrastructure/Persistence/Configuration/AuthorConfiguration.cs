@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.Configuration
 {
-    public  class BookConfiguration : BaseEntityTypeConfiguration<Book>
-    { 
-        public override void Configure(EntityTypeBuilder<Book> builder)
+    public class AuthorConfiguration : BaseEntityTypeConfiguration<Author>
+    {
+        public override void Configure(EntityTypeBuilder<Author> builder)
         {
-            builder.ToTable("Book");
-            builder.HasKey(x => x.Id);
 
+            builder.ToTable("Author");
+            builder.HasKey(x => x.Id);
 
             builder.Property(x => x.CreatedDate)
                 .HasConversion(a => a.GeoDateTime, a => new PersianDateTime(a));
@@ -25,15 +25,8 @@ namespace Infrastructure.Persistence.Configuration
             builder.Property(x => x.LastModifiedDate)
                 .HasConversion(a => a.Value.GeoDateTime, a => PersianDateTime.Parse(a));
 
-            builder.HasOne(b => b.Category)
-                .WithMany(c => c.books)
-                .HasForeignKey(c => c.CategoryId)
-                .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(b => b.Author)
-                .WithMany(c => c.Books)
-                .HasForeignKey(c => c.AuthorId)
-                .OnDelete(DeleteBehavior.Cascade);
+            
         }
     }
 }

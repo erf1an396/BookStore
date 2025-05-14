@@ -10,11 +10,11 @@
         $.ajax({
             url: `/admin/book/GetById?id=${bookId}`,
             type: 'GET',
-            
+
             success: function (books) {
                 console.log(books)
                 const book = books.Value;
-               
+
 
                 $('#bookId').val(book.Id);
                 $('#bookTitle').val(book.Title);
@@ -26,9 +26,11 @@
                 CKEDITOR.instances['bookDescription'].setData(book.Description);
                 $('#bookLanguage').val(book.Language);
                 $('#bookCategoryId').val(book.CategoryId);
+                $('#bookPrice').val(book.Price);
                 $('#cancelEditBtn').show();
                 $('#formTitle').text("✏️ ویرایش کتاب");
-                
+
+
             },
             error: function () {
 
@@ -40,8 +42,8 @@
         });
     }
 
-    
-    
+
+
 
     $('#bookForm').on('submit', function (e) {
         e.preventDefault();
@@ -57,7 +59,8 @@
             Pages: parseInt($('#bookPages').val()),
             Description: CKEDITOR.instances['bookDescription'].getData(),
             Language: parseInt($('#bookLanguage').val()),
-            CategoryId: parseInt($('#bookCategoryId').val())
+            CategoryId: parseInt($('#bookCategoryId').val()),
+            Price: parseInt($('#bookPrice').val())
 
 
         };
@@ -76,8 +79,8 @@
 
                 debugger
                 resetForm();
-                
-                
+
+
             },
             error: function () {
                 alert("خطا در ذخیره کتاب")
@@ -89,86 +92,27 @@
         resetForm();
     })
 
-    //function loadBook() {
-    //    $.ajax({
-    //        url: '/admin/book/GetAll',
-    //        type: 'GET',
-    //        success: function (books) {
 
-
-
-    //            const $list = $('#bookList');
-    //            $list.empty();
-    //            const value = books.Value;
-
-
-    //            for (let book of books.Value) {
-    //                $list.append(
-    //                    `
-    //                      <li class="list-group-item d-flex justify-content-between align-items-center">
-    //                        <div><strong>${book.Title}</strong> - ${book.Author}</div>
-    //                        <div>
-    //                            <button class="btn btn-sm btn-primary me-2" onclick='editBook(${JSON.stringify(book)})'>ویرایش</button>
-    //                            <button class="btn btn-sm btn-danger" onclick='deleteBook(${book.Id})'>حذف</button>
-    //                        </div>
-    //                      </li>
-                        
-    //                    `
-    //                );
-    //            }
-
-    //        },
-    //        error: function () {
-    //            alert('خط در برگزاری لیست کتاب ها ')
-    //        }
-    //    });
-    //}
-
-    
-
-    //window.editBook = function (book) {
-
-    //    $('#bookId').val(book.Id);
-    //    $('#bookTitle').val(book.Title);
-    //    $('#bookAuthor').val(book.Author);
-    //    $('#bookPublisher').val(book.Publisher);
-    //    $('#bookYear').val(book.Publication_Year);
-    //    $('#bookIsbn').val(book.Isbn);
-    //    $('#bookPages').val(book.Pages);
-    //    /*$('#bookDescription').val(book.Description);*/
-    //    CKEDITOR.instances['bookDescription'].setData(book.Description);
-    //    $('#bookLanguage').val(book.Language);
-    //    $('#bookCategoryId').val(book.CategoryId);
-    //    $('#cancelEditBtn').show();
-
-    //}
-
-    //window.deleteBook = function (bookId) {
-    //    if (!confirm('آیا مطمئن هستید')) return;
-
-    //    debugger
-    //    $.ajax({
-    //        url: '/admin/book/Delete/' + bookId,
-    //        type: 'POST',
-
-
-    //        success: function () {
-    //            loadBook();
-                
-
-    //        },
-    //        error: function () {
-    //            alert('خطا در حذف کتاب')
-    //        }
-
-    //    });
-
-
-    //};
 
     function resetForm() {
         $('#bookForm')[0].reset();
         $('#bookId').val('');
         $('#cancelEditBtn').hide();
     }
+
+   
+
+
+
 })
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// FOR FORM CUSTOMIZE //
+
+const description = document.getElementById("bookPrice");
+description.addEventListener("keypress", function (e) {
+    if (!/[0-9]/.test(e.key)) {
+        e.preventDefault();
+    }
+});

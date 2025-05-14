@@ -234,6 +234,43 @@ namespace Infrastructure.Migrations
                     b.ToTable("ApplicationUserToken", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Author", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Book_Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Born_Year")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Language")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Prize_Count")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Author", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Entities.Book", b =>
                 {
                     b.Property<int>("Id")
@@ -242,8 +279,8 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Author")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -266,6 +303,9 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Pages")
                         .HasColumnType("int");
 
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
                     b.Property<int>("Publication_Year")
                         .HasColumnType("int");
 
@@ -276,6 +316,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("CategoryId");
 
@@ -404,11 +446,19 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Book", b =>
                 {
+                    b.HasOne("Domain.Entities.Author", "Author")
+                        .WithMany("Books")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.Category", "Category")
                         .WithMany("books")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Author");
 
                     b.Navigation("Category");
                 });
@@ -450,6 +500,11 @@ namespace Infrastructure.Migrations
                     b.Navigation("ApplicationUserRoles");
 
                     b.Navigation("ApplicationUserTokens");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Author", b =>
+                {
+                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("Domain.Entities.Book", b =>

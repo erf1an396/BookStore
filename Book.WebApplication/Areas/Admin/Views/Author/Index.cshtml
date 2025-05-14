@@ -1,55 +1,5 @@
-﻿@using Application.Extensions
-@using Application.Features.Category
-@using MediatR
-@inject IMediator Mediator
-@using Application.Features.Category.Query.GetAll
-
-
-@{
+﻿@{
     Layout = "_Layout";
-}
-
-
-@{
-
-
-
-    var category = await Mediator.Send(new CategoryGetAllQuery());
-
-
-
-
-    List<CategoryDto> categoryDtos = category.Value;
-
-
-
-
-
-    // List<CategoryDto> categoryDtos = category.Value;
-}
-
-@functions {
-
-    string RenderCategoryOptions(List<CategoryDto> allCategories, int? parentId, int level)
-    {
-        var children = allCategories.Where(x => x.ParentId == parentId).OrderBy(c => c.Title).ToList();
-
-        foreach (var category in children)
-
-        {
-
-            var space = string.Concat(Enumerable.Repeat(" |- ", level * 1));
-
-
-
-            <option value="@category.Id">@($"{space} {category.Title} ")</option>
-
-            RenderCategoryOptions(allCategories, category.Id, level + 1);
-        }
-
-        return "";
-
-    }
 }
 
 
@@ -94,7 +44,7 @@
 
         <div class="card shadow-sm mb-4">
             <div class="card-header bg-primary text-white">
-                
+
                 <div class="d-flex justify-content-end gap-2">
                     <a href="~/admin/book/booklist">
                         <button type="submit" class="btn btn-danger px-4">
@@ -133,18 +83,6 @@
                             <input id="bookPages" type="number" class="form-control" />
                         </div>
 
-                        @* <div class="col-md-3 mb-3">
-                            <label class="form-label">شناسه کتگوری</label>
-                            <input id="bookCategoryId" type="number" class="form-control" />
-                        </div> *@
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">کتگوری</label>
-                            <select class="form-select" id="bookCategoryId">
-                                <option value="">انتخاب کتگوری</option>
-                                @RenderCategoryOptions(category.Value, null, 0)
-                            </select>
-                        </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">زبان</label>
                             <select class="form-select" id="bookLanguage">
@@ -157,7 +95,7 @@
 
                         <div class="col-md-3 mb-3">
                             <label class="form-label">قیمت</label>
-                            <input id="bookPrice" type="text"  placeholder="عدد وارد کنید به تومان" class="form-control" />
+                            <input id="bookPrice" type="text" placeholder="عدد وارد کنید به تومان" class="form-control" />
                         </div>
 
                         <div class="col-12 mb-3">
@@ -174,14 +112,14 @@
                 </form>
             </div>
         </div>
-        
+
 
         @* <div class="card shadow-sm">
-            <div class="card-header bg-light">
-                <h5 class="mb-0">📖 لیست کتاب‌ها</h5>
-            </div>
-            <ul class="list-group list-group-flush" id="bookList">
-            </ul>
+        <div class="card-header bg-light">
+        <h5 class="mb-0">📖 لیست کتاب‌ها</h5>
+        </div>
+        <ul class="list-group list-group-flush" id="bookList">
+        </ul>
         </div> *@
     </div>
 
@@ -196,5 +134,5 @@
     <script>
         CKEDITOR.replace('bookDescription');
     </script>
-    <script src="~/js/AdminPageQuery/Book.js"></script>
+    
 }

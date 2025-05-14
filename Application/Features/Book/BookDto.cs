@@ -1,4 +1,5 @@
-﻿using Application.Features.BookPhoto;
+﻿using Application.Features.Author;
+using Application.Features.BookPhoto;
 using Application.Features.Category;
 using Application.Mappings;
 using Application.Models;
@@ -26,13 +27,17 @@ namespace Application.Features.Book
 
         public string Title { get; set; }
 
-        public string Author { get; set; }
+        public AuthorDto Author { get; set; }
+
+        public int AuthorId { get; set; }
 
         public string? Description { get; set; }
 
         public string Publisher { get; set; }
 
         public int Publication_Year { get; set; }
+
+        public int Price    { get; set; }
 
         public string? Isbn { get; set; }
 

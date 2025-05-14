@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BookStoreContext))]
-    [Migration("20250506112003_edit_category")]
-    partial class edit_category
+    [Migration("20250514091603_add_Author_table")]
+    partial class add_Author_table
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,7 +101,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
@@ -111,7 +110,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -239,6 +237,43 @@ namespace Infrastructure.Migrations
                     b.ToTable("ApplicationUserToken", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Author", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Book_Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Born_Year")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Language")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Prize_Count")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Author", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Entities.Book", b =>
                 {
                     b.Property<int>("Id")
@@ -247,9 +282,8 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Author")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -272,22 +306,55 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Pages")
                         .HasColumnType("int");
 
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
                     b.Property<int>("Publication_Year")
                         .HasColumnType("int");
 
                     b.Property<string>("Publisher")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AuthorId");
+
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Book", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.BookPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Extenstion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("BookPhoto", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Category", b =>
@@ -308,7 +375,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -383,13 +449,32 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Book", b =>
                 {
+                    b.HasOne("Domain.Entities.Author", "Author")
+                        .WithMany("Books")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.Category", "Category")
                         .WithMany("books")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Author");
+
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Domain.Entities.BookPhoto", b =>
+                {
+                    b.HasOne("Domain.Entities.Book", "Book")
+                        .WithMany("BookPhtotos")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
                 });
 
             modelBuilder.Entity("Domain.Entities.Category", b =>
@@ -418,6 +503,16 @@ namespace Infrastructure.Migrations
                     b.Navigation("ApplicationUserRoles");
 
                     b.Navigation("ApplicationUserTokens");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Author", b =>
+                {
+                    b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Book", b =>
+                {
+                    b.Navigation("BookPhtotos");
                 });
 
             modelBuilder.Entity("Domain.Entities.Category", b =>
