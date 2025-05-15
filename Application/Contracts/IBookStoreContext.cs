@@ -17,6 +17,7 @@ namespace Application.Contracts
         DbSet<Book> Books { get; set; }
         DbSet<BookPhoto> BookPhotos { get; set; }
         DbSet<Author> Authors { get; set; }
+        DbSet<AuthorPhoto> AuthorPhotos { get; set; }
 
         Task<IDbContextTransaction> BeginTransaction(CancellationToken cancellationToken = default);
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

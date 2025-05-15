@@ -68,7 +68,7 @@ namespace Book.WebApplication.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [ActionName("Create")]
+        [ActionName("Create")]  
         public async Task<IActionResult>  Create([FromBody] BookInsertCommand command)
         {
             var result = await _mediator.Send(command);

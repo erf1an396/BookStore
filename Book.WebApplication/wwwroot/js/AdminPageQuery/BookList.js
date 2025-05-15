@@ -20,7 +20,7 @@
                     $list.append(
                         `
                           <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div><strong>${book.Title}</strong> - ${book.Author}</div>
+                            <div><strong>${book.Title}</strong></div>
 
                             <div>
                                 
@@ -54,7 +54,7 @@
 
             },
             error: function () {
-                alert('خط در برگزاری لیست کتاب ها ')
+                alert('خطا در برگزاری لیست کتاب ها ')
             }
         });
     }
@@ -65,7 +65,7 @@
 
         $('#bookId').val(book.Id);
         $('#bookTitle').val(book.Title);
-        $('#bookAuthor').val(book.Author);
+        $('#bookAuthor').val(book.AuthorId);
         $('#bookPublisher').val(book.Publisher);
         $('#bookYear').val(book.Publication_Year);
         $('#bookIsbn').val(book.Isbn);

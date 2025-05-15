@@ -11,6 +11,7 @@
             url: `/admin/book/GetById?id=${bookId}`,
             type: 'GET',
 
+            
             success: function (books) {
                 console.log(books)
                 const book = books.Value;
@@ -18,7 +19,7 @@
 
                 $('#bookId').val(book.Id);
                 $('#bookTitle').val(book.Title);
-                $('#bookAuthor').val(book.Author);
+                $('#bookAuthor').val(book.AuthorId);
                 $('#bookPublisher').val(book.Publisher);
                 $('#bookYear').val(book.Publication_Year);
                 $('#bookIsbn').val(book.Isbn);
@@ -48,11 +49,12 @@
     $('#bookForm').on('submit', function (e) {
         e.preventDefault();
 
+        debugger
         const bookId = $('#bookId').val();
         const book = {
             Id: $('#bookId').val(),
             Title: $('#bookTitle').val(),
-            Author: $('#bookAuthor').val(),
+            AuthorId: parseInt($('#bookAuthor').val()),
             Publisher: $('#bookPublisher').val(),
             Publication_Year: parseInt($('#bookYear').val()),
             Isbn: $('#bookIsbn').val(),
@@ -109,10 +111,3 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // FOR FORM CUSTOMIZE //
-
-const description = document.getElementById("bookPrice");
-description.addEventListener("keypress", function (e) {
-    if (!/[0-9]/.test(e.key)) {
-        e.preventDefault();
-    }
-});

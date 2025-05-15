@@ -46,43 +46,35 @@
             <div class="card-header bg-primary text-white">
 
                 <div class="d-flex justify-content-end gap-2">
-                    <a href="~/admin/book/booklist">
+                    <a href="~/admin/author/authorList">
                         <button type="submit" class="btn btn-danger px-4">
-                            لیست کتاب ها
+                            لیست نویسنده ها 
                         </button>
                     </a>
                 </div>
             </div>
             <div class="card-body">
-                <form id="bookForm">
-                    <input type="hidden" id="bookId" />
+                <form id="authorForm">
+                    <input type="hidden" id="authorId" />
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">عنوان</label>
-                            <input id="bookTitle" class="form-control" placeholder="مثلاً: غرور و تعصب" />
+                            <label class="form-label">نام نویسنده</label>
+                            <input id="authorName" class="form-control" placeholder="مثلا: فئودور داستایوفسکی" />
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">نویسنده</label>
-                            <input id="bookAuthor" class="form-control" placeholder="مثلاً: جین آستن" />
+                            <label class="form-label">سال تولد</label>
+                            <input id="authorBorn" type="number" class="form-control"  />
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">ناشر</label>
-                            <input id="bookPublisher" class="form-control" placeholder="مثلاً: ققنوس" />
+                            <label class="form-label">تعداد کتاب</label>
+                            <input id="authorBook" type="number" class="form-control" placeholder="" />
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label class="form-label">سال انتشار</label>
-                            <input id="bookYear" type="number" class="form-control" />
+                            <label class="form-label">تعداد جوایز</label>
+                            <input id="authorPrize" type="number" class="form-control" />
                         </div>
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">شابک</label>
-                            <input id="bookIsbn" class="form-control" placeholder=" 978-3-16-148410-0 :مثلاً" />
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">تعداد صفحات</label>
-                            <input id="bookPages" type="number" class="form-control" />
-                        </div>
-
+                        
                         <div class="col-md-6 mb-3">
                             <label class="form-label">زبان</label>
                             <select class="form-select" id="bookLanguage">
@@ -93,14 +85,9 @@
                             </select>
                         </div>
 
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">قیمت</label>
-                            <input id="bookPrice" type="text" placeholder="عدد وارد کنید به تومان" class="form-control" />
-                        </div>
-
                         <div class="col-12 mb-3">
                             <label class="form-label">توضیحات</label>
-                            <textarea id="bookDescription" class="form-control" rows="3"></textarea>
+                            <textarea id="authorDescription" class="form-control" rows="3"></textarea>
                         </div>
                     </div>
 
@@ -132,7 +119,8 @@
 @section myscript {
     <script src="/ckeditor4/ckeditor/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace('bookDescription');
+        CKEDITOR.replace('authorDescription');
     </script>
+    <script src="~/js/AdminPageQuery/Author.js"></script>
     
 }

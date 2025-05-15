@@ -1,4 +1,5 @@
 ﻿using Application.Contracts;
+using Application.Features.Author;
 using Application.Models;
 using Domain.Enums;
 using MediatR;
@@ -16,6 +17,8 @@ namespace Application.Features.Book.Command.Insert
         public int Publication_Year { get; set; }
 
         public string? Isbn { get; set; }
+
+        
 
         public BookLanguageEnum Language { get; set; }
 

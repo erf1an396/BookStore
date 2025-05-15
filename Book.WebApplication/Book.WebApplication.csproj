@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\AdminPageQuery\Author.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\AdminPageQuery\Author.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.4">
@@ -23,6 +31,10 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\img\BookPhoto\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\AdminPageQuery\Author.js" />
   </ItemGroup>
 
 </Project>
