@@ -49,6 +49,10 @@ namespace Application.Features.Book
 
         public int CategoryId { get; set; }
 
+        public string CategoryName { get; set; }
+
+        public List<string> PhotoUrls { get; set; } = new();
+
         public ICollection<BookPhotoDto> BookPhtotos { get; set; }
 
 

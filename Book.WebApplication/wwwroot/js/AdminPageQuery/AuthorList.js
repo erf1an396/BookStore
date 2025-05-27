@@ -29,10 +29,10 @@
 
                                 <button class="btn btn-sm btn-danger" onclick='deleteBook(${author.Id})'>حذف</button>
 
-                                <a href="/admin/bookPhoto/index?bookId=${author.Id}">
+                                <a href="/admin/authorPhoto/Index?authorId=${author.Id}">
 
                                 
-                                
+                                <button class="btn btn-sm btn-warning me-2">افزودن عکس</button>
                                 
                                 </a>
                                 

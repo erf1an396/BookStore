@@ -117,10 +117,13 @@
 
 
 @section myscript {
-    <script src="/ckeditor4/ckeditor/ckeditor.js"></script>
+    <script src="~/ckeditor4/ckeditor/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace('authorDescription');
+        CKEDITOR.replace('authorDescription',{
+            customConfig: '~/ckeditor4/ckeditor/config.js'
+        });
     </script>
+
     <script src="~/js/AdminPageQuery/Author.js"></script>
     
 }

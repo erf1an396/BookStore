@@ -1,0 +1,477 @@
+﻿
+
+@using Application.Features.AuthorPhoto
+@using Application.Features.Book
+@using MediatR 
+@using System.Text.RegularExpressions
+@inject IMediator Mediator
+
+
+@{
+    var authorPhotos = ViewBag.AuthorPhoto as List<AuthorPhotoDto>;
+    var authors = ViewBag.Author as Application.Features.Author.AuthorDto;
+    var books = ViewBag.Books as List<Application.Features.Book.BookDto>;
+}
+
+
+@section myStyle 
+{
+
+    <style>
+        .author-img {
+            width: 460px;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    </style>
+
+}
+
+
+<!-- Mirrored from html-template.spider-themes.net/bookjar/author-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Nov 2024 07:59:30 GMT -->
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <!-- Bootstrap CSS -->
+    
+    <link href="~/assets/vendors/fancybox/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+
+</head>
+
+<body data-scroll-animation="true">
+    
+
+
+    <!-- Modal -->
+    <div class="modal fade product-quickview-modal" id="productQuickView" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="icon_close"></i></button>
+                <div class="bj_book_single">
+                    <div class="bj_book_img flip">
+                        <div class="front">
+                            <img class="img-fluid" src="assets/img/book-single1.jpg" alt="">
+                        </div>
+                        <div class="back"><img class="img-fluid" src="assets/img/book-single.jpg" alt=""></div>
+                        <div class="pr_ribbon">
+                            <span class="product-badge">جدید</span>
+                        </div>
+                    </div>
+                    <div class="bj_book_details">
+                        <h2>کتاب کار داستان سرایی</h2>
+                        <ul class="list-unstyled book_meta">
+                            <li>اثری از:<a href="author-single.html">فرهاد نادری</a></li>
+                            <li>دسته بندی:<a href="shop-sidebar.html">درام</a></li>
+                            <li>برچسب:<a href="shop-sidebar.html">بهترین امتیاز</a></li>
+                        </ul>
+                        <div class="ratting review">
+                            <div class="star-rating">
+                                <span>4.9</span>
+                            </div>
+                            <a href="#product_review" class="woocommerce-review-link">
+                                <span class="count"> 50 </span>یادآوری
+                            </a>
+                        </div>
+                        <div class="price"><p>تومان</p>150</div>
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است،</p>
+                        <ul class="product_meta list-unstyled">
+                            <li><span>ناشر:</span>آرین</li>
+                            <li><span>تاریخ انتشار:</span>12 آبان 1403</li>
+                            <li><span>طول چاپ:</span>320 صفحه</li>
+                            <li><span>ردیف:</span>3288365629</li>
+                            <li><span>زبان:</span>انگلیسی</li>
+                        </ul>
+
+
+                        <div class="product_sidbar">
+                            <div class="product-qty">
+                                تعداد:
+                                <div class="cart_quantity">
+                                    <button class="quantity_btn minus"><i class="icon_minus-06"></i></button>
+                                    <input type="number" min="1" max="99" step="1" value="1">
+                                    <button class="quantity_btn plus"><i class="icon_plus"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="single_product_price_variation mb-3">
+                                <label class="variation_single">
+                                    <input class="variation_single_input" name="variation_single" type="radio" checked>
+                                    <span class="price-details">
+                                        <span class="price-type">جلد دستی</span>
+                                        <span class="price-cost">15 تومان</span>
+                                    </span>
+                                </label>
+                                <label class="variation_single">
+                                    <input class="variation_single_input" name="variation_single" type="radio">
+                                    <span class="price-details">
+                                        <span class="price-type">کتاب</span>
+                                        <span class="price-cost">
+                                            تومان<span>20</span>
+                                        </span>
+                                </label>
+                                <label class="variation_single">
+                                    <input class="variation_single_input" name="variation_single" type="radio">
+                                    <span class="price-details">
+                                        <span class="price-type">چاپ</span>
+                                        <span class="price-cost">
+                                            20<span>تومان</span>
+                                        </span>
+                                </label>
+
+                            </div>
+                            <div class="d-flex flex-column gap-2">
+                                <a href="checkout.html" class="bj_theme_btn"> اکنون خرید کنید</a>
+                                <button class="bj_theme_btn add-to-cart-automated" type="button" data-name="کتاب کار داستان سرایی" data-price="10" data-img="assets/img/book-single1.jpg" data-mrp="15"> <i class="icon_cart_alt"></i>اضافه به سبد خرید</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="body_wrapper">
+        <div class="toast-container position-fixed p-3">
+            <div id="cartToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">اضافه به سبدخرید</strong>
+                    <small>همین الان</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    کالا به سبد خرید اضافه شد!
+                </div>
+            </div>
+        </div>
+
+       
+        <!-- breadcrumb area  -->
+        <section class="bj_breadcrumb_area text-center banner_animation_03" data-bg-color="#f5f5f5">
+            <div class="bg_one" data-bg-image="assets/img/breadcrumb/breadcrumb_banner_bg.png"></div>
+            <div class="bd_shape one wow fadeInDown layer" data-wow-delay="0.3s" data-depth="0.5">
+                <img data-parallax='{"y": -50}' src="assets/img/breadcrumb/book_left1.png" alt="">
+            </div>
+            <div class="bd_shape two wow fadeInUp layer" data-depth="0.6" data-wow-delay="0.4s">
+                <img data-parallax='{"y": 30}' src="assets/img/breadcrumb/book-left2.png" alt="">
+            </div>
+            <div class="bd_shape three wow fadeInDown layer" data-wow-delay="0.3s" data-depth="0.5">
+                <img data-parallax='{"y": -50}' src="assets/img/breadcrumb/plane-1.png" alt="">
+            </div>
+            <div class="bd_shape four wow fadeInUp layer" data-depth="0.6" data-wow-delay="0.4s">
+                <img data-parallax='{"y": 30}' src="assets/img/breadcrumb/plan-3.png" alt="">
+            </div>
+            <div class="bd_shape five wow fadeInUp layer" data-depth="0.6" data-wow-delay="0.4s">
+                <img data-parallax='{"y": 80}' src="assets/img/breadcrumb/plan-2.png" alt="">
+            </div>
+            <div class="bd_shape six wow fadeInDown layer" data-wow-delay="0.3s" data-depth="0.5">
+                <img data-parallax='{"y": -60}' src="assets/img/breadcrumb/book-right.png" alt="">
+            </div>
+            <div class="bd_shape seven wow fadeInUp layer" data-depth="0.6" data-wow-delay="0.4s">
+                <img data-parallax='{"x": 50}' src="assets/img/breadcrumb/book-right2.png" alt="">
+            </div>
+            <div class="container">
+                <h2 class="title">نویسندگان مجرد</h2>
+                <ol class="breadcrumb justify-content-center">
+                    <li><a href="index.html">خانه</a></li>
+                    <li><a href="author.html">نویسنده</a></li>
+                    <li class="active">نویسندگان مجرد</li>
+                </ol>
+            </div>
+        </section>
+        <!-- breadcrumb area  -->
+        <!-- author single area  -->
+        <section class="bj_author_single_area sec_padding" data-bg-color="#f5f5f5">
+            <div class="container rtl">
+                <div class="row justify-content-center">
+                    <div class="col-xl-10">
+                        <div class="bj_author_single d-flex align-items-center rtl">
+                            @foreach (var item in authorPhotos)
+                            {
+                                <img class="author-img" src="~/img/AuthorPhoto/@(item.Id).@(item.Extenstion)" alt="">
+                            }
+                            
+                            <div class="bj_author_single_content">
+                                <h2>کیوان رستمی</h2>
+
+                                
+                                @{
+                                    string text = authors.Description;
+                                    int maxLenght = 200;
+                                    int minLenght = 10;
+                                    string plainText = Regex.Replace(text, "<.*?>", string.Empty);
+                                    string shortText = plainText.Length > maxLenght ? plainText.Substring(0, maxLenght) + "..." : plainText;
+                                    string VshortText = plainText.Length > minLenght ? plainText.Substring(0, minLenght) + "..." : plainText;
+
+                                }
+                                
+                                <p>@Html.Raw(shortText)</p>
+                                <ul class="book_info">
+                                    <li><span>موقعیت:</span>نویسنده کتاب</li>
+                                    <li><span>متولد:</span>@authors.Born_Year</li>
+                                    
+                                    <li><span>زبان:</span><a href="#">@authors.Language</a></li>
+                                </ul>
+                                <ul class="list-unstyled f_social_round">
+                                    <li><a href="#"><i class="social_twitter"></i></a></li>
+                                    <li><a href="#"><i class="social_facebook"></i></a></li>
+                                    <li><a href="#"><i class="social_googleplus"></i></a></li>
+                                    <li><a href="#"><i class="social_pinterest"></i></a></li>
+                                </ul>
+                                <a href="#" class="bj_theme_btn">تماس با ما</a>
+                            </div>
+                        </div>
+                        <div class="row award_inner">
+                            <div class="">
+                                <div class="award_content pe-5">
+                                    <h2 class="title">جوایز و نامزدی</h2>
+                                    <p>@Html.Raw(text)</p>
+                                   
+                                    <div class="award_fact">
+                                        
+                                        <div class="bj_fact_item">
+                                            <div class="number"><span class="counter">@authors.Book_Count</span></div>
+                                            <p>کتاب ها</p>
+                                        </div>
+                                        <div class="bj_fact_item">
+                                            <div class="number"><span class="counter">@authors.Prize_Count</span></div>
+                                            <p>جوایز</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           @*  <div class="col-lg-5 col-md-5">
+                                <div class="award_list">
+                                    <h4>جوایز</h4>
+                                    @foreach (var item in books)
+                                    {
+                                        <div class="award_list_item">
+                                            <h5>@item.Title</h5>
+                                            <ul class="list-unstyled book_meta">
+                                                <li>@item.Publication_Year</li>
+                                                <li>@item.CategoryName</li>
+                                            </ul>
+                                        </div>
+                                        
+                                    }
+                                    
+                                    <div class="award_list_item">
+                                        <h5>خاطرات غریبه</h5>
+                                        <ul class="list-unstyled book_meta">
+                                            <li>1403</li>
+                                            <li>جنایت بریتانیا</li>
+                                        </ul>
+                                    </div>
+                                    <div class="award_list_item">
+                                        <h5> مافین گل میخ و کیک کوچک</h5>
+                                        <ul class="list-unstyled book_meta">
+                                            <li>1401</li>
+                                            <li>رمان</li>
+                                        </ul>
+                                    </div>
+                                    <div class="award_list_item">
+                                        <h5>سلسله تبعیدیان</h5>
+                                        <ul class="list-unstyled book_meta">
+                                            <li>1402</li>
+                                            <li>علمی-تخیلی</li>
+                                        </ul>
+                                    </div>
+                                    <div class="award_list_item">
+                                        <h5> نوادگان آوالون</h5>
+                                        <ul class="list-unstyled book_meta">
+                                            <li>1402</li>
+                                            <li>علمی-تخیلی</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div> *@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- author single area  -->
+        <!-- new product area  -->
+        <section class="bj_new_product_area_four sec_padding">
+            <div class="container rtl">
+                <div class="section_title text-center">
+                    <h2 class="title">کتاب ها</h2>
+                </div>
+                @* <div id="portfolio_filter" class="portfolio_filter d-flex justify-content-center">
+                    <div data-filter="*" class="work_portfolio_item active">همه</div>
+                    <div data-filter=".bio" class="work_portfolio_item">بیوگرافی</div>
+                    <div data-filter=".cook" class="work_portfolio_item">کتاب‌های آشپزی</div>
+                    <div data-filter=".drama" class="work_portfolio_item">درام</div>
+                    <div data-filter=".kid" class="work_portfolio_item">برای کودک</div>
+                    <div data-filter=".romance" class="work_portfolio_item">عاشقانه</div>
+                </div> *@
+                <div class="projects_gallery_one">
+                    <div class="row" id="project_portfolio">
+
+                        @foreach(var item in books)
+                        {
+
+                            <div class="col-lg-3 col-md-4 col-sm-6 projects_item bio kid">
+                                <div class="best_product_item best_product_item_two">
+                                    <div class="img">
+
+                                        @foreach(var photo in item.PhotoUrls)
+                                        {
+                                            <a href="~/bookdetail/model/@(item.Id)">
+
+                                                <img src="@photo">
+
+                                            </a>
+                                            
+                                        }
+                                        
+                                        <div class="hover_item">
+                                            <a class="quick_button" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="right" title="علاقه مندی"><i class="icon_heart_alt"></i></a>
+                                            <span data-bs-toggle="tooltip" data-bs-placement="right" title="مشاهده سریع"><button class="quick_button" data-bs-toggle="modal" data-bs-target="#productQuickView"><i class="arrow_move"></i></button></span>
+                                            <a class="quick_button" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="مقایسه"><i class="ti-control-shuffle"></i></a>
+                                        </div>
+                                        <button type="button" class="bj_theme_btn add-to-cart-automated" data-name="@item.Title" data-img="assets/img/author_book1.jpg" data-price="@item.Price">
+                                            <i class="icon_cart_alt"></i> سبد خرید اضافه شود
+                                        </button>
+                                    </div>
+                                    <div class="bj_new_pr_content">
+                                        <a href="~/bookdetail/model/@(item.Id)">
+                                            <h4 class="bj_new_pr_title">@item.Title</h4>
+                                        </a>
+                                        <div class="writer_name">@item.CategoryName</div>
+                                        <div class="bj_pr_meta d-flex">
+                                            <div class="book_price">@item.Price تومان</div>
+                                            <div class="ratting">
+                                                
+                                                @item.Pages
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        }
+                        
+
+                        @* <div class="col-lg-3 col-md-4 col-sm-6 projects_item bio drama">
+                            <div class="best_product_item best_product_item_two">
+                                <div class="img">
+                                    <a href="product-single.html"><img src="assets/img/author_book2.jpg" alt="book"></a>
+                                    <div class="hover_item">
+                                        <a class="quick_button" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="right" title="علاقه مندی"><i class="icon_heart_alt"></i></a>
+                                        <span data-bs-toggle="tooltip" data-bs-placement="right" title="مشاهده سریع"><button class="quick_button" data-bs-toggle="modal" data-bs-target="#productQuickView"><i class="arrow_move"></i></button></span>
+                                        <a class="quick_button" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="مقایسه"><i class="ti-control-shuffle"></i></a>
+                                    </div>
+                                    <button type="button" class="bj_theme_btn add-to-cart-automated" data-name="روانشناسی" data-img="assets/img/author_book2.jpg" data-price="25">
+                                        <i class="icon_cart_alt"></i> سبد خرید اضافه شود
+                                    </button>
+                                </div>
+                                <div class="bj_new_pr_content">
+                                    <a href="product-single.html">
+                                        <h4 class="bj_new_pr_title">روانشناسی</h4>
+                                    </a>
+                                    <div class="writer_name">اثری از- <a href="author-single.html"> بهرام نوری</a></div>
+                                    <div class="bj_pr_meta d-flex">
+                                        <div class="book_price">250 تومان</div>
+                                        <div class="ratting">
+                                            <img src="assets/img/home/raiting.png" alt="">
+                                            1221
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6 projects_item cook romance">
+                            <div class="best_product_item best_product_item_two">
+                                <div class="img">
+                                    <a href="product-single.html"><img src="assets/img/author_book3.jpg" alt="book"></a>
+                                    <div class="hover_item">
+                                        <a class="quick_button" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="right" title="علاقه مندی"><i class="icon_heart_alt"></i></a>
+                                        <span data-bs-toggle="tooltip" data-bs-placement="right" title="مشاهده سریع"><button class="quick_button" data-bs-toggle="modal" data-bs-target="#productQuickView"><i class="arrow_move"></i></button></span>
+                                        <a class="quick_button" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="مقایسه"><i class="ti-control-shuffle"></i></a>
+                                    </div>
+                                    <button type="button" class="bj_theme_btn add-to-cart-automated" data-name="فیلم های مهیج" data-img="assets/img/author_book3.jpg" data-price="25">
+                                        <i class="icon_cart_alt"></i> سبد خرید اضافه شود
+                                    </button>
+                                </div>
+                                <div class="bj_new_pr_content">
+                                    <a href="product-single.html">
+                                        <h4 class="bj_new_pr_title">پنج حرکت بعدی شما</h4>
+                                    </a>
+                                    <div class="writer_name">اثری از- <a href="author-single.html"> بهرام داوودی </a></div>
+                                    <div class="bj_pr_meta d-flex">
+                                        <div class="book_price">250 تومان</div>
+                                        <div class="ratting">
+                                            <img src="assets/img/home/raiting.png" alt="">
+                                            1221
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6 projects_item cook romance drama">
+                            <div class="best_product_item best_product_item_two">
+                                <div class="img">
+                                    <a href="product-single.html"><img src="assets/img/author_book4.jpg" alt="book"></a>
+                                    <div class="hover_item">
+                                        <a class="quick_button" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="right" title="علاقه مندی"><i class="icon_heart_alt"></i></a>
+                                        <span data-bs-toggle="tooltip" data-bs-placement="right" title="مشاهده سریع"><button class="quick_button" data-bs-toggle="modal" data-bs-target="#productQuickView"><i class="arrow_move"></i></button></span>
+                                        <a class="quick_button" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="مقایسه"><i class="ti-control-shuffle"></i></a>
+                                    </div>
+                                    <button type="button" class="bj_theme_btn add-to-cart-automated" data-name="The Ruthless" data-img="assets/img/author_book4.jpg" data-price="55">
+                                        <i class="icon_cart_alt"></i> سبد خرید اضافه شود
+                                    </button>
+                                </div>
+                                <div class="bj_new_pr_content">
+                                    <a href="product-single.html">
+                                        <h4 class="bj_new_pr_title">بی رحم</h4>
+                                    </a>
+                                    <div class="writer_name">اثری از- <a href="author-single.html"> جهان مظفری </a></div>
+                                    <div class="bj_pr_meta d-flex">
+                                        <div class="book_price">550 تومان</div>
+                                        <div class="ratting">
+                                            <img src="assets/img/home/raiting.png" alt="">
+                                            1221
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> *@
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- new product area  -->
+        <!-- footer area css  -->
+        
+    </div>
+    <!-- Back to top button -->
+    <a id="back-to-top" title="برگشت به بالا"></a>
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+
+   
+   
+   
+    
+ 
+    <script src="~/assets/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="~/assets/ vendors/isotope/isotope.pkgd.min.js"></script>
+    <script src="~/assets/vendors/parallax/jquery.parallax-scroll.js"></script>
+    <script src="~/assets/vendors/fancybox/jquery.fancybox.min.js"></script>
+    
+
+</body>
+
+
+<!-- Mirrored from html-template.spider-themes.net/bookjar/author-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Nov 2024 07:59:30 GMT -->
+</html>

@@ -1,0 +1,77 @@
+﻿@{
+    Layout = "_Layout";
+}
+@section myStyle {
+    <link rel="stylesheet" href="~/css/modalcss/StyleSheet.css">
+}
+
+<input type="hidden" id="hd_authorId" value="@ViewBag.AuthorId" />
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col">
+                    <div class="page-header-left">
+                        <h3>Book Page</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">home</li>
+                            <li class="breadcrumb-item active">Book Page</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <h2 class="text-center mb-4">مدیریت عکس‌های نویسنده</h2>
+        <a href="/admin/book/index">
+            <button class="btn btn-dark mb-3">بازگشت</button>
+        </a>
+        <button class="btn btn-success mb-3" id="btnOpenAddPhotoModal">➕ افزودن عکس</button>
+
+        <ul class="list-group" id="photoList">
+
+            <!-- عکس‌ها اینجا لود می‌شن -->
+
+
+        </ul>
+    </div>
+</div>
+
+<!-- Modal افزودن عکس -->
+<div class="modal fade" id="addPhotoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">افزودن عکس</h5></div>
+            <div class="modal-body">
+                <input type="file" id="photoFile" class="form-control mb-2" accept="image/*" />
+                <input type="text" id="entityName" class="form-control" placeholder="نام موجودیت (EntityName)">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                <button class="btn btn-primary" id="addPhotoBtn">افزودن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal حذف عکس -->
+<div class="modal fade" id="deletePhotoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">حذف عکس</h5></div>
+            <div class="modal-body">آیا مطمئن هستید که می‌خواهید این عکس را حذف کنید؟</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">لغو</button>
+                <button class="btn btn-danger" id="deletePhotoBtn">حذف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section myscript {
+    <script src="~/js/AdminPageQuery/AuthorPhoto.js"></script>
+}

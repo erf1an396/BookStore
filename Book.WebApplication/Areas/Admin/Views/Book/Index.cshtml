@@ -129,10 +129,14 @@
 </div> *@
 
 @section myscript {
-    <script src="/ckeditor4/ckeditor/ckeditor.js"></script>
+    <script src="~/ckeditor4/ckeditor/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace('bookDescription');
-        CKEDITOR.replace('editBookDescription');
+        CKEDITOR.replace('bookDescription', {
+            customConfig: '~/ckeditor4/ckeditor/config.js'
+        });
+        CKEDITOR.replace('editBookDescription', {
+            customConfig: '~/ckeditor4/ckeditor/config.js'
+        });
     </script>
     @* <script src="~/js/AdminPageQuery/Book.js"></script> *@
 }

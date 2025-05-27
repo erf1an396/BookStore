@@ -39,6 +39,7 @@
 
     @RenderSection("myStyle", false)
 
+
     
     <style>
         
@@ -627,7 +628,7 @@
             <!-- footer area css  -->
         </div>
         <!-- Back to top button -->
-        <a id="back-to-top" title="Back to Top"></a>
+        <a id="back-to-top" title="Back to Top" class="show"></a>
         <!-- Optional JavaScript; choose one of the two! -->
         <script src="~/assets/js/jquery-3.6.0.min.js"></script>
 
@@ -647,7 +648,7 @@
 
     @* <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script> *@
+    <script src="~/js/site.js" asp-append-version="true"></script> *@   
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -23,5 +23,7 @@ namespace Domain.Entities
         public int Prize_Count { get; set; }
 
         public ICollection<Book> Books { get; set; }
+
+        public ICollection<AuthorPhoto> AuthorPhotos { get; set; }
     }
 }
