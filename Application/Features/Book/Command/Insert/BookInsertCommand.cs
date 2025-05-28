@@ -18,6 +18,7 @@ namespace Application.Features.Book.Command.Insert
 
         public string? Isbn { get; set; }
 
+        public string Review { get; set; }
         
 
         public BookLanguageEnum Language { get; set; }
@@ -59,6 +60,7 @@ namespace Application.Features.Book.Command.Insert
                 Description = request.Description,
                 CategoryId = request.CategoryId,
                 Price = request.Price,
+                Review = request.Review,
                 
             });
 

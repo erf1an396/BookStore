@@ -34,7 +34,9 @@ namespace Application.Features.Book.Query.GetById
             //var books = await _db.Books.Where(b => b.Id == request.Id).FirstOrDefaultAsync();
             //result.Value = _mapper.Map<BookDto>(books);
 
-            var book = await _db.Books.Where(b => b.Id == request.Id).Select(b => new BookDto
+            var book = await _db.Books.Where(b => b.Id == request.Id)
+                .Include(x => x.Author)
+                .Select(b => new BookDto
             {
                 Id = b.Id,
                 Title = b.Title,
@@ -47,6 +49,9 @@ namespace Application.Features.Book.Query.GetById
                 Language = b.Language,
                 CategoryId = b.CategoryId,
                 Price = b.Price,
+                AuthorName = b .Author.Name,
+                CategoryName = b.Category.Title,
+                Review = b.Review,
 
 
 

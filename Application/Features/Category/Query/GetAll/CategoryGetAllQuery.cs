@@ -32,7 +32,19 @@ namespace Application.Features.Category.Query.GetAll
             ApiResult<List<CategoryDto>> result = new();
 
             var data = await _db.Categories.ToListAsync(cancellationToken);
-            result.Value = _mapper.Map<List<CategoryDto>>(data);
+
+
+           result.Value =  await _db.Categories
+                .Include(x => x.CategoryParent)
+                .Include(x => x.CategoryChildren)
+                .Select(x=> new CategoryDto
+            {
+                BookCount = x.books.Count,
+                Title = x.Title,
+                ParentId = x.ParentId,
+                
+            }).ToListAsync(cancellationToken);
+
             result.Success();
             return result;
 

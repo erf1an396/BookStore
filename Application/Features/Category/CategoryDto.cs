@@ -20,6 +20,8 @@ namespace Application.Features.Category
         public int? ParentId { get; set; }
         public string Title { get; set; }
 
+        public int BookCount { get; set; }
+
         public CategoryDto CategoryParent { get; set; }
         public List<CategoryDto> CategoryChildren { get; set; }
        

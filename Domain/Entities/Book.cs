@@ -30,6 +30,10 @@ namespace Domain.Entities
 
         public  string? Description { get; set; }
 
+        public string Review { get; set; }
+
+
+        #region relations
 
         public Category  Category { get; set; }
 
@@ -38,8 +42,8 @@ namespace Domain.Entities
         public ICollection<BookPhoto> BookPhtotos { get; set; }
 
 
+        #endregion
 
-        
 
 
     }

@@ -53,6 +53,10 @@ namespace Application.Features.Book
 
         public List<string> PhotoUrls { get; set; } = new();
 
+        public string AuthorName { get; set; }
+
+        public string Review {  get; set; }
+
         public ICollection<BookPhotoDto> BookPhtotos { get; set; }
 
 

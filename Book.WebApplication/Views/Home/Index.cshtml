@@ -8,14 +8,14 @@
     ViewData["Title"] = "Home Page";
 
     var books = ViewBag.Books as List<Application.Features.Book.BookDto>;
-    var bookPhoto = ViewBag.BookPhotos as List<Application.Features.BookPhoto.BookPhotoDto> ?? new List<Application.Features.BookPhoto.BookPhotoDto>() ;
+    var bookPhoto = ViewBag.BookPhotos as List<Application.Features.BookPhoto.BookPhotoDto> ?? new List<Application.Features.BookPhoto.BookPhotoDto>();
 
 
 
-    var result  = await Mediator.Send(new CategoryGetAllQuery());
+    var result = await Mediator.Send(new CategoryGetAllQuery());
     List<CategoryDto> categoryDtos = result.Value;
 
-    
+
 
 }
 
@@ -107,24 +107,24 @@
         <div class="row wow fadeInUp" data-wow-delay="0.2s">
             <div class="col-lg-4">
                 <ul class="nav nav-pills tab_slider_thumb" id="pills-tab-one" role="tablist">
-                    
-                @foreach(var category in categoryDtos)
-                    {
-                       
-                                <li role="presentation" class="nav-item">
-                                    <a class="nav-link active" id="pills-adventure-tab" data-bs-toggle="pill" data-bs-target="#pills-adventure" role="tab" aria-controls="pills-adventure" aria-selected="true">
 
-                                        <strong>@category.Title</strong> <span>(250 کتاب ها)</span>
-                                    </a>
-                                </li>
-                         
-  
+                    @foreach (var category in categoryDtos)
+                    {
+
+                        <li role="presentation" class="nav-item">
+                            <a class="nav-link active" id="pills-adventure-tab" data-bs-toggle="pill" data-bs-target="#pills-adventure" role="tab" aria-controls="pills-adventure" aria-selected="true">
+
+                                <strong>@category.Title</strong> <span>(@category.BookCount کتاب ها)</span>
+                            </a>
+                        </li>
+
+
                     }
 
                 </ul>
             </div>
-        
-        
+
+
             <div class="col-lg-8 ltr">
                 <div class="tab-content" id="pills-tabContent-two">
                     <div class="tab-pane fade show active" id="pills-adventure" role="tabpanel" aria-labelledby="pills-adventure-tab">
@@ -132,1250 +132,1262 @@
 
                             @foreach (var item in books)
                             {
-                                <div class="item">
-                                    <div class="bj_new_pr_item">
+                                
+                                    <div class="item">
+                                        <div class="bj_new_pr_item">
+                                        <a href="~/bookdetail/Model/@(item.Id)">
+                                            <div class="swiper book-image-slider">
+                                                <div class="swiper-wrapper">
 
-                                        <div class="swiper book-image-slider">
-                                            <div class="swiper-wrapper">
 
-                                              
-                                                @foreach (var p in bookPhoto.Where(x => x.BookId == item.Id))
-                                                {
-                                                    <div class="swiper-slide">
-                                                        <img src="~/img/BookPhoto/@(p.Id).@(p.Extenstion)"/>
-                                                    </div>
-                                                }
+                                                    @foreach (var p in bookPhoto.Where(x => x.BookId == item.Id))
+                                                    {
+                                                        <div class="swiper-slide">
+                                                            <img src="~/img/BookPhoto/@(p.Id).@(p.Extenstion)" />
+                                                        </div>
+                                                    }
 
+                                                </div>
+                                                <div class="swiper-button-next"></div>
+                                                <div class="swiper-button-prev"></div>
                                             </div>
-                                            <div class="swiper-button-next"></div>
-                                            <div class="swiper-button-prev"></div>
-                                        </div>
+                                        </a>
+                                        <!--
 
                                         <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                        <div class="bj_new_pr_content_two rtl">
-                                            <div class="d-flex justify-content-between">
-                                                <a href="/bookdetail/model/@(item.Id)">
-                                                    <h5>@item.Title</h5>
-                                                </a>
-                                                <div class="book_price">
-                                                    <sup>200</sup> <sup>تومان</sup>
+
+                                        -->
+                                            
+                                            <div class="bj_new_pr_content_two rtl">
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="/bookdetail/model/@(item.Id)">
+                                                        <h5>@item.Title</h5>
+                                                    </a>
+                                                    <div class="book_price">
+                                                        <sup>200</sup> <sup>تومان</sup>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="writer_name">
-                                                <i class="icon-user"></i><a href="#">@item.Publisher</a>
-                                            </div>
-                                            <div class="ratting">
-                                                <div class="ratting_icon">
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
+
+                                                <div class="writer_name">
+                                                    <i class="icon-user"></i><a href="#">@item.Publisher</a>
                                                 </div>
-                                                <span>(252)</span>
+                                                <div class="ratting">
+                                                    <div class="ratting_icon">
+                                                        <i class="fa-solid fa-star"></i>
+                                                        <i class="fa-solid fa-star"></i>
+                                                        <i class="fa-solid fa-star"></i>
+                                                        <i class="fa-solid fa-star"></i>
+                                                        <i class="fa-solid fa-star"></i>
+                                                    </div>
+                                                    <span>(252)</span>
+                                                </div>
+
+
+                                                <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
                                             </div>
-                                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
                                         </div>
                                     </div>
-                                </div>
+
+                                
                             }
-                            
-                    @* <div class="tab-pane fade" id="pills-bio" role="tabpanel" aria-labelledby="pills-bio-tab">
-                        <div class="tab_slider_content slick_slider_tab">
+
+                            @* <div class="tab-pane fade" id="pills-bio" role="tabpanel" aria-labelledby="pills-bio-tab">
+                            <div class="tab_slider_content slick_slider_tab">
 
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book2.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book2.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book3.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book3.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book2.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book2.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
                             </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-classic" role="tabpanel" aria-labelledby="pills-classic-tab">
-                        <div class="tab_slider_content slick_slider_tab">
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-classic" role="tabpanel" aria-labelledby="pills-classic-tab">
+                            <div class="tab_slider_content slick_slider_tab">
 
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book3.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book3.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
                             </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-harvard" role="tabpanel" aria-labelledby="pills-harvard-tab">
-                        <div class="tab_slider_content slick_slider_tab">
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book4.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
                             </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-harvard" role="tabpanel" aria-labelledby="pills-harvard-tab">
+                            <div class="tab_slider_content slick_slider_tab">
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book4.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book2.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book2.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
                             </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-short" role="tabpanel" aria-labelledby="pills-short-tab">
-                        <div class="tab_slider_content slick_slider_tab">
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="item">
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-short" role="tabpanel" aria-labelledby="pills-short-tab">
+                            <div class="tab_slider_content slick_slider_tab">
 
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book2.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two rtl">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price ltr">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book2.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two rtl">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price ltr">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book2.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book2.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
                             </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-philosophy" role="tabpanel" aria-labelledby="pills-philosophy-tab">
-                        <div class="tab_slider_content slick_slider_tab">
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book5.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
                             </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-philosophy" role="tabpanel" aria-labelledby="pills-philosophy-tab">
+                            <div class="tab_slider_content slick_slider_tab">
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book5.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book2.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book2.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
                             </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-romantic" role="tabpanel" aria-labelledby="pills-romantic-tab">
-                        <div class="tab_slider_content slick_slider_tab">
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book2.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-romantic" role="tabpanel" aria-labelledby="pills-romantic-tab">
+                            <div class="tab_slider_content slick_slider_tab">
+                            <div class="item">
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book2.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book2.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book2.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
                             </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-science" role="tabpanel" aria-labelledby="pills-science-tab">
-                        <div class="tab_slider_content slick_slider_tab">
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="item">
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-science" role="tabpanel" aria-labelledby="pills-science-tab">
+                            <div class="tab_slider_content slick_slider_tab">
 
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book2.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book2.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book2.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book2.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
                             </div>
                             <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
                             </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-thriller" role="tabpanel" aria-labelledby="pills-thriller-tab">
+                            <div class="tab_slider_content slick_slider_tab">
+                            <div class="item">
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book3.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="item">
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="item">
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book2.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="item">
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-design" role="tabpanel" aria-labelledby="pills-design-tab">
+                            <div class="tab_slider_content slick_slider_tab">
+                            <div class="item">
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book4.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="item">
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book3.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="item">
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book2.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="item">
+                            <div class="bj_new_pr_item">
+                            <a href="product-single.html" class="img">
+                            <img src="assets/img/home/tab_book1.png" alt="book" />
+                            </a>
+                            <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
+                            <div class="bj_new_pr_content_two">
+                            <div class="d-flex justify-content-between">
+                            <a href="product-single.html">
+                            <h5>کتابخانه نیمه شب</h5>
+                            </a>
+                            <div class="book_price">
+                            <sup>250</sup> <sup>تومان</sup>
+                            </div>
+                            </div>
+                            <div class="writer_name">
+                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
+                            </div>
+                            <div class="ratting">
+                            <div class="ratting_icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>(252)</span>
+                            </div>
+                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div> *@
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="pills-thriller" role="tabpanel" aria-labelledby="pills-thriller-tab">
-                        <div class="tab_slider_content slick_slider_tab">
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book3.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book2.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-design" role="tabpanel" aria-labelledby="pills-design-tab">
-                        <div class="tab_slider_content slick_slider_tab">
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book4.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book3.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book2.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">آیسان کریمی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="assets/img/home/tab_book1.png" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="اضافه به علاقه مندی" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h5>کتابخانه نیمه شب</h5>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>250</sup> <sup>تومان</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">اشکان موسوی</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> *@
                 </div>
             </div>
-        </div>
-    </div>
 </section>
 <!-- product tab showcase area  -->
 <!-- best selling product area  -->
@@ -2357,7 +2369,10 @@
                                             نویسنده کتاب
                                         </li>
                                         <li><span>تعداد کتاب:&nbsp;</span>23</li>
-                                        <li><span>تولد:&nbsp;</span1973</li>
+                                        <li>
+                                            <span>تولد:&nbsp;</span1973
+
+                                        </li>
                                         <li>
                                             <span> دسته:&nbsp;</span><a href="#">بیوگرافی</a><a href="#">فانتزی</a><a href="#">علمی تخیلی</a>
                                         </li>

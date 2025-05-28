@@ -42,7 +42,8 @@ namespace Application.Features.Book.Query.GetByAuthorId
                 CategoryName = b.Category.Title,
                 Price = b.Price,
                 Pages = b.Pages,
-                PhotoUrls = b.BookPhtotos.Select(p => $"/img/BookPhoto/{p.Id}.webp").ToList()
+                PhotoUrls = b.BookPhtotos.Select(p => $"/img/BookPhoto/{p.Id}.webp").ToList(),
+                Publisher = b.Publisher
 
 
             }).ToListAsync(cancellationToken);

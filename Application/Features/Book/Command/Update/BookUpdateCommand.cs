@@ -40,6 +40,8 @@ namespace Application.Features.Book.Command.Update
         
         public int Price { get; set; }
 
+        public string Review  { get; set; }
+
 
 
     }
@@ -66,6 +68,7 @@ namespace Application.Features.Book.Command.Update
             }
             book.Title = request.Title;
             book.Publisher = request.Publisher;
+
             if(request.Isbn != null)
             {
                 book.Isbn = request.Isbn;
@@ -77,6 +80,7 @@ namespace Application.Features.Book.Command.Update
             book.Language = request.Language;
             book.Price = request.Price;
             book.AuthorId = request.AuthorId;
+            book.Review = request.Review;
 
             _db.Books.Update(book);
 
