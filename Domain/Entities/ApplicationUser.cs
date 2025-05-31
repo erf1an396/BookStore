@@ -20,6 +20,7 @@ namespace Domain.Entities
 
         public GenderEnum Gender { get; set; }
 
+        
         public bool Deleted { get; set; }
 
         public bool IsAdmin { get; set; }
