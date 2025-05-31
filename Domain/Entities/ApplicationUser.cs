@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Domain.Enums;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,9 @@ namespace Domain.Entities
 
         public bool IsActive { get; set; }
 
-   
+        public string BirthDay_Date {  get; set; }
+
+        public GenderEnum Gender { get; set; }
 
         public bool Deleted { get; set; }
 
@@ -27,6 +30,8 @@ namespace Domain.Entities
         public virtual ICollection<ApplicationUserClaim> ApplicationUserClaims { get; set; }
 
         public virtual ICollection<ApplicationUserRole> ApplicationUserRoles { get; set; }
+
+        public ICollection<UserPhoto> UserPhoto {  get; set; }
 
 
     }

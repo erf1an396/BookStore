@@ -72,6 +72,7 @@
         $('#bookPages').val(book.Pages);
         /*$('#bookDescription').val(book.Description);*/
         CKEDITOR.instances['bookDescription'].setData(book.Description);
+        CKEDITOR.instances['bookReview'].setData(book.Review);
         $('#bookLanguage').val(book.Language);
         $('#bookCategoryId').val(book.CategoryId);
         $('#bookPrice').val(book.Price);

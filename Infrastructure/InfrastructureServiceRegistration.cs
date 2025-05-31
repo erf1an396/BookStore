@@ -122,7 +122,7 @@ namespace Infrastructure
                     policy =>
                     {
                         policy.Requirements.Add(new DynamicPermissionRequirement());
-                        policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                        
 
                     }
                 );

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Contracts
 {
-    public interface IBookStoreContext
+    public interface IBookStoreContext 
     {
         DbSet<ApplicationUser> Users { get; set; }
         DbSet<ApplicationRole> Roles { get; set; }
@@ -18,6 +18,8 @@ namespace Application.Contracts
         DbSet<BookPhoto> BookPhotos { get; set; }
         DbSet<Author> Authors { get; set; }
         DbSet<AuthorPhoto> AuthorPhotos { get; set; }
+
+        DbSet<UserPhoto> UserPhotos { get; set; }
 
         Task<IDbContextTransaction> BeginTransaction(CancellationToken cancellationToken = default);
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

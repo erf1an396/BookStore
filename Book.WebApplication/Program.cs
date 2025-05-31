@@ -63,7 +63,7 @@ builder.Services.AddSwaggerGen(c =>
     c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, securityScheme);
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
-                    // defines scope - without a protocol use an empty array for global scope
+                    // defines scope - without a protocol use an empty array for global scope   
                     { securityScheme, Array.Empty<string>() }
                 });
 });

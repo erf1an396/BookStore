@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+    updateCharCount();
+
     const urlParams = new URLSearchParams(window.location.search);
     const bookId = urlParams.get('bookId');
 
@@ -25,6 +27,7 @@
                 $('#bookIsbn').val(book.Isbn);
                 $('#bookPages').val(book.Pages);
                 CKEDITOR.instances['bookDescription'].setData(book.Description);
+                CKEDITOR.instances['bookReview'].setData(book.Review);
                 $('#bookLanguage').val(book.Language);
                 $('#bookCategoryId').val(book.CategoryId);
                 $('#bookPrice').val(book.Price);
@@ -44,10 +47,26 @@
     }
 
 
+     CKEDITOR.instances['bookDescription'].on('change', function () {
+        updateCharCount();
+    }); 
 
 
     $('#bookForm').on('submit', function (e) {
         e.preventDefault();
+
+       
+        var content = CKEDITOR.instances['bookDescription'].getData();
+        var length = getPlainTextLength(content);
+
+        if (length > maxChars) {
+            $('#editor-error').text('حداکثر 150 کاراکتر').show();
+            return;
+        }
+
+        $('#editor-error').hide();
+
+        
 
         debugger
         const bookId = $('#bookId').val();
@@ -62,7 +81,8 @@
             Description: CKEDITOR.instances['bookDescription'].getData(),
             Language: parseInt($('#bookLanguage').val()),
             CategoryId: parseInt($('#bookCategoryId').val()),
-            Price: parseInt($('#bookPrice').val())
+            Price: parseInt($('#bookPrice').val()),
+            Review: CKEDITOR.instances['bookReview'].getData()
 
 
         };
@@ -109,5 +129,33 @@
 })
 
 
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // FOR FORM CUSTOMIZE //
+
+
+var maxChars = 150;
+
+function getPlainTextLength(html) {
+    var div = document.createElement("div");
+    div.innerHTML = html ;
+    return div.textContent.trim().length;
+}
+
+function updateCharCount() {
+    var content = CKEDITOR.instances['bookDescription'].getData();
+    var length = getPlainTextLength(content);
+    var $counter = $('#char-count');
+
+    $counter.text(length + ' / ' + maxChars);
+
+    if (length > maxChars) {
+        $counter.css('color', 'red');
+        $('#editor-error').text('حداکثر تعداد مجاز کاراکتر 150 تاست').show();
+    } else {
+        $counter.css('color', 'black');
+        $('#editor-error').hide();
+    }
+}

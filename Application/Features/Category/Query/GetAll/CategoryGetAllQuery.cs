@@ -42,6 +42,9 @@ namespace Application.Features.Category.Query.GetAll
                 BookCount = x.books.Count,
                 Title = x.Title,
                 ParentId = x.ParentId,
+                Id = x.Id, 
+                CreatedDate = x.CreatedDate,
+                LastModifiedDate = x.LastModifiedDate,
                 
             }).ToListAsync(cancellationToken);
 

@@ -134,8 +134,7 @@
                                 </div>
                                 <div class="price">100تومان</div>
                                 <p>
-                                    آنچه گفته شد را توضیح خواهم داد. زیرا هیچ کس از خود لذت متنفر نیست و از آن فرار نمی کند
-                                    چون موفق می شوند
+                                    @Html.Raw(book.Description)
                                 </p>
                                 <ul class="product_meta list-unstyled">
                                     <li><span>ناشر:</span>@book.Publisher</li>
@@ -184,9 +183,14 @@
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="product_description-tab" data-bs-toggle="tab" data-bs-target="#product_description" type="button" role="tab" aria-controls="product_description" aria-selected="true">جزئیات محصول</button>
                                 </li>
+                                <!--
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="product_aurhor_desc-tab" data-bs-toggle="tab" data-bs-target="#product_aurhor_desc" type="button" role="tab" aria-controls="product_aurhor_desc" aria-selected="false">دیگر نویسندگان</button>
                                 </li>
+
+                                -->
+
+                                
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="product_review-tab" data-bs-toggle="tab" data-bs-target="#product_review" type="button" role="tab" aria-controls="product_review" aria-selected="false">یادآوری</button>
                                 </li>
@@ -194,54 +198,11 @@
                             <div class="tab-content bj_book_single_tab_content mt-4">
                                 <div class="tab-pane fade show active" id="product_description" role="tabpanel" aria-labelledby="product_description-tab">
                                     <div class="product_book_content_details">
-                                        <div>
-                                            <h5 class="content_header mb-2">مزایای کلیدی</h5>
-                                            <ul class="content_text mb-2">
-                                                <li>
-                                                    سومین نسخه از پرفروش ترین دستگاه پایتون که بسیار تحسین شده است
-                                                    کتاب یادگیری
-                                                </li>
-                                                <li>
-                                                    توضیحات واضح و شهودی شما را عمیقاً به نظریه و
-                                                    تمرین یادگیری ماشین پایتون
-                                                </li>
-                                                <li>
-                                                    نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <h5 class="content_header mb-2">توضیحات</h5>
-                                            <p class="content_text mb-2">با استفاده از طراحان گرافیک است مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
-                                        </div>
-                                        <div>
-                                            <h5 class="content_header mb-2">آنچه خواهید آموخت</h5>
-                                            <ul class="content_text mb-2">
-                                                <li>
-                                                    برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد
-                                                </li>
-                                                <li>
-                                                    برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد
-                                                </li>
-                                                <li>
-                                                    فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                                                </li>
-                                                <li>
-                                                    در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و
-                                                </li>
-                                                <li>
-                                                    فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                                                </li>
-                                                <li>
-                                                    فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                                                </li>
-                                                <li>
-                                                    با استفاده از طراحان گرافیک است مورد نیاز، و کاربردهای متنوع با
-                                                </li>
-                                            </ul>
-                                        </div>
+                                       @Html.Raw(book.Review)
                                     </div>
                                 </div>
+                                <!--
+                                    
                                 <div class="tab-pane fade" id="product_aurhor_desc" role="tabpanel" aria-labelledby="product_aurhor_desc-tab">
                                     <div class="tab_slider_content">
                                         <div class="bj_author_single d-flex align-items-center rtl">
@@ -274,6 +235,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                -->
+
+                                
                                 <div class="tab-pane fade" id="product_review" role="tabpanel" aria-labelledby="product_review-tab">
                                     <div class="reviews-item " id="scrollspyReviews">
                                         <div class="d-flex flex-wrap justify-content-between mb-40 gap-3">
@@ -524,10 +489,15 @@
                                         <span class="product_details_section_key">طول</span>
                                         <span class="product_details_section_value">@book.Pages صفحه </span>
                                     </div>
+                                    <!--
+
                                     <div class="product_details_section_content mb-3">
                                         <span class="product_details_section_key">نسخه :</span>
                                         <span class="product_details_section_value">نسخه 3</span>
                                     </div>
+
+                                    -->
+                                    
                                     <div class="product_details_section_content mb-3">
                                         <span class="product_details_section_key">زبان :</span>
                                         <span class="product_details_section_value">@book.Language</span>
@@ -536,6 +506,8 @@
                                         <span class="product_details_section_key">ISBN-13 :</span>
                                         <span class="product_details_section_value">@book.Isbn</span>
                                     </div>
+                                    <!--
+
                                     <div class="product_details_section_content mb-3">
                                         <span class="product_details_section_key">فروشنده :</span>
                                         <div class="product_details_section_value">
@@ -544,6 +516,8 @@
                                             </span>
                                         </div>
                                     </div>
+                                    -->
+                                    
                                     <div class="product_details_section_content mb-3">
                                         <span class="product_details_section_key">دسته بندی:</span>
                                         <div class="product_details_section_value">
@@ -552,34 +526,9 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="product_details_section_content mb-3">
-                                        <span class="product_details_section_key">زبان :</span>
-                                        <div class="product_details_section_value">
-                                            <a href="https://www.packtpub.com/en-us/data/language/python" class="fw-600">
-                                                پایتون (متخصص)
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product_details_section_content mb-3">
-                                        <span class="product_details_section_key">مفاهیم :</span>
-                                        <div class="product_details_section_value">
-                                            <a href="https://www.packtpub.com/en-us/data/concept/machine-learning" class="fw-600">
-                                                یادگیری ماشینی
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product_details_section_content mb-3">
-                                        <span class="product_details_section_key">ابزار :</span>
-                                        <div class="product_details_section_value">
-                                            <a href="https://www.packtpub.com/en-us/data/tool/tensorflow" class="fw-600">
-                                                ترجمه (متوسط)
-                                                ,
-                                            </a>
-                                            <a href="https://www.packtpub.com/en-us/data/tool/keras" class="fw-600">
-                                                سخت (متوسط)
-                                            </a>
-                                        </div>
-                                    </div>
+                                    
+                                    
+                                    
                                 </div>
                             </div>
                         </div>

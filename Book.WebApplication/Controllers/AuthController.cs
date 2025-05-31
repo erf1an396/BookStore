@@ -1,7 +1,9 @@
 ﻿using Application.Features.Auth.Command;
 using Book.WebApplication.Models;
+using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book.WebApplication.Controllers
@@ -9,6 +11,7 @@ namespace Book.WebApplication.Controllers
     public class AuthController : Controller
     {
         private readonly IMediator _mediator;
+        
 
         public AuthController(IMediator mediator)
         {
@@ -46,6 +49,14 @@ namespace Book.WebApplication.Controllers
             return Ok(result);
         }
 
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _mediator.Send(new LogoutCommand());
+
+            return RedirectToAction("Index", "Home");
+            
+        }
 
         //public IActionResult SetToken([FromBody] TokenDto dto)
         //{
@@ -65,6 +76,7 @@ namespace Book.WebApplication.Controllers
         //    public string Token { get; set; }
         //}
 
+       
 
     }
 }

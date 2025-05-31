@@ -37,7 +37,7 @@ $(document).ready(function () {
                     //    window.location.href = "/admin";
                     //});
                     /*localStorage.setItem("token", response.Value);*/
-                    window.location.href = "/admin";
+                    window.location.href = "/";
                 } else {
                     console.warn('Login failed:', response.message);
                     alert('ورود ناموفق بود: ');

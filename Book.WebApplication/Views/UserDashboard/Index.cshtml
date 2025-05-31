@@ -1,0 +1,227 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!doctype html>
+<html lang="en">
+
+
+<!-- Mirrored from html-template.spider-themes.net/bookjar/my-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Nov 2024 07:59:05 GMT -->
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link href="assets/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendors/elagent-icon/style.css" rel="stylesheet">
+    <link href="assets/vendors/font-awesome/css/all.min.css" rel="stylesheet">
+    <link href="assets/vendors/icomoon/style.css" rel="stylesheet">
+    <link href="assets/vendors/themify-icon/themify-icons.css" rel="stylesheet">
+    <link href="assets/vendors/animation/animate.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/responsive.css" rel="stylesheet">
+    <title>کتاب باز</title>
+</head>
+
+<body data-scroll-animation="true">
+    
+    <div class="body_wrapper">
+
+        <div class="toast-container position-fixed p-3">
+            <div id="cartToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">اضافه به سبدخرید</strong>
+                    <small>همین الان</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    کالا به سبد خرید اضافه شد!
+                </div>
+            </div>
+        </div>
+
+        <!-- Header area -->
+        
+
+        <div class="cart-header-separator"></div>
+
+        <!-- Dashboard area -->
+        <section class="bj_account_dashboard" data-bg-color="#f5f5f5">
+            <div class="container rtl">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="account_dashboard_sidebar container">
+                            <div class="sidebar_widget_body d-flex account_dashboard_sidebar_profile row">
+                                <div class="">
+                                    <img src="assets/img/profile-img.png" alt="account">
+                                </div>
+                                <div class="">
+                                    <div class="greetings">درود</div>
+                                    <div class="name">مازیار منوچهری</div>
+                                    
+                                </div>
+                                <div class="col-12">
+                                    <form method="post" asp-controller="Auth" asp-action="Logout">
+                                        @Html.AntiForgeryToken()
+                                        <button style="margin-top:5px ; font-size:14px" type="submit" class="btn btn-danger">خروج</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="sidebar_widget_body p-0">
+                                <ul class="sidebar_widget_menu">
+                                    <li><a class="active " href="my-account.html">پروفایل من</a></li>
+                                    <li><a href="my-address.html">آدرس من</a></li>
+                                    <li><a href="my-orders.html">سفارشات من</a></li>
+                                    <li><a href="my-ebook-library.html">کتاب خانه الکتورنیکی من </a></li>
+                                    <li><a href="my-list.html">لیست های من</a></li>
+                                    <li><a href="my-wishlist.html">علاقه مندی های من</a></li>
+                                    <li><a href="my-rating-reviews.html">رتبه بندی و نظرات من</a></li>
+                                    <li><a href="my-following-authors.html">نویسندگان بعدی من</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="account_dashboard_body">
+                            <div class="account_dashboard_content">
+                                <div class="account_dashboard_content_header">
+                                    اطلاعات شخصی
+                                </div>
+                                <div class="content_body">
+                                    <form action="#">
+                                        <div class="row gy-4">
+                                            <div class="col-12">
+                                                <div class="profile-picture-form">
+                                                    <div class="preview">
+                                                        <img class="img-fluid"
+                                                             src="assets/img/profile-img.png" alt="">
+                                                    </div>
+                                                    <div class="upload_btn">
+                                                        آپلود عکس جدید
+                                                        <input type="file" id="profile-picture-file">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group ">
+                                                    <input type="text" class="form-control" required>
+                                                    <label class="floating-label">اسم کوچک</label>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group ">
+                                                    <input type="text" class="form-control" required>
+                                                    <label class="floating-label">نام خانوادکی</label>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group ">
+                                                    <label class="form-label">تاریخ تولد شما</label>
+                                                    <input type="date" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">جنسیت</label>
+                                                    <div class="d-flex flex-row">
+                                                        <div class="form-check me-3">
+                                                            <input class="form-check-input" type="radio" value=""
+                                                                   id="genderMale" name="gender_radio">
+                                                            <label class="form-check-label" for="genderMale">
+                                                                آقا
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" value=""
+                                                                   id="genderFemale" name="gender_radio">
+                                                            <label class="form-check-label" for="genderFemale">
+                                                                خانم
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" id="email_address" required>
+                                                    <label class="floating-label" for="email_address">ایمیل آدرس</label>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" id="phone" required>
+                                                    <label class="floating-label" for="phone">شماره موبایل</label>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="account_dashboard_content_title mt-3">
+                                            <h4>پسورد</h4>
+                                        </div>
+                                        <div class="row mt-1 gy-3">
+                                            <div class="col-lg-6">
+                                                <div class="form-group pass-field-with-icon">
+                                                    <input type="password" id="toggle_passowrd_field"
+                                                           class="form-control" required>
+                                                    <label class="floating-label">پسورد جدید</label>
+                                                    <i data-toggleTarget="#toggle_passowrd_field"
+                                                       class="icon fas fa-eye toggle-password"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group pass-field-with-icon">
+                                                    <input type="password" id="toggle_passowrd_field2"
+                                                           class="form-control" required>
+                                                    <label class="floating-label">رمز عبور را تایید کنید</label>
+                                                    <i data-toggleTarget="#toggle_passowrd_field2"
+                                                       class="icon fas fa-eye toggle-password"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="bj_theme_btn mt-3">ذخیره</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- Dashboard area -->
+        <!-- footer area -->
+    </div>
+    <!-- Back to top button -->
+    <a id="back-to-top" title="برگشت به بالا"></a>
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+
+    <script src="assets/js/preloader.js"></script>
+    <script src="assets/vendors/bootstrap/js/popper.min.js"></script>
+    <script src="assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/vendors/wow/wow.min.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+
+    <script src="~/js/MainPageQuery/UserPhoto.js"></script>
+
+</body>
+
+
+<!-- Mirrored from html-template.spider-themes.net/bookjar/my-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Nov 2024 07:59:05 GMT -->
+
+</html>

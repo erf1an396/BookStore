@@ -1,8 +1,13 @@
-﻿@using MediatR
+﻿@using Domain.Entities
+@using MediatR
 @inject IMediator Mediator
 @inherits Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic> 
 @using Application.Features.Category.Query.GetAllAsTree 
 @using Application.Features.Category 
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager 
+@inject UserManager<ApplicationUser> UserManager 
 
 @{
     var result  = await Mediator.Send(new CategoryGetAllAsTreeQuery());
@@ -97,7 +102,7 @@
                         <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                             <ul class="navbar-nav menu w_menu ms-auto me-auto">
                                 <li class="nav-item dropdown submenu active">
-                                    <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="~/" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         خانه
                                     </a>
                                 
@@ -113,7 +118,7 @@
                                     }
                                 </ul>
                             </li>
-                                <li class="nav-item dropdown submenu">
+                                @* <li class="nav-item dropdown submenu">
                                     <a class="nav-link dropdown-toggle" href="shop.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         فروشگاه
                                     </a>
@@ -126,7 +131,7 @@
                                             <ul class="dropdown-menu">
 
                                                 
-                                                @* <li class="nav-item">
+                                                <li class="nav-item">
                                                     <a href="shop.html" class="nav-link">فروشگاه</a>
                                                 </li>
                                                 <li class="nav-item">
@@ -134,7 +139,7 @@
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="product-single.html" class="nav-link">جزئیات محصول</a>
-                                                </li> *@
+                                                </li>
                                             </ul>
                                         </li>
                                         <li class="nav-item dropdown submenu">
@@ -167,13 +172,13 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> *@
                                 <li class="nav-item dropdown submenu">
-                                    <a class="nav-link dropdown-toggle" href="my-account.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="~/userDashboard" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         داشبورد
                                     </a>
 
-                                    <ul class="dropdown-menu">
+                                    @* <ul class="dropdown-menu">
                                         <li class="nav-item">
                                             <a href="my-account.html" class="nav-link">پروفایل کاربری</a>
                                         </li>
@@ -237,7 +242,7 @@
                                         <li class="nav-item">
                                             <a href="my-wishlist.html" class="nav-link">علاقه مندی ها</a>
                                         </li>
-                                    </ul>
+                                    </ul> *@
                                 </li>
                                 <li class="nav-item dropdown submenu mega_menu tab-demo">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -463,7 +468,7 @@
                                             </div>
                                         </form>
                                     </li>
-                                    <li class="nav-item shpping-cart dropdown submenu">
+                                   @*  <li class="nav-item shpping-cart dropdown submenu">
                                         <a class="cart-btn nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="icon-shopping-basket"></i><span class="num">2</span>
                                         </a>
@@ -508,12 +513,21 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> *@
                                    
                                 </ul>
                             </div>
                             <div>
-                            <a class="bj_theme_btn strock_btn hidden-sm hidden-xs" href="~/auth/login"><i class="fa-regular fa-user"></i>ورود</a>
+                                @if(SignInManager.IsSignedIn(User))
+                            {
+                                <a class="bj_theme_btn strock_btn hidden-sm hidden-xs" href="~/userdashboard"><i class="fa-regular fa-user"></i>ورود به پنل </a>
+
+                            }
+                            else
+                            {
+                                <a class="bj_theme_btn strock_btn hidden-sm hidden-xs" href="~/auth/login"><i class="fa-regular fa-user"></i>ورود/ ثبت نام </a>
+                            }
+
 
                             </div>
                         
