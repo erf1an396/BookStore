@@ -14,6 +14,7 @@ namespace Application.Features.User.Command.Update
 {
     public class UserUpdateCommand : IRequest<ApiResult>
     {
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -49,9 +50,9 @@ namespace Application.Features.User.Command.Update
 
             
 
-            var user = await _userManager.FindByNameAsync(request.UserName);
+            var user = await _userManager.FindByIdAsync(request.Id.ToString());
 
-            if (user != null)
+            if (user == null)
             {
                 result.Fail(ApiResultStaticMessage.NotFound);
                 return result;
@@ -62,6 +63,7 @@ namespace Application.Features.User.Command.Update
             user.UserName = request.UserName;
             user.BirthDay_Date = request.BirthDay_Date;
             user.Gender = request.Gender;
+            user.Email = request.Email;
 
 
 

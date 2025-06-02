@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\js\AdminPageQuery\Author.js" />
+    <Content Remove="wwwroot\js\MainPageQuery\UserDashboard.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,7 +35,84 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\dist\jalalidatepicker.js" />
+    <None Include="wwwroot\dist\jalalidatepicker.min.js" />
     <None Include="wwwroot\js\AdminPageQuery\Author.js" />
+    <None Include="wwwroot\js\MainPageQuery\UserDashboard.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\.gitignore" />
+    <None Include="wwwroot\PersianDate-1.1.0\.jshintrc" />
+    <None Include="wwwroot\PersianDate-1.1.0\.markdown-doctest-setup.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\.travis.yml" />
+    <None Include="wwwroot\PersianDate-1.1.0\CHANGELOG.md" />
+    <None Include="wwwroot\PersianDate-1.1.0\dist\persian-date.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\dist\persian-date.min.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\doc\document.md" />
+    <None Include="wwwroot\PersianDate-1.1.0\doc\leapyear.md" />
+    <None Include="wwwroot\PersianDate-1.1.0\Gruntfile.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\LICENSE" />
+    <None Include="wwwroot\PersianDate-1.1.0\README.md" />
+    <None Include="wwwroot\PersianDate-1.1.0\src\algorithms.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\src\astro.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\src\constants.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\src\duration.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\src\en.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\src\fa.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\src\helpers.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\src\init.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\src\on.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\src\pDate.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\src\type-checking.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\src\validator.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\test\gregorian.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\test\leap-year.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\test\test.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\webpack.config.js" />
+    <None Include="wwwroot\PersianDate-1.1.0\yarn.lock" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\.gitignore" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\.npmignore" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\css\font-awesome.css.map" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\less\animated.less" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\less\bordered-pulled.less" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\less\core.less" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\less\fixed-width.less" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\less\font-awesome.less" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\less\icons.less" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\less\larger.less" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\less\list.less" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\less\mixins.less" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\less\path.less" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\less\rotated-flipped.less" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\less\stacked.less" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\less\variables.less" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\scss\font-awesome.scss" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\scss\_animated.scss" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\scss\_bordered-pulled.scss" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\scss\_core.scss" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\scss\_fixed-width.scss" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\scss\_icons.scss" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\scss\_larger.scss" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\scss\_list.scss" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\scss\_mixins.scss" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\scss\_path.scss" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\scss\_rotated-flipped.scss" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\scss\_stacked.scss" />
+    <None Include="wwwroot\persianDatepicker-master\css\fontawesome\scss\_variables.scss" />
+    <None Include="wwwroot\persianDatepicker-master\js\ajaxmin.bat" />
+    <None Include="wwwroot\persianDatepicker-master\js\angular.min.js" />
+    <None Include="wwwroot\persianDatepicker-master\js\jquery-1.10.1.min.js" />
+    <None Include="wwwroot\persianDatepicker-master\js\persianDatepicker.js" />
+    <None Include="wwwroot\persianDatepicker-master\js\persianDatepicker.min.js" />
+    <None Include="wwwroot\persianDatepicker-master\js\prism.js" />
+    <None Include="wwwroot\persianDatepicker-master\js\prism.min.js" />
+    <None Include="wwwroot\persianDatepicker-master\js\vertical-responsive-menu.min.js" />
+    <None Include="wwwroot\persianDatepicker-master\LICENSE" />
+    <None Include="wwwroot\persianDatepicker-master\README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\PersianDate-1.1.0\typings\persian-date.d.ts" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = "_Layout";
 }
 
 <!doctype html>
@@ -15,15 +13,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="assets/img/favicon.png">
+    <link  rel="stylesheet" type="text/css" href="~/dist/jalalidatepicker.min.css"/>
+
     <!-- Bootstrap CSS -->
-    <link href="assets/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendors/elagent-icon/style.css" rel="stylesheet">
-    <link href="assets/vendors/font-awesome/css/all.min.css" rel="stylesheet">
-    <link href="assets/vendors/icomoon/style.css" rel="stylesheet">
-    <link href="assets/vendors/themify-icon/themify-icons.css" rel="stylesheet">
-    <link href="assets/vendors/animation/animate.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/responsive.css" rel="stylesheet">
+    <link href="~/assets/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendors/elagent-icon/style.css" rel="stylesheet">
+    <link href="~/assets/vendors/font-awesome/css/all.min.css" rel="stylesheet">
+    <link href="~/assets/vendors/icomoon/style.css" rel="stylesheet">
+    <link href="~/assets/vendors/themify-icon/themify-icons.css" rel="stylesheet">
+    <link href="~/assets/vendors/animation/animate.css" rel="stylesheet">
+    <link href="~/assets/css/style.css" rel="stylesheet">
+    <link href="~/assets/css/responsive.css" rel="stylesheet">
+
+    
     <title>کتاب باز</title>
 </head>
 
@@ -94,7 +96,7 @@
                                     اطلاعات شخصی
                                 </div>
                                 <div class="content_body">
-                                    <form action="#">
+                                    <form action="#" id="userProfileForm">
                                         <div class="row gy-4">
                                             <div class="col-12">
                                                 <div class="profile-picture-form">
@@ -109,23 +111,22 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="form-group ">
-                                                    <input type="text" class="form-control" required>
-                                                    <label class="floating-label">اسم کوچک</label>
-
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="firstName" required>
+                                                    <label class="floating-label" for="firstName">اسم کوچک</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="form-group ">
-                                                    <input type="text" class="form-control" required>
-                                                    <label class="floating-label">نام خانوادکی</label>
-
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="lastName" required>
+                                                    <label class="floating-label" for="lastName">نام خانوادگی</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="form-group ">
-                                                    <label class="form-label">تاریخ تولد شما</label>
-                                                    <input type="date" class="form-control" required>
+                                                <div class="form-group">
+                                                    <label class="form-label" for="birthDate">تاریخ تولد شما</label>
+                                                    <input type="text" data-jdp class="form-control" id="birthDate" required>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -133,64 +134,53 @@
                                                     <label class="form-label">جنسیت</label>
                                                     <div class="d-flex flex-row">
                                                         <div class="form-check me-3">
-                                                            <input class="form-check-input" type="radio" value=""
-                                                                   id="genderMale" name="gender_radio">
-                                                            <label class="form-check-label" for="genderMale">
-                                                                آقا
-                                                            </label>
+                                                            <input class="form-check-input" type="radio" value="0" id="genderMale" name="gender_radio">
+                                                            <label class="form-check-label" for="genderMale">آقا</label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" value=""
-                                                                   id="genderFemale" name="gender_radio">
-                                                            <label class="form-check-label" for="genderFemale">
-                                                                خانم
-                                                            </label>
+                                                            <input class="form-check-input" type="radio" value="1" id="genderFemale" name="gender_radio">
+                                                            <label class="form-check-label" for="genderFemale">خانم</label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <input class="form-control" type="text" id="email_address" required>
+                                                    <input class="form-control" type="email" id="email_address" required>
                                                     <label class="floating-label" for="email_address">ایمیل آدرس</label>
-
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <input class="form-control" type="text" id="phone" required>
                                                     <label class="floating-label" for="phone">شماره موبایل</label>
-
                                                 </div>
                                             </div>
                                         </div>
-
 
                                         <div class="account_dashboard_content_title mt-3">
                                             <h4>پسورد</h4>
                                         </div>
                                         <div class="row mt-1 gy-3">
+                                            <!--Password Field-->
                                             <div class="col-lg-6">
                                                 <div class="form-group pass-field-with-icon">
-                                                    <input type="password" id="toggle_passowrd_field"
-                                                           class="form-control" required>
-                                                    <label class="floating-label">پسورد جدید</label>
-                                                    <i data-toggleTarget="#toggle_passowrd_field"
-                                                       class="icon fas fa-eye toggle-password"></i>
+                                                    <input type="password" id="password" class="form-control" required>
+                                                    <label class="floating-label" for="password">پسورد جدید</label>
+                                                    <i data-toggleTarget="#password" class="icon fas fa-eye toggle-password"></i>
                                                 </div>
                                             </div>
+                                            <!--Confirm Password Field-->
                                             <div class="col-lg-6">
                                                 <div class="form-group pass-field-with-icon">
-                                                    <input type="password" id="toggle_passowrd_field2"
-                                                           class="form-control" required>
-                                                    <label class="floating-label">رمز عبور را تایید کنید</label>
-                                                    <i data-toggleTarget="#toggle_passowrd_field2"
-                                                       class="icon fas fa-eye toggle-password"></i>
+                                                    <input type="password" id="confirmPassword" class="form-control" required>
+                                                    <label class="floating-label" for="confirmPassword">تایید رمز عبور</label>
+                                                    <i data-toggleTarget="#confirmPassword" class="icon fas fa-eye toggle-password"></i>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="bj_theme_btn mt-3">ذخیره</button>
+
+                                        <button type="submit" id="saveBtn" class="bj_theme_btn mt-3" disabled>ذخیره</button>
                                     </form>
                                 </div>
                             </div>
@@ -206,18 +196,22 @@
     <!-- Back to top button -->
     <a id="back-to-top" title="برگشت به بالا"></a>
     <!-- Optional JavaScript; choose one of the two! -->
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/js/jquery-3.6.0.min.js"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
 
-    <script src="assets/js/preloader.js"></script>
-    <script src="assets/vendors/bootstrap/js/popper.min.js"></script>
-    <script src="assets/vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/vendors/wow/wow.min.js"></script>
-    <script src="assets/js/custom.js"></script>
+    <script src="~/assets/js/preloader.js"></script>
+    <script src="~/assets/vendors/bootstrap/js/popper.min.js"></script>
+    <script src="~/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/assets/vendors/wow/wow.min.js"></script>
+    
+
+   
+
+    
 
 
-    <script src="~/js/MainPageQuery/UserPhoto.js"></script>
+      
 
 </body>
 
@@ -225,3 +219,14 @@
 <!-- Mirrored from html-template.spider-themes.net/bookjar/my-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Nov 2024 07:59:05 GMT -->
 
 </html>
+
+@section Scripts {
+
+    <script type="text/javascript" src="~/dist/jalalidatepicker.min.js"></script>
+
+    <script src="~/js/MainPageQuery/UserDashboard.js"></script>
+
+    
+
+
+}

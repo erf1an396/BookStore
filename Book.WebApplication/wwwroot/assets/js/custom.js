@@ -492,7 +492,7 @@
     updateQuantity($(this), 0); // This will ensure the value stays within range
   });
 
-  $(".toggle-password").click(function () {
+  $(".toggle-password").on("click",function () {
     $(this).toggleClass("fa-eye fa-eye-slash");
     var input = $($(this).attr("data-toggleTarget"));
     if (input.attr("type") == "password") {
@@ -501,6 +501,9 @@
       input.attr("type", "password");
     }
   });
+
+  
+
 
   $(".addres_sidebar_cart_trigger").on("click", function () {
     $(".side_menu").addClass("menu-opened");

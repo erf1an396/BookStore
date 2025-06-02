@@ -80,6 +80,8 @@ namespace Application.Features.Auth.Command
                  
                 if (principal.Identity is ClaimsIdentity identity)
                 {
+                    identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
+                    identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
                     identity.AddClaim(new Claim("FullName",user.FirstName + " " + user.LastName));
                     identity.AddClaim(new Claim("IsAdmin", user.IsAdmin.ToString()));
                 }

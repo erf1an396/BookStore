@@ -25,9 +25,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\User\Query\GetAll\" />
-    <Folder Include="Features\User\Query\GetById\" />
-  </ItemGroup>
-
 </Project>
