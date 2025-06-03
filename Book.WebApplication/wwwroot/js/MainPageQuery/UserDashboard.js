@@ -44,7 +44,12 @@
 
         },
         error: function (error) {
-            alert('خطا در ارتباط با سرور ');
+            if (error.status === 401 || error.status === 403) {
+                window.location.herf = "/";
+            } else {
+                alert('خطا در ارتباط با سرور ');
+            }
+            
         }
     });
 

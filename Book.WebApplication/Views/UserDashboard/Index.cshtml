@@ -1,6 +1,15 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNetCore.Identity
+
+
+
+@{
     Layout = "_Layout";
+
+    var photo = ViewBag.Photo as Application.Features.UserPhoto.UserPhotoDto ?? new Application.Features.UserPhoto.UserPhotoDto();
+
 }
+
 
 <!doctype html>
 <html lang="en">
@@ -12,8 +21,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="assets/img/favicon.png">
-    <link  rel="stylesheet" type="text/css" href="~/dist/jalalidatepicker.min.css"/>
+    <link rel="shortcut icon" href="assets/img/favicoprn.png">
+    <link rel="stylesheet" type="text/css" href="~/dist/jalalidatepicker.min.css" />
 
     <!-- Bootstrap CSS -->
     <link href="~/assets/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -25,12 +34,12 @@
     <link href="~/assets/css/style.css" rel="stylesheet">
     <link href="~/assets/css/responsive.css" rel="stylesheet">
 
-    
+
     <title>کتاب باز</title>
 </head>
 
 <body data-scroll-animation="true">
-    
+
     <div class="body_wrapper">
 
         <div class="toast-container position-fixed p-3">
@@ -47,7 +56,7 @@
         </div>
 
         <!-- Header area -->
-        
+
 
         <div class="cart-header-separator"></div>
 
@@ -59,12 +68,19 @@
                         <div class="account_dashboard_sidebar container">
                             <div class="sidebar_widget_body d-flex account_dashboard_sidebar_profile row">
                                 <div class="">
-                                    <img src="assets/img/profile-img.png" alt="account">
+                                   
+                                   <img src="/img/UserPhoto/@(photo.Id).webp" alt="account" />
+                                    
                                 </div>
                                 <div class="">
                                     <div class="greetings">درود</div>
-                                    <div class="name">مازیار منوچهری</div>
-                                    
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        var FirstName = User.FindFirst("FullName")?.Value;
+                                        <div class="name">@FirstName</div>
+                                    }
+
+
                                 </div>
                                 <div class="col-12">
                                     <form method="post" asp-controller="Auth" asp-action="Logout">
@@ -96,20 +112,25 @@
                                     اطلاعات شخصی
                                 </div>
                                 <div class="content_body">
-                                    <form action="#" id="userProfileForm">
+                                    <form id="uploadProfilePictureForm" enctype="multipart/form-data" class="mb-4">
                                         <div class="row gy-4">
                                             <div class="col-12">
                                                 <div class="profile-picture-form">
                                                     <div class="preview">
-                                                        <img class="img-fluid"
-                                                             src="assets/img/profile-img.png" alt="">
+                                                        <img id="profilePreview" class="img-fluid"  alt="UserPhoto" src="~/img/UserPhoto/@(photo.Id).webp" >
                                                     </div>
                                                     <div class="upload_btn">
                                                         آپلود عکس جدید
-                                                        <input type="file" id="profile-picture-file">
+                                                        <input type="file" id="profile-picture-file" name="profile_picture">
                                                     </div>
+                                                    
                                                 </div>
                                             </div>
+                                        </div>
+                                    </form>
+                                    <form action="#" id="userProfileForm">
+                                        <div class="row gy-4">
+
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" id="firstName" required>
@@ -126,7 +147,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="birthDate">تاریخ تولد شما</label>
                                                     <input type="text" data-jdp class="form-control" id="birthDate" required>
-                                                    
+
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -204,14 +225,14 @@
     <script src="~/assets/vendors/bootstrap/js/popper.min.js"></script>
     <script src="~/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/assets/vendors/wow/wow.min.js"></script>
+
+
+
+
+
+
     
 
-   
-
-    
-
-
-      
 
 </body>
 
@@ -225,8 +246,9 @@
     <script type="text/javascript" src="~/dist/jalalidatepicker.min.js"></script>
 
     <script src="~/js/MainPageQuery/UserDashboard.js"></script>
+    <script src="~/js/MainPageQuery/UserPhoto.js"></script>
 
-    
+
 
 
 }

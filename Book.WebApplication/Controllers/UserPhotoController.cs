@@ -1,8 +1,11 @@
-﻿using Application.Features.UserPhoto.Command.Delete;
+﻿
 using Application.Features.UserPhoto.Command.Insert;
 using Application.Features.UserPhoto.Query.GetById;
+using Application.Features.UserPhoto.Query.GetByUserId;
 using MediatR;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Book.WebApplication.Controllers
 {
@@ -27,6 +30,8 @@ namespace Book.WebApplication.Controllers
         [ActionName("GetById")]
         public async Task<IActionResult> GetById(int Id)
         {
+            
+
             var query = new UserPhotoGetByIdQuery { Id = Id };
             var result = await _mediator.Send(query);
 
@@ -35,23 +40,34 @@ namespace Book.WebApplication.Controllers
         }
 
         [HttpPost]
-        [ActionName("Delete")]
-
-        public async Task<IActionResult> Delete(int Id)
+        [ActionName("GetByUserId")]
+        public async Task<IActionResult> GetByUserId(Guid UserId)
         {
-            var command = new UserPhotoDeleteCommand { Id = Id };
-            var result = await _mediator.Send(command);
+            var query = new UserPhotoGetByUserIdQuery { UserId = UserId };
+            var result = await _mediator.Send(query);
 
             return Ok(result);
-
-
         }
+
+        //[HttpPost]
+        //[ActionName("Delete")]
+
+        //public async Task<IActionResult> Delete(int Id)
+        //{
+        //    var command = new UserPhotoDeleteCommand { Id = Id };
+        //    var result = await _mediator.Send(command);
+
+        //    return Ok(result);
+
+
+        //}
 
 
         [HttpPost]
         [ActionName("Create")]
         public async Task<IActionResult> Create([FromForm] UserPhotoInsertCommand command)
         {
+            command.UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var result = await _mediator.Send(command);
             return Ok(result);
         }

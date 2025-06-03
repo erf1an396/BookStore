@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\img\BookPhoto\" />
+    <Folder Include="wwwroot\img\UserPhoto\" />
   </ItemGroup>
 
   <ItemGroup>

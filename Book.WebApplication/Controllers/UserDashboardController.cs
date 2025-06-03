@@ -1,6 +1,9 @@
-﻿using MediatR;
+﻿using Application.Features.UserPhoto.Query.GetByUserId;
+using MediatR;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Book.WebApplication.Controllers
 {
@@ -19,6 +22,11 @@ namespace Book.WebApplication.Controllers
 
         public async  Task<IActionResult> Index()
         {
+            Guid userId =Guid.Parse(User.Identity.GetUserId());
+            var photo = (await _mediator.Send(new UserPhotoGetByUserIdQuery { UserId = userId })).Value;
+
+            ViewBag.Photo = photo;
+
             return View();
         }
     }

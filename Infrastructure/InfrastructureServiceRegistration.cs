@@ -68,7 +68,7 @@ namespace Infrastructure
                 options.LoginPath = "/auth/Login";
                 options.AccessDeniedPath = "/auth/AccessDenied";
                 options.LogoutPath = "/auth/Logout";
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
                 options.SlidingExpiration = true;
             }
             );
@@ -95,8 +95,9 @@ namespace Infrastructure
 
                     options.SignIn.RequireConfirmedEmail = false;
 
-                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(20);
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(20);
                     options.Lockout.MaxFailedAccessAttempts = 3;
+                    
 
 
                     options.ClaimsIdentity.UserIdClaimType = "nameid";
