@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\PersianDate-1.1.0\**" />
+    <Content Remove="wwwroot\PersianDate-1.1.0\**" />
+    <EmbeddedResource Remove="wwwroot\PersianDate-1.1.0\**" />
+    <None Remove="wwwroot\PersianDate-1.1.0\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\js\AdminPageQuery\Author.js" />
     <Content Remove="wwwroot\js\MainPageQuery\UserDashboard.js" />
   </ItemGroup>
@@ -32,7 +39,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\img\BookPhoto\" />
-    <Folder Include="wwwroot\img\UserPhoto\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,35 +46,6 @@
     <None Include="wwwroot\dist\jalalidatepicker.min.js" />
     <None Include="wwwroot\js\AdminPageQuery\Author.js" />
     <None Include="wwwroot\js\MainPageQuery\UserDashboard.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\.gitignore" />
-    <None Include="wwwroot\PersianDate-1.1.0\.jshintrc" />
-    <None Include="wwwroot\PersianDate-1.1.0\.markdown-doctest-setup.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\.travis.yml" />
-    <None Include="wwwroot\PersianDate-1.1.0\CHANGELOG.md" />
-    <None Include="wwwroot\PersianDate-1.1.0\dist\persian-date.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\dist\persian-date.min.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\doc\document.md" />
-    <None Include="wwwroot\PersianDate-1.1.0\doc\leapyear.md" />
-    <None Include="wwwroot\PersianDate-1.1.0\Gruntfile.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\LICENSE" />
-    <None Include="wwwroot\PersianDate-1.1.0\README.md" />
-    <None Include="wwwroot\PersianDate-1.1.0\src\algorithms.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\src\astro.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\src\constants.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\src\duration.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\src\en.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\src\fa.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\src\helpers.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\src\init.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\src\on.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\src\pDate.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\src\type-checking.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\src\validator.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\test\gregorian.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\test\leap-year.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\test\test.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\webpack.config.js" />
-    <None Include="wwwroot\PersianDate-1.1.0\yarn.lock" />
     <None Include="wwwroot\persianDatepicker-master\css\fontawesome\.gitignore" />
     <None Include="wwwroot\persianDatepicker-master\css\fontawesome\.npmignore" />
     <None Include="wwwroot\persianDatepicker-master\css\fontawesome\css\font-awesome.css.map" />
@@ -110,10 +87,6 @@
     <None Include="wwwroot\persianDatepicker-master\js\vertical-responsive-menu.min.js" />
     <None Include="wwwroot\persianDatepicker-master\LICENSE" />
     <None Include="wwwroot\persianDatepicker-master\README.md" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="wwwroot\PersianDate-1.1.0\typings\persian-date.d.ts" />
   </ItemGroup>
 
 </Project>

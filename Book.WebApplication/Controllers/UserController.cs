@@ -26,15 +26,15 @@ namespace Book.WebApplication.Controllers
 
 
 
-        [HttpPost]
-        [ActionName("Create")]
-        public async Task<IActionResult> Create([FromBody]  UserInsertCommand command)
-        {
-            var result = await _mediator.Send(command); 
-            return Ok(result);
+        //[HttpPost]
+        //[ActionName("Create")]
+        //public async Task<IActionResult> Create([FromBody]  UserInsertCommand command)
+        //{
+        //    var result = await _mediator.Send(command); 
+        //    return Ok(result);
 
 
-        }
+        //}
 
         [HttpPost]
         [ActionName("UserUpdate")]
@@ -48,39 +48,39 @@ namespace Book.WebApplication.Controllers
         }
 
 
-        [HttpPost]
-        [ActionName("Admin/Update")]
-        public async Task<IActionResult> UpdateAdmin(int UserName , [FromBody] UserUpdateCommand command)
-        {
-            var result = await _mediator.Send(command);
-            return Ok(result);
-        }
+        //[HttpPost]
+        //[ActionName("Admin/Update")]
+        //public async Task<IActionResult> UpdateAdmin(int UserName , [FromBody] UserUpdateCommand command)
+        //{
+        //    var result = await _mediator.Send(command);
+        //    return Ok(result);
+        //}
 
 
 
-        [HttpPost]
-        [ActionName("Delete")]
+        //[HttpPost]
+        //[ActionName("Delete")]
 
-        public async Task<IActionResult> Delete(Guid Id)
-        {
-            var command = new UserGetByIdQuery { Id = Id };
-            var result = await _mediator.Send(command);
+        //public async Task<IActionResult> Delete(Guid Id)
+        //{
+        //    var command = new UserGetByIdQuery { Id = Id };
+        //    var result = await _mediator.Send(command);
 
-            return Ok(result);
+        //    return Ok(result);
 
-        }
+        //}
 
-        [HttpGet]
-        [ActionName("Admin/GetById")]
+        //[HttpGet]
+        //[ActionName("Admin/GetById")]
 
-        public async Task<IActionResult> GetById (Guid Id)
-        {
+        //public async Task<IActionResult> GetById (Guid Id)
+        //{
 
-            var query = new UserGetByIdQuery { Id = Id };
-            var result = await _mediator.Send(query);
-            return Ok(result);
+        //    var query = new UserGetByIdQuery { Id = Id };
+        //    var result = await _mediator.Send(query);
+        //    return Ok(result);
 
-        }
+        //}
 
 
         [HttpGet]
@@ -111,13 +111,13 @@ namespace Book.WebApplication.Controllers
 
 
 
-        [HttpGet]
-        [ActionName("GetAll")]
-        public async Task<IActionResult> GetAll()
-        {
-            var query = new UserGetAllQuery();
-            var result = _mediator.Send(query);
-            return Ok(result);
-        }
+        //[HttpGet]
+        //[ActionName("GetAll")]
+        //public async Task<IActionResult> GetAll()
+        //{
+        //    var query = new UserGetAllQuery();
+        //    var result = _mediator.Send(query);
+        //    return Ok(result);
+        //}
     }
 }

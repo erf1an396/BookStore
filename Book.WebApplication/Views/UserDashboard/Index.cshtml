@@ -68,12 +68,12 @@
                         <div class="account_dashboard_sidebar container">
                             <div class="sidebar_widget_body d-flex account_dashboard_sidebar_profile row">
                                 <div class="">
-                                   
-                                   <img src="/img/UserPhoto/@(photo.Id).webp" alt="account" />
-                                    
+
+                                    <img src="/img/UserPhoto/@(photo.Id).webp?@(DateTime.Now.ToBinary())" alt="account" />
+
                                 </div>
                                 <div class="">
-                                    <div class="greetings">درود</div>
+                                    
                                     @if (User.Identity.IsAuthenticated)
                                     {
                                         var FirstName = User.FindFirst("FullName")?.Value;
@@ -117,13 +117,13 @@
                                             <div class="col-12">
                                                 <div class="profile-picture-form">
                                                     <div class="preview">
-                                                        <img id="profilePreview" class="img-fluid"  alt="UserPhoto" src="~/img/UserPhoto/@(photo.Id).webp" >
+                                                        <img id="profilePreview" class="img-fluid" alt="UserPhoto" src="~/img/UserPhoto/@(photo.Id).webp?@(DateTime.Now.ToBinary())">
                                                     </div>
                                                     <div class="upload_btn">
                                                         آپلود عکس جدید
                                                         <input type="file" id="profile-picture-file" name="profile_picture">
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -231,7 +231,7 @@
 
 
 
-    
+
 
 
 </body>
@@ -247,6 +247,8 @@
 
     <script src="~/js/MainPageQuery/UserDashboard.js"></script>
     <script src="~/js/MainPageQuery/UserPhoto.js"></script>
+
+
 
 
 
