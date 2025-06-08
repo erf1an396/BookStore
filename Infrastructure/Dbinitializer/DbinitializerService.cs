@@ -36,12 +36,13 @@ namespace Infrastructure.Dbinitializer
         private readonly RoleManager<ApplicationRole> _roleManager;
 
 
-        private readonly string name = "admin";
+        private readonly string name = "313";
         private readonly string password = "Admin@123";
         private readonly string email = "admin@my.store";
         private readonly string roleName = "مدیر سیستم";
         private readonly string firstName = "مدیر";
         private readonly string lastName = "سیستم";
+        
 
         public DbInitializerService(
             IServiceScopeFactory scopeFactory, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)

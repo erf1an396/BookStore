@@ -32,7 +32,6 @@ namespace Infrastructure.Identity
             DynamicPermissionRequirement requirement)
 
         {
-
             AuthorizationFilterContext filterContext = context.Resource as AuthorizationFilterContext;
             HttpResponse response = filterContext?.HttpContext.Response;
 
@@ -54,7 +53,7 @@ namespace Infrastructure.Identity
                 cad.RouteValues.TryGetValue("area", out string areaName);
                 string area = string.IsNullOrWhiteSpace(areaName) ? string.Empty : areaName;
 
-                cad.RouteValues.TryGetValue("contorller", out string controllerName);
+                cad.RouteValues.TryGetValue("controller", out string controllerName);
                 string controller = string.IsNullOrWhiteSpace(controllerName) ? string.Empty : controllerName;
 
                 cad.RouteValues.TryGetValue("action" , out string actionName);

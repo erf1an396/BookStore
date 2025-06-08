@@ -1,0 +1,88 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@section myStyle {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Items</title>
+    <link rel="stylesheet" href="~/css/modalcss/StyleSheet.css">
+    <link rel="stylesheet" href="~/css/custom.css">
+}
+
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col">
+                    <div class="page-header-left">
+                        <h3>Book Page</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">home</li>
+                            <li class="breadcrumb-item active">Book Page</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="container my-5">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">📚 مدیریت نقش ها</h2>
+            <p class="text-muted">نقش جدید اضافه کن یا اطلاعات نقش‌های قبلی رو ویرایش کن</p>
+        </div>
+
+
+
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="~/admin/author/authorList">
+                        <button type="submit" class="btn btn-danger px-4">
+                            لیست نقش ها
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <form id="roleForm">
+
+                    <input type="hidden" id="roleId">
+                    <input type="text" id="roleName" class="form-control mb-2" placeholder="نام نقش">
+                    <div id="permissionList" class="mb-3"></div>
+                    <div class="d-flex justify-content-end gap-2">
+                        <button type="submit" class="btn btn-success">ذخیره</button>
+                        <button type="button" id="cancelEditBtn" class="btn btn-secondary" style="display: none;">انصراف</button>
+                    </div>
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+@section myscript {
+    <script src="~/ckeditor4/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('authorDescription', {
+            customConfig: '~/ckeditor4/ckeditor/config.js'
+        });
+    </script>
+
+    <script src="~/js/AdminPageQuery/Role.js"></script>
+
+}

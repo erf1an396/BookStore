@@ -1,4 +1,5 @@
-﻿using Application.Features.Author.Query.GetAll;
+﻿using Application.Contracts.Identity;
+using Application.Features.Author.Query.GetAll;
 using Application.Features.Author.Query.GetById;
 using Application.Features.User.Command.Delete;
 using Application.Features.User.Command.Insert;
@@ -6,11 +7,14 @@ using Application.Features.User.Command.Update;
 using Application.Features.User.Query.GetAll;
 using Application.Features.User.Query.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 
 namespace Book.WebApplication.Areas.Admin.Controllers
 {
     [Area("admin")]
+    [DisplayName("یوزر")]
     public class UserController : Controller
     {
         private readonly IMediator _mediator;
@@ -39,6 +43,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpPost]
         [ActionName("Create")]
+        [DisplayName("افزودن")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         public async Task<IActionResult> Create([FromBody] UserInsertCommand command)
         {
             var result = await _mediator.Send(command);
@@ -49,6 +55,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpPost]
         [ActionName("Update")]
+        [DisplayName("آپدیت")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         public async Task<IActionResult> Update (int UserName , [FromBody] UserUpdateCommand command)
         {
             var result = await _mediator.Send(command);
@@ -57,6 +65,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
+        [DisplayName("حذف")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         public async Task<IActionResult> Delete(string UserName)
         {
             var command = new UserDeleteCommand { UserName = UserName };
@@ -66,6 +76,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpGet]
         [ActionName("GetById")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
+        [DisplayName("گرفتن براساس آیدی")]
         public async Task<IActionResult> GetById(Guid id)
         {
             var query = new UserGetByIdQuery { Id = id };
@@ -75,6 +87,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpGet]
         [ActionName("GetAll")]
+        [DisplayName("گرفتن همه")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         public async Task<IActionResult> GetAll()
         {
             var query = new UserGetAllQuery();

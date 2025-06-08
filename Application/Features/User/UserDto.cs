@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.User
 {
-    public class UserDto : BaseDto , IMapFrom<Domain.Entities.ApplicationUser>
+    public class UserDto : IMapFrom<Domain.Entities.ApplicationUser>
     {
         public void Mapping(Profile profile)
         {

@@ -1,14 +1,19 @@
-﻿using Application.Features.Author.Command.Delete;
+﻿using Application.Contracts.Identity;
+using Application.Features.Author.Command.Delete;
 using Application.Features.Author.Command.Insert;
 using Application.Features.Author.Command.Update;
 using Application.Features.Author.Query.GetAll;
 using Application.Features.Author.Query.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Book.WebApplication.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [DisplayName("نویسنده")]
     public class AuthorController : Controller
     {
 
@@ -34,6 +39,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpGet]
         [ActionName("GetAll")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
+        [DisplayName("گرفتن همه")]
         public async Task<IActionResult> GetAll()
         {
             var query = new AuthorGetAllQuery();
@@ -43,6 +50,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
+        [DisplayName("حذف")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         public async Task<IActionResult> Delete(int id)
         {
             var command = new AuthorDeleteCommand { Id = id };
@@ -53,6 +62,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpPost]
         [ActionName("Create")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
+        [DisplayName("افزودن")]
 
         public async Task<IActionResult> Create([FromBody] AuthorInsertCommand command)
         {
@@ -62,7 +73,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpPost]
         [ActionName("Update")]
-
+        [DisplayName("آپدیت")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         public async Task<IActionResult> Update(int Id, [FromBody] AuthorUpdateCommand command)
         {
             var resutl = await _mediator.Send(command);
@@ -72,6 +84,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpGet]
         [ActionName("GetById")]
+        [DisplayName("گرفتن بر اساس آیدی")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         public async Task<IActionResult> GetById(int id)
         {
             var query = new AuthorGetByIdQuery { Id = id };
