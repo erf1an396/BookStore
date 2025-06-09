@@ -22,8 +22,10 @@
                 $('#phoneNumber').val(user.UserName);
                 $(`input[name="gender"][value="${user.Gender}"]`).prop('checked', true);
 
+                
                 $('#cancelEditBtn').show();
                 $('#formTitle').text("ویرایش یوزر")
+                
             },
             error: function () {
                 alert("خطا در دریافت اطلاعات یوزر");

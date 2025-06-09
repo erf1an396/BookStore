@@ -89,7 +89,11 @@ namespace Infrastructure.Dbinitializer
                 ApplicationRole adminRoleSeed = await _roleManager.FindByNameAsync(roleName);
                 if (adminRoleSeed != null)
                 {
-                    //await AddClaimForAdmin(adminUser, adminRoleSeed);
+                    IdentityResult addToRoleResult_1 = await _userManager.AddToRoleAsync(adminUser, adminRoleSeed.Name);
+                    if (addToRoleResult_1 == IdentityResult.Failed())
+                    {
+                        return IdentityResult.Failed();
+                    }
                 }
                 return IdentityResult.Success;
             }

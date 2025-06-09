@@ -78,6 +78,7 @@ namespace Infrastructure.Identity
         public async Task<List<ApplicationRole>> GetAll()
         {
             return await _roleManager.Roles.ToListAsync();
+           
         }
 
         public async Task<ApplicationRole> FindById(Guid id)
@@ -93,6 +94,12 @@ namespace Infrastructure.Identity
         public async Task<List<Claim>> GetClaimsAsync(ApplicationRole applicationRole)
         {
             return (await _roleManager.GetClaimsAsync(applicationRole)).ToList();
+        }
+
+        public async Task<bool> RoleExistAsync(string name)
+        {
+           var role = await _roleManager.FindByNameAsync(name);
+            return role != null;
         }
 
 

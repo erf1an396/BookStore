@@ -24,6 +24,8 @@ namespace Application.Contracts.Identity
         Task<List<Claim>> GetClaimsAsync(ApplicationRole applicationRole);
 
         Task<ApiResult> UpdateRoleWithClaimsAsync(Guid id , string name , List<string> ClaimValue);
+
+        Task<bool> RoleExistAsync(string name);
     }
 
 }

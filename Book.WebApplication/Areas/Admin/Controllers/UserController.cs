@@ -14,7 +14,7 @@ using System.ComponentModel;
 namespace Book.WebApplication.Areas.Admin.Controllers
 {
     [Area("admin")]
-    [DisplayName("یوزر")]
+    [DisplayName("پنل ادمین / یوزر ها")]
     public class UserController : Controller
     {
         private readonly IMediator _mediator;

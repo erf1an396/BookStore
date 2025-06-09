@@ -25,7 +25,7 @@ namespace Book.WebApplication.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Policy =ConstantPolicies.DynamicPermission)]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         [DisplayName("مشاهده")]
         public async Task<IActionResult> List()
         {
@@ -35,7 +35,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
 
         [HttpGet]
-        //[Authorize(Policy =ConstantPolicies.DynamicPermission)]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
+        [DisplayName("ایجاد و ویرایش نقش")]
         public async Task<IActionResult> Index(Guid id)
         {
             return View();
@@ -43,7 +44,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
 
         [HttpPost]
-        //[Authorize(Policy = ConstantPolicies.DynamicPermission)]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
+
         [DisplayName("افزودن")]
         [ActionName("Insert")]
         public async Task<IActionResult> Insert([FromBody]RoleInsertCommand command)
@@ -53,9 +55,10 @@ namespace Book.WebApplication.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Policy = ConstantPolicies.DynamicPermission)]
+       
         [DisplayName("ویرایش")]
         [ActionName("Update")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         public async Task<IActionResult> Update([FromBody]RoleUpdateCommand command)
         {
             var result = await _mediator.Send(command);
@@ -64,9 +67,10 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
 
         [HttpPost]
-        //[Authorize(Policy = ConstantPolicies.DynamicPermission)]
+        
         [DisplayName("حذف")]
         [ActionName("Delete")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         public async Task<IActionResult> Delete(Guid id)
         {
            var command = new RoleDeleteCommand {Id = id};
@@ -75,8 +79,9 @@ namespace Book.WebApplication.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Policy = ConstantPolicies.DynamicPermission)]
-        [DisplayName("مشاهده")]
+       
+        [DisplayName("گرفتن همه")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new RoleGetQuery());
@@ -85,7 +90,7 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
 
         [HttpGet]
-        //[Authorize(Policy = ConstantPolicies.DynamicPermission)]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         [ActionName("GetById")]
         public async Task<IActionResult> GetById(Guid id)
         {

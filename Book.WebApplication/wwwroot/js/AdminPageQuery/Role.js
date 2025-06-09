@@ -2,30 +2,42 @@
     const urlParams = new URLSearchParams(window.location.search);
     const roleId = urlParams.get('roleId');
 
-    if (roleId) {
-        $.ajax({
-            url: `/admin/role/GetById?id=${roleId}`,
-            type: 'GET',
-            success: function (res) {
-                const role = res.Value;
-                $('#roleId').val(role.Id);
-                $('#roleName').val(role.Name);
-                debugger
+   
 
-                const selectedClaims = role.RoleClaimVM.map(x => x.claimValue);
-                $('#permissionList input[type="checkbox"]').each(function () {
-                    if (selectedClaims.includes($(this).val())) {
-                        $(this).prop('checked', true);
-                    }
-                });
+    function tickLoad() {
+        if (roleId) {
+            $.ajax({
+                url: `/admin/role/GetById?id=${roleId}`,
+                type: 'GET',
+                success: function (res) {
 
-                $('#cancelEditBtn').show();
-                $('#formTitle').text("ویرایش نقش")
-            },
-            error: function () {
-                alert("خطا در دریافت اطلاعات نقش")
-            }
-        });
+                    const role = res.Value;
+                    $('#roleId').val(role.Id);
+                    $('#roleName').val(role.Name);
+                    debugger
+
+                    const selectedClaims = role.RoleClaimVM.map(x => x.ClaimValue);
+                    $('#permissionList input[type="checkbox"]').each(function () {
+                        if (selectedClaims.includes($(this).val())) {
+                            $(this).prop('checked', true);
+                        }
+
+                    });
+
+
+
+
+                    $('#cancelEditBtn').show();
+                    $('#formTitle').text("ویرایش نقش");
+
+
+                },
+                error: function () {
+                    alert("خطا در دریافت اطلاعات نقش")
+
+                }
+            });
+        }
     }
 
     $('#roleForm').on('submit', function (e) {
@@ -36,6 +48,14 @@
         const selectedClaims = $('#permissionList input:checked').map(function () {
             return this.value;
         }).get();
+
+
+        if (!name || name.length >= 50) {
+            alert("لطفا نام نقش را به درستی وارد کنید");
+            return;
+
+        };
+        
 
         const roleData = {
             Id: id,
@@ -55,6 +75,7 @@
                 alert("نقش ذخیره شد");
                 resetForm();
                 debugger
+                window.location.href = '/admin/role/list'
 
             },
             error: function () {
@@ -74,6 +95,7 @@
         $('#permissionList input[type="checkbox"]').prop('checked', false);
     }
     loadPermissions();
+    
     function loadPermissions() {
         $.ajax({
             url: `/admin/role/GetById?id=00000000-0000-0000-0000-000000000000`,
@@ -85,6 +107,8 @@
                 const $list = $('#permissionList');
                 $list.empty();
                 debugger
+
+                
 
                 for (let item of permisstions) {
                     let html = `
@@ -112,6 +136,7 @@
                     $list.append(html);
                 }
 
+                tickLoad();
             },
             error: function () {
                 alert("خطا در دریافت لیست دسترسی‌ها");

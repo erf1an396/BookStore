@@ -13,7 +13,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Book.WebApplication.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [DisplayName("نویسنده")]
+    [DisplayName("پنل ادمین / نویسنده ها")]
     public class AuthorController : Controller
     {
 

@@ -30,6 +30,7 @@ namespace Application.Features.Role.Command.Insert
             Domain.Entities.ApplicationRole applicationRole = new Domain.Entities.ApplicationRole()
             {
                 Name = request.Name,
+                
                 ApplicationRoleClaims =
                 request.ClaimValue.Select(x => new Domain.Entities.ApplicationRoleClaim()
                 {
@@ -39,6 +40,7 @@ namespace Application.Features.Role.Command.Insert
             };
 
             return _identityRoleManager.CreateAsync(applicationRole);
+            
         }
     }
 }

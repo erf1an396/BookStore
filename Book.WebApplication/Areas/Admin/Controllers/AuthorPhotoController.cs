@@ -1,15 +1,20 @@
 ﻿
+using Application.Contracts.Identity;
 using Application.Features.AuthorPhoto.Command.Delete;
 using Application.Features.AuthorPhoto.Command.Insert;
 using Application.Features.AuthorPhoto.Query.GetAll;
 using Application.Features.AuthorPhoto.Query.GetById;
 using Application.Features.BookPhoto.Command.Insert;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 
 namespace Book.WebApplication.Areas.Admin.Controllers
 {
     [Area("admin")]
+    [DisplayName("پنل ادمین / عکس نویسنده ها")]
+
     public class AuthorPhotoController : Controller
     {
         private readonly IMediator _mediator;
@@ -30,6 +35,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpGet]
         [ActionName("GetAll")]
+        [DisplayName("گرفتن همه")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         public async Task<IActionResult> GetAll([FromQuery] int AuthorId)
         {
             ViewBag.AuthorId = AuthorId;
@@ -46,6 +53,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpGet]
         [ActionName("GetById")]
+        [DisplayName("گرفتن بر اساس آیدی")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         public async Task<IActionResult> GetById(int id)
         {
             var query = new AuthorPhotoGetByIdQuery { Id = id };
@@ -57,6 +66,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
+        [DisplayName("حذف")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         public async Task<IActionResult> Delete(int id)
         {
             var command = new AuthorPhotoDeleteCommand { Id = id };
@@ -68,6 +79,8 @@ namespace Book.WebApplication.Areas.Admin.Controllers
 
         [HttpPost]
         [ActionName("Create")]
+        [DisplayName("افزودن")]
+        [Authorize(Policy = ConstantPolicies.DynamicPermission)]
         public async Task<IActionResult> Create([FromForm] AuthorPhotoInsertCommand command)
         {
             var result = await _mediator.Send(command);
