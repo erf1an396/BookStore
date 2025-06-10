@@ -78,7 +78,7 @@ namespace Infrastructure.Persistence
             base.OnModelCreating(builder);
 
             var timeSpanConverter = new ValueConverter<TimeSpan, long>(v => v.Ticks, v => TimeSpan.FromTicks(v));
-
+            
             foreach (var entityType in builder.Model.GetEntityTypes())
             {
                 foreach (var property in entityType.GetProperties())

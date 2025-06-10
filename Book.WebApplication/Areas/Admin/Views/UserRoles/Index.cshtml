@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@section myStyle {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Items</title>
+    <link rel="stylesheet" href="~/css/modalcss/StyleSheet.css">
+    <link rel="stylesheet" href="~/css/custom.css">
+}
+
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col">
+                    <div class="page-header-left">
+                        <h3>Book Page</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">home</li>
+                            <li class="breadcrumb-item active">Book Page</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-5">
+            <h2 class="text-center mb-4">لیست یوزر ها  </h2>
+
+
+
+
+
+            <ul class="list-group" id="userList">
+            </ul>
+        </div>
+
+
+
+
+    </div>
+
+
+@* <div id="userList" class="row g-3"></div> *@
+
+
+
+<!--MODAL FOR ROLES-->
+<div class="modal fade" id="rolesModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content rounded-3">
+            <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <h5 class="modal-title">مدیریت نقش‌ها</h5>
+                
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="selectedUserId" />
+                    <div id="rolesCheckboxList" class="d-flex flex-wrap gap-3" style="text-align:right"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="saveRolesBtn">ذخیره</button>
+                <button class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    @section myscript {
+
+        <script src="~/js/AdminPageQuery/UserRoles.js"></script>
+        
+    }

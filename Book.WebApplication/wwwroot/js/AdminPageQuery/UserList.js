@@ -18,11 +18,18 @@
                         `
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <div><strong>${user.FirstName} ${user.LastName}</strong> - ${user.Email}</div>
+                            
                             <div>
+
+                                
+                            
+
                                 <a href="/admin/user/index?userId=${user.Id}">
                                     <button class="btn btn-sm btn-primary me-2" onclick='editUser(${JSON.stringify(user)})'>ویرایش</button>
                                 </a>
+                                
                                 <button class="btn btn-sm btn-danger" onclick="deleteUser('${user.UserName}')">حذف</button>
+                                  
                             </div>
                         </li>
 
